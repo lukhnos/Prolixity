@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 
 #import "RootViewController.h"
+#import "PXBlock.h"
 
 @interface DetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
@@ -21,9 +22,20 @@
 
 @synthesize detailItem=_detailItem;
 
-@synthesize detailDescriptionLabel=_detailDescriptionLabel;
 
 @synthesize popoverController=_myPopoverController;
+
+@synthesize textView = _textView;
+
+- (IBAction)runAction
+{    
+    NSLog(@"source: %@", self.textView.text);
+    
+    PXBlock *blk = [PXBlock blockWithSource:self.textView.text];
+    if (blk) {
+        [blk runWithParent:nil];
+    }
+}
 
 #pragma mark - Managing the detail item
 
@@ -48,8 +60,7 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
-    self.detailDescriptionLabel.text = [self.detailItem description];
+    // self.detailDescriptionLabel.text = [self.detailItem description];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,7 +91,7 @@
 
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
 {
-    barButtonItem.title = @"Events";
+    barButtonItem.title = @"Snippets";
     NSMutableArray *items = [[self.toolbar items] mutableCopy];
     [items insertObject:barButtonItem atIndex:0];
     [self.toolbar setItems:items animated:YES];
@@ -130,7 +141,7 @@
     [_myPopoverController release];
     [_toolbar release];
     [_detailItem release];
-    [_detailDescriptionLabel release];
+    [_textView release];
     [super dealloc];
 }
 

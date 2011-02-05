@@ -417,10 +417,13 @@
 				"$(SRCROOT)/parser/parser.y",
 			);
 			outputPaths = (
+				"$(SRCROOT)/parser/lexer.cpp",
+				"$(SRCROOT)/parser/parser.h",
+				"$(SRCROOT)/parser/parser.cpp",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$DEVELOPER_BIN_DIR/flex -o $SRCROOT/parser/lexer.cpp $SRCROOT/parser/lexer.l\ncp $SRCROOT/parser/lempar.c $TARGET_BUILD_DIR/\n$TARGET_BUILD_DIR/lemon $SRCROOT/parser/parser.y\ncat $SRCROOT/parser/parser.c | perl -n -e 's/parser\\.c/parser\\.cpp/g; print;' > $SRCROOT/parser/parser.cpp\nrm $SRCROOT/parser/parser.c\n";
+			shellScript = "$DEVELOPER_BIN_DIR/flex -o $SRCROOT/parser/lexer.cpp $SRCROOT/parser/lexer.l\ncp $SRCROOT/parser/lempar.c $TARGET_BUILD_DIR/\n$TARGET_BUILD_DIR/lemon $SRCROOT/parser/parser.y\ncat $SRCROOT/parser/parser.c | perl -n -e 's/parser\\.c/parser\\.cpp/g; print;' > $SRCROOT/parser/parser.cpp\nrm $SRCROOT/parser/parser.c\nrm $SRCROOT/parser/parser.out";
 		};
 /* End PBXShellScriptBuildPhase section */
 
