@@ -24,7 +24,7 @@ char *PXParserParseSource(const char *source, char **outError)
     
     yy_scan_string(source);
 
-#if DEBUG
+#if 0
     ParseTrace(stderr, (char*)"->");
 #endif
 

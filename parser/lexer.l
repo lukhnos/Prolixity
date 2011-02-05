@@ -112,6 +112,7 @@ PERIOD          \.
 {IDENTIFEME}            { BEGIN(IDMODE); return TOKEN_IDENTIFEME; }
 <IDMODE>{IDENTIFEME}    { return TOKEN_IDENTIFEME; }
 {ELLIPSIS}              { return TOKEN_ELLIPSIS; }
+<IDMODE>{ELLIPSIS}      { BEGIN(0); return TOKEN_ELLIPSIS; }
 
  /* skip space and CR */
 {SPACE}
