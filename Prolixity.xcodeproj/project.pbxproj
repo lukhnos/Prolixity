@@ -23,6 +23,7 @@
 		6A3A791012FDE1650016D6AD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A790E12FDE1650016D6AD /* InfoPlist.strings */; };
 		6A3A791312FDE1650016D6AD /* ProlixityTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A791212FDE1650016D6AD /* ProlixityTests.h */; };
 		6A3A791512FDE1650016D6AD /* ProlixityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A791412FDE1650016D6AD /* ProlixityTests.m */; };
+		6A5432C112FDEA220084C7D0 /* lemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432C012FDEA220084C7D0 /* lemon.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		6A3A791112FDE1650016D6AD /* ProlixityTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProlixityTests-Prefix.pch"; sourceTree = "<group>"; };
 		6A3A791212FDE1650016D6AD /* ProlixityTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProlixityTests.h; sourceTree = "<group>"; };
 		6A3A791412FDE1650016D6AD /* ProlixityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProlixityTests.m; sourceTree = "<group>"; };
+		6A4E4AD212FDE8DC0061E729 /* lemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lemon; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A5432C012FDEA220084C7D0 /* lemon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lemon.c; path = parser/lemon.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +84,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A4E4ACF12FDE8DC0061E729 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6A3A78D312FDE1650016D6AD = {
 			isa = PBXGroup;
 			children = (
+				6A5432BF12FDE9ED0084C7D0 /* parser */,
 				6A3A78E812FDE1650016D6AD /* Prolixity */,
 				6A3A790B12FDE1650016D6AD /* ProlixityTests */,
 				6A3A78E112FDE1650016D6AD /* Frameworks */,
@@ -99,6 +110,7 @@
 			children = (
 				6A3A78DE12FDE1650016D6AD /* Prolixity.app */,
 				6A3A790512FDE1650016D6AD /* ProlixityTests.octest */,
+				6A4E4AD212FDE8DC0061E729 /* lemon */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +172,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6A5432BF12FDE9ED0084C7D0 /* parser */ = {
+			isa = PBXGroup;
+			children = (
+				6A5432C012FDEA220084C7D0 /* lemon.c */,
+			);
+			name = parser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,6 +219,23 @@
 			productReference = 6A3A790512FDE1650016D6AD /* ProlixityTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		6A4E4AD112FDE8DC0061E729 /* lemon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A4E4AD812FDE8DC0061E729 /* Build configuration list for PBXNativeTarget "lemon" */;
+			buildPhases = (
+				6A4E4ACE12FDE8DC0061E729 /* Sources */,
+				6A4E4ACF12FDE8DC0061E729 /* Frameworks */,
+				6A5432C212FDEA330084C7D0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lemon;
+			productName = lemon;
+			productReference = 6A4E4AD212FDE8DC0061E729 /* lemon */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -218,6 +255,7 @@
 			targets = (
 				6A3A78DD12FDE1650016D6AD /* Prolixity */,
 				6A3A790412FDE1650016D6AD /* ProlixityTests */,
+				6A4E4AD112FDE8DC0061E729 /* lemon */,
 			);
 		};
 /* End PBXProject section */
@@ -258,6 +296,21 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		6A5432C212FDEA330084C7D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/parser/lexer.l",
+				"$(SRCROOT)/parser/parser.y",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$DEVELOPER_BIN_DIR/flex -o $SRCROOT/parser/lexer.cpp $SRCROOT/parser/lexer.l\ncp $SRCROOT/parser/lempar.c $TARGET_BUILD_DIR/\n$TARGET_BUILD_DIR/lemon $SRCROOT/parser/parser.y\nmv $SRCROOT/parser/parser.c $SRCROOT/parser/parser.cpp\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -277,6 +330,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A3A791512FDE1650016D6AD /* ProlixityTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A4E4ACE12FDE8DC0061E729 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A5432C112FDEA220084C7D0 /* lemon.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +496,39 @@
 			};
 			name = Release;
 		};
+		6A4E4AD912FDE8DC0061E729 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6A4E4ADA12FDE8DC0061E729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -454,6 +548,7 @@
 				6A3A791A12FDE1650016D6AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6A3A791B12FDE1650016D6AD /* Build configuration list for PBXNativeTarget "ProlixityTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +557,16 @@
 				6A3A791D12FDE1650016D6AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A4E4AD812FDE8DC0061E729 /* Build configuration list for PBXNativeTarget "lemon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A4E4AD912FDE8DC0061E729 /* Debug */,
+				6A4E4ADA12FDE8DC0061E729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
