@@ -24,6 +24,16 @@
 		6A3A791312FDE1650016D6AD /* ProlixityTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A791212FDE1650016D6AD /* ProlixityTests.h */; };
 		6A3A791512FDE1650016D6AD /* ProlixityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A791412FDE1650016D6AD /* ProlixityTests.m */; };
 		6A5432C112FDEA220084C7D0 /* lemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432C012FDEA220084C7D0 /* lemon.c */; };
+		6A5432DE12FDEF950084C7D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E412FDE1650016D6AD /* Foundation.framework */; };
+		6A54330212FDF0480084C7D0 /* lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432F812FDF0200084C7D0 /* lexer.cpp */; };
+		6A54330312FDF0480084C7D0 /* lexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432F912FDF0200084C7D0 /* lexer.h */; };
+		6A54330412FDF0480084C7D0 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432FC12FDF0200084C7D0 /* parser.cpp */; };
+		6A54330512FDF0480084C7D0 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432FD12FDF0200084C7D0 /* parser.h */; };
+		6A54330612FDF0480084C7D0 /* ParserBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432FE12FDF0200084C7D0 /* ParserBlock.h */; };
+		6A54330712FDF0480084C7D0 /* PXParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A54330012FDF0200084C7D0 /* PXParser.cpp */; };
+		6A54330C12FDF1C40084C7D0 /* PXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A54330B12FDF1C40084C7D0 /* PXBlock.m */; };
+		6A54330D12FDF2310084C7D0 /* libPXParser-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */; };
+		6A74BC8712FDF32C0019C2ED /* PXParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A54330112FDF0200084C7D0 /* PXParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +43,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6A3A78DD12FDE1650016D6AD;
 			remoteInfo = Prolixity;
+		};
+		6A54330E12FDF24E0084C7D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A3A78D512FDE1650016D6AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A5432DC12FDEF950084C7D0;
+			remoteInfo = "PXParser-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -60,7 +77,21 @@
 		6A3A791212FDE1650016D6AD /* ProlixityTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProlixityTests.h; sourceTree = "<group>"; };
 		6A3A791412FDE1650016D6AD /* ProlixityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProlixityTests.m; sourceTree = "<group>"; };
 		6A4E4AD212FDE8DC0061E729 /* lemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lemon; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A5432C012FDEA220084C7D0 /* lemon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lemon.c; path = parser/lemon.c; sourceTree = "<group>"; };
+		6A5432C012FDEA220084C7D0 /* lemon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lemon.c; sourceTree = "<group>"; };
+		6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPXParser-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A5432F712FDF0200084C7D0 /* lempar.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lempar.c; sourceTree = "<group>"; };
+		6A5432F812FDF0200084C7D0 /* lexer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = lexer.cpp; sourceTree = "<group>"; };
+		6A5432F912FDF0200084C7D0 /* lexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lexer.h; sourceTree = "<group>"; };
+		6A5432FA12FDF0200084C7D0 /* lexer.l */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.lex; path = lexer.l; sourceTree = "<group>"; };
+		6A5432FB12FDF0200084C7D0 /* parser.y */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.yacc; path = parser.y; sourceTree = "<group>"; };
+		6A5432FC12FDF0200084C7D0 /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = parser.cpp; sourceTree = "<group>"; };
+		6A5432FD12FDF0200084C7D0 /* parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		6A5432FE12FDF0200084C7D0 /* ParserBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParserBlock.h; sourceTree = "<group>"; };
+		6A5432FF12FDF0200084C7D0 /* PXParser_iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PXParser_iOS-Prefix.pch"; sourceTree = "<group>"; };
+		6A54330012FDF0200084C7D0 /* PXParser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PXParser.cpp; sourceTree = "<group>"; };
+		6A54330112FDF0200084C7D0 /* PXParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXParser.h; sourceTree = "<group>"; };
+		6A54330A12FDF1C40084C7D0 /* PXBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBlock.h; sourceTree = "<group>"; };
+		6A54330B12FDF1C40084C7D0 /* PXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBlock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A54330D12FDF2310084C7D0 /* libPXParser-iOS.a in Frameworks */,
 				6A3A78E312FDE1650016D6AD /* UIKit.framework in Frameworks */,
 				6A3A78E512FDE1650016D6AD /* Foundation.framework in Frameworks */,
 				6A3A78E712FDE1650016D6AD /* CoreGraphics.framework in Frameworks */,
@@ -91,15 +123,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A5432DA12FDEF950084C7D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A5432DE12FDEF950084C7D0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6A3A78D312FDE1650016D6AD = {
 			isa = PBXGroup;
 			children = (
-				6A5432BF12FDE9ED0084C7D0 /* parser */,
+				6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */,
 				6A3A78E812FDE1650016D6AD /* Prolixity */,
 				6A3A790B12FDE1650016D6AD /* ProlixityTests */,
+				6A5432DF12FDEF950084C7D0 /* PXParser-iOS */,
+				6A54330912FDF1C40084C7D0 /* Runtime */,
+				6A5432BF12FDE9ED0084C7D0 /* parser */,
 				6A3A78E112FDE1650016D6AD /* Frameworks */,
 				6A3A78DF12FDE1650016D6AD /* Products */,
 			);
@@ -175,12 +218,61 @@
 		6A5432BF12FDE9ED0084C7D0 /* parser */ = {
 			isa = PBXGroup;
 			children = (
+				6A5432F712FDF0200084C7D0 /* lempar.c */,
+				6A5432F812FDF0200084C7D0 /* lexer.cpp */,
+				6A5432F912FDF0200084C7D0 /* lexer.h */,
+				6A5432FA12FDF0200084C7D0 /* lexer.l */,
+				6A5432FB12FDF0200084C7D0 /* parser.y */,
+				6A5432FC12FDF0200084C7D0 /* parser.cpp */,
+				6A5432FD12FDF0200084C7D0 /* parser.h */,
+				6A5432FE12FDF0200084C7D0 /* ParserBlock.h */,
+				6A5432FF12FDF0200084C7D0 /* PXParser_iOS-Prefix.pch */,
+				6A54330012FDF0200084C7D0 /* PXParser.cpp */,
+				6A54330112FDF0200084C7D0 /* PXParser.h */,
 				6A5432C012FDEA220084C7D0 /* lemon.c */,
 			);
-			name = parser;
+			path = parser;
+			sourceTree = "<group>";
+		};
+		6A5432DF12FDEF950084C7D0 /* PXParser-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6A5432E012FDEF950084C7D0 /* Supporting Files */,
+			);
+			path = "PXParser-iOS";
+			sourceTree = "<group>";
+		};
+		6A5432E012FDEF950084C7D0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6A54330912FDF1C40084C7D0 /* Runtime */ = {
+			isa = PBXGroup;
+			children = (
+				6A54330A12FDF1C40084C7D0 /* PXBlock.h */,
+				6A54330B12FDF1C40084C7D0 /* PXBlock.m */,
+			);
+			path = Runtime;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6A5432DB12FDEF950084C7D0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A54330312FDF0480084C7D0 /* lexer.h in Headers */,
+				6A54330512FDF0480084C7D0 /* parser.h in Headers */,
+				6A54330612FDF0480084C7D0 /* ParserBlock.h in Headers */,
+				6A74BC8712FDF32C0019C2ED /* PXParser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		6A3A78DD12FDE1650016D6AD /* Prolixity */ = {
@@ -194,6 +286,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6A54330F12FDF24E0084C7D0 /* PBXTargetDependency */,
 			);
 			name = Prolixity;
 			productName = Prolixity;
@@ -236,6 +329,23 @@
 			productReference = 6A4E4AD212FDE8DC0061E729 /* lemon */;
 			productType = "com.apple.product-type.tool";
 		};
+		6A5432DC12FDEF950084C7D0 /* PXParser-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A5432E212FDEF950084C7D0 /* Build configuration list for PBXNativeTarget "PXParser-iOS" */;
+			buildPhases = (
+				6A5432D912FDEF950084C7D0 /* Sources */,
+				6A5432DA12FDEF950084C7D0 /* Frameworks */,
+				6A5432DB12FDEF950084C7D0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PXParser-iOS";
+			productName = "PXParser-iOS";
+			productReference = 6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -256,6 +366,7 @@
 				6A3A78DD12FDE1650016D6AD /* Prolixity */,
 				6A3A790412FDE1650016D6AD /* ProlixityTests */,
 				6A4E4AD112FDE8DC0061E729 /* lemon */,
+				6A5432DC12FDEF950084C7D0 /* PXParser-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -309,7 +420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$DEVELOPER_BIN_DIR/flex -o $SRCROOT/parser/lexer.cpp $SRCROOT/parser/lexer.l\ncp $SRCROOT/parser/lempar.c $TARGET_BUILD_DIR/\n$TARGET_BUILD_DIR/lemon $SRCROOT/parser/parser.y\nmv $SRCROOT/parser/parser.c $SRCROOT/parser/parser.cpp\n";
+			shellScript = "$DEVELOPER_BIN_DIR/flex -o $SRCROOT/parser/lexer.cpp $SRCROOT/parser/lexer.l\ncp $SRCROOT/parser/lempar.c $TARGET_BUILD_DIR/\n$TARGET_BUILD_DIR/lemon $SRCROOT/parser/parser.y\ncat $SRCROOT/parser/parser.c | perl -n -e 's/parser\\.c/parser\\.cpp/g; print;' > $SRCROOT/parser/parser.cpp\nrm $SRCROOT/parser/parser.c\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -322,6 +433,7 @@
 				6A3A78F312FDE1650016D6AD /* ProlixityAppDelegate.m in Sources */,
 				6A3A78F912FDE1650016D6AD /* DetailViewController.m in Sources */,
 				6A3A78FF12FDE1650016D6AD /* RootViewController.m in Sources */,
+				6A54330C12FDF1C40084C7D0 /* PXBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +453,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A5432D912FDEF950084C7D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A54330212FDF0480084C7D0 /* lexer.cpp in Sources */,
+				6A54330412FDF0480084C7D0 /* parser.cpp in Sources */,
+				6A54330712FDF0480084C7D0 /* PXParser.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -348,6 +470,11 @@
 			isa = PBXTargetDependency;
 			target = 6A3A78DD12FDE1650016D6AD /* Prolixity */;
 			targetProxy = 6A3A790912FDE1650016D6AD /* PBXContainerItemProxy */;
+		};
+		6A54330F12FDF24E0084C7D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A5432DC12FDEF950084C7D0 /* PXParser-iOS */;
+			targetProxy = 6A54330E12FDF24E0084C7D0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -430,6 +557,7 @@
 				GCC_PREFIX_HEADER = "Prolixity/Prolixity-Prefix.pch";
 				INFOPLIST_FILE = "Prolixity/Prolixity-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				OTHER_LDFLAGS = "-lstdc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -444,6 +572,7 @@
 				GCC_PREFIX_HEADER = "Prolixity/Prolixity-Prefix.pch";
 				INFOPLIST_FILE = "Prolixity/Prolixity-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				OTHER_LDFLAGS = "-lstdc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -529,6 +658,32 @@
 			};
 			name = Release;
 		};
+		6A5432E312FDEF950084C7D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/PXParser_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "parser/PXParser_iOS-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6A5432E412FDEF950084C7D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/PXParser_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "parser/PXParser_iOS-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -564,6 +719,15 @@
 			buildConfigurations = (
 				6A4E4AD912FDE8DC0061E729 /* Debug */,
 				6A4E4ADA12FDE8DC0061E729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A5432E212FDEF950084C7D0 /* Build configuration list for PBXNativeTarget "PXParser-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A5432E312FDEF950084C7D0 /* Debug */,
+				6A5432E412FDEF950084C7D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

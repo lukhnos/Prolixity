@@ -52,6 +52,7 @@
     NSMutableArray *instructions;
 }
 
++ (PXBlock *)blockWithSource:(NSString *)inSource;
 + (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm;
 - (id)runWithParent:(PXBlock *)inParent;
 

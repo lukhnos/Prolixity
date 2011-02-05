@@ -26,6 +26,7 @@
 //
 
 #import "PXBlock.h"
+#import "PXParser.h"
 #import <objc/runtime.h>
 
 @interface PXLexer : NSObject
@@ -213,6 +214,24 @@ static const size_t kObjCMaXTypeLength = 256;
     [variables release], variables = nil;
     [instructions release], instructions = nil;
     [super dealloc];
+}
+
++ (PXBlock *)blockWithSource:(NSString *)inSource
+{
+    const char *u8str = [inSource UTF8String];
+    char *error = NULL;
+    char *parsed = PXParserParseSource(u8str, &error);
+ 
+    if (error || !parsed) {
+        // TODO: Handles error
+        free(error);
+        free(parsed);
+        return nil;
+    }
+
+    NSString *data = [[[NSString alloc] initWithBytesNoCopy:parsed length:strlen(parsed) encoding:NSUTF8StringEncoding freeWhenDone:YES] autorelease];
+    NSLog(@"parsed block assembly: %@", data);
+    return [self blockWithBlockAssembly:data];
 }
 
 + (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm
@@ -473,7 +492,7 @@ static const size_t kObjCMaXTypeLength = 256;
     
     if (inSelector == @selector(class)) {
         id tmp = tempValue;
-        tempValue = [NSString class];
+        tempValue = (id)[NSString class];
         [tmp release];                
         return;
     }
