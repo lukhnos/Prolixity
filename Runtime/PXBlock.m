@@ -391,7 +391,16 @@ static const size_t kObjCMaXTypeLength = 256;
             
         }
         else if ([t isEqualToString:@"loadin"]) {
-            [self addLoadImmeidate:[NSNumber numberWithInteger:[[inLexer next] integerValue]]];
+            NSString *numberText = [inLexer next];            
+            NSNumber *number = nil;
+            if ([numberText rangeOfString:@"."].location != NSNotFound) {
+                number = [NSNumber numberWithDouble:[numberText doubleValue]];
+            }
+            else {
+                number = [NSNumber numberWithInteger:[numberText integerValue]];
+            }
+            
+            [self addLoadImmeidate:number];
         }
         else if ([t isEqualToString:@"loadis"]) {
             [self addLoadImmeidate:[inLexer next]];
