@@ -8,7 +8,6 @@
 
 #import "EvaluationCanvasView.h"
 
-
 @implementation EvaluationCanvasView
 @synthesize textView;
 
@@ -29,11 +28,6 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    
-    [[UIColor redColor] setFill];
-    [[UIColor blackColor] setStroke];
-    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
-    [path fill];
 }
 
 - (void)dealloc

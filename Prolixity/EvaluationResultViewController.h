@@ -13,5 +13,5 @@
     
 }
 - (IBAction)dismissAction;
-@property (retain, nonatomic) EvaluationCanvasView *evaluationCanvasView;
+@property (retain, nonatomic) IBOutlet EvaluationCanvasView *evaluationCanvasView;
 @end

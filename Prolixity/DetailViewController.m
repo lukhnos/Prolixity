@@ -30,6 +30,8 @@
 
 - (IBAction)runAction
 {    
+    [[PXBlock currentConsoleBuffer] setString:@""];
+    
     NSLog(@"source: %@", self.textView.text);
     PXBlock *blk = [PXBlock blockWithSource:self.textView.text];
     if (blk) {
@@ -42,6 +44,8 @@
  
     self.evaluationResultViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentModalViewController:self.evaluationResultViewController animated:YES];
+    
+    self.evaluationResultViewController.evaluationCanvasView.textView.text = [PXBlock currentConsoleBuffer];
 }
 
 #pragma mark - Managing the detail item

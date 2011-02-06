@@ -139,7 +139,8 @@
 @implementation NSObject (PXSupport)
 - (void)dump
 {
-    NSLog(@"%@", self);
+    NSLog(@"%@", self);    
+    [[PXBlock currentConsoleBuffer] appendFormat:@"%@\n", [self description]];
 }
 @end
 
@@ -196,6 +197,7 @@
 
 
 static NSString *const PXCurrentBlockInThreadKey = @"PXCurrentBlockInThreadKey";
+static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBufferInThreadKey";
 static NSString *const PXInstructionLoadImmediate = @"loadi";
 static NSString *const PXInstructionLoad = @"load";
 static NSString *const PXInstructionStore = @"save";
@@ -405,6 +407,17 @@ static const size_t kObjCMaXTypeLength = 256;
             [self addInvoke:NSSelectorFromString([inLexer next])];
         }
     }
+}
+
++ (NSMutableString *)currentConsoleBuffer
+{
+    NSMutableString *consoleBuffer = [[[NSThread currentThread] threadDictionary] objectForKey:PXCurrentConsoleBufferInThreadKey];
+    if (!consoleBuffer) {
+        consoleBuffer = [NSMutableString string];
+        [[[NSThread currentThread] threadDictionary] setValue:consoleBuffer forKey:PXCurrentConsoleBufferInThreadKey];
+    }
+    
+    return consoleBuffer;
 }
 
 + (PXBlock *)currentBlock

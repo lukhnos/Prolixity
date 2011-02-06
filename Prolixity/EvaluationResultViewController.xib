@@ -80,7 +80,6 @@
 								<string key="NSFrameSize">{640, 480}</string>
 								<reference key="NSSuperview" ref="520006826"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -148,6 +147,14 @@
 						<reference key="destination" ref="776314675"/>
 					</object>
 					<int key="connectionID">13</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">evaluationCanvasView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="520006826"/>
+					</object>
+					<int key="connectionID">14</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -255,7 +262,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">13</int>
+			<int key="maxID">14</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -291,6 +298,17 @@
 						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">dismissAction</string>
 							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">evaluationCanvasView</string>
+						<string key="NS.object.0">EvaluationCanvasView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">evaluationCanvasView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">evaluationCanvasView</string>
+							<string key="candidateClassName">EvaluationCanvasView</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
