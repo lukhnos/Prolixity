@@ -35,6 +35,7 @@
 
 @interface NSNumber (PXSupport)
 - (NSNumber *)plus:(NSNumber *)inNumber;
+- (NSNumber *)mul:(NSNumber *)inNumber;
 - (NSNumber *)gt:(NSNumber *)inNumber;
 - (NSNumber *)lt:(NSNumber *)inNumber;
 - (id)ifTrue:(PXBlock *)inBlock;
