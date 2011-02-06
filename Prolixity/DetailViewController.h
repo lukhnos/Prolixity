@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EvaluationResultViewController.h"
 
 @interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
-
 }
 
 - (IBAction)runAction;
@@ -18,8 +18,7 @@
 
 @property (nonatomic, retain) id detailItem;
 
-@property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
-
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 
+@property (nonatomic, retain) EvaluationResultViewController *evaluationResultViewController;
 @end

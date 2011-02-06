@@ -34,6 +34,9 @@
 		6A54330C12FDF1C40084C7D0 /* PXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A54330B12FDF1C40084C7D0 /* PXBlock.m */; };
 		6A54330D12FDF2310084C7D0 /* libPXParser-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */; };
 		6A74BC8712FDF32C0019C2ED /* PXParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A54330112FDF0200084C7D0 /* PXParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6ABD1D3B12FE1A240014DF3B /* EvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */; };
+		6ABD1D3F12FE1A610014DF3B /* EvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */; };
+		6ABD1D4012FE1A610014DF3B /* EvaluationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3E12FE1A600014DF3B /* EvaluationResultViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,11 @@
 		6A54330112FDF0200084C7D0 /* PXParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXParser.h; sourceTree = "<group>"; };
 		6A54330A12FDF1C40084C7D0 /* PXBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBlock.h; sourceTree = "<group>"; };
 		6A54330B12FDF1C40084C7D0 /* PXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBlock.m; sourceTree = "<group>"; };
+		6ABD1D3912FE1A240014DF3B /* EvaluationCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationCanvasView.h; sourceTree = "<group>"; };
+		6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationCanvasView.m; sourceTree = "<group>"; };
+		6ABD1D3C12FE1A600014DF3B /* EvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultViewController.h; sourceTree = "<group>"; };
+		6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationResultViewController.m; sourceTree = "<group>"; };
+		6ABD1D3E12FE1A600014DF3B /* EvaluationResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationResultViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +188,11 @@
 				6A3A78FD12FDE1650016D6AD /* RootViewController.h */,
 				6A3A78FE12FDE1650016D6AD /* RootViewController.m */,
 				6A3A78E912FDE1650016D6AD /* Supporting Files */,
+				6ABD1D3912FE1A240014DF3B /* EvaluationCanvasView.h */,
+				6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */,
+				6ABD1D3C12FE1A600014DF3B /* EvaluationResultViewController.h */,
+				6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */,
+				6ABD1D3E12FE1A600014DF3B /* EvaluationResultViewController.xib */,
 			);
 			path = Prolixity;
 			sourceTree = "<group>";
@@ -379,6 +392,7 @@
 				6A3A78ED12FDE1650016D6AD /* InfoPlist.strings in Resources */,
 				6A3A78F612FDE1650016D6AD /* MainWindow.xib in Resources */,
 				6A3A78FC12FDE1650016D6AD /* DetailView.xib in Resources */,
+				6ABD1D4012FE1A610014DF3B /* EvaluationResultViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +451,8 @@
 				6A3A78F912FDE1650016D6AD /* DetailViewController.m in Sources */,
 				6A3A78FF12FDE1650016D6AD /* RootViewController.m in Sources */,
 				6A54330C12FDF1C40084C7D0 /* PXBlock.m in Sources */,
+				6ABD1D3B12FE1A240014DF3B /* EvaluationCanvasView.m in Sources */,
+				6ABD1D3F12FE1A610014DF3B /* EvaluationResultViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

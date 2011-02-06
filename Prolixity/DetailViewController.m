@@ -7,7 +7,6 @@
 //
 
 #import "DetailViewController.h"
-
 #import "RootViewController.h"
 #import "PXBlock.h"
 
@@ -27,14 +26,22 @@
 
 @synthesize textView = _textView;
 
+@synthesize  evaluationResultViewController;
+
 - (IBAction)runAction
 {    
     NSLog(@"source: %@", self.textView.text);
-    
     PXBlock *blk = [PXBlock blockWithSource:self.textView.text];
     if (blk) {
         [blk runWithParent:nil];
     }
+    
+    if (!self.evaluationResultViewController) {
+        self.evaluationResultViewController = [[[EvaluationResultViewController alloc] initWithNibName:@"EvaluationResultViewController" bundle:nil] autorelease];        
+    }
+ 
+    self.evaluationResultViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentModalViewController:self.evaluationResultViewController animated:YES];
 }
 
 #pragma mark - Managing the detail item
@@ -138,6 +145,7 @@
 
 - (void)dealloc
 {
+    [evaluationResultViewController release];
     [_myPopoverController release];
     [_toolbar release];
     [_detailItem release];
