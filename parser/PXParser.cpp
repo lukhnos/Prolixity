@@ -37,6 +37,10 @@ char *PXParserParseSource(const char *source, char **outError)
         // tokenContent will be deleted by the parser
         std::string *tokenContent = (tokenType == TOKEN_STRING) ? new std::string(Prolixity::LexerGetStringToken()) : new std::string(yytext);
         Parse(parser, tokenType, tokenContent, blk);
+        
+        if (0) {
+            std::cerr << "line no: " << yylineno << ", token: " << (yytext ? yytext : "") << ", length: " << yyleng << std::endl;
+        }
     }
     
     Parse(parser, 0, NULL, blk);
