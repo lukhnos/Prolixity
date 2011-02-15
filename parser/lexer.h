@@ -27,9 +27,11 @@
 
 #include <string>
 
-// Flex-generated functions
+// Flex-generated functions and global variables
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 extern char *yytext;
+extern size_t yyleng;
+extern int yylineno;
 extern int yylex();
 extern YY_BUFFER_STATE yy_scan_string( const char * );
 
