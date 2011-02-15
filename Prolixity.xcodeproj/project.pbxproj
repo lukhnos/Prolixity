@@ -23,7 +23,7 @@
 		6A3A791012FDE1650016D6AD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A790E12FDE1650016D6AD /* InfoPlist.strings */; };
 		6A3A791312FDE1650016D6AD /* ProlixityTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A791212FDE1650016D6AD /* ProlixityTests.h */; };
 		6A3A791512FDE1650016D6AD /* ProlixityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A791412FDE1650016D6AD /* ProlixityTests.m */; };
-		6A5432C112FDEA220084C7D0 /* lemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432C012FDEA220084C7D0 /* lemon.c */; };
+		6A5432C112FDEA220084C7D0 /* lemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432C012FDEA220084C7D0 /* lemon.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
 		6A5432DE12FDEF950084C7D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E412FDE1650016D6AD /* Foundation.framework */; };
 		6A54330212FDF0480084C7D0 /* lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432F812FDF0200084C7D0 /* lexer.cpp */; };
 		6A54330312FDF0480084C7D0 /* lexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432F912FDF0200084C7D0 /* lexer.h */; };
@@ -31,8 +31,9 @@
 		6A54330512FDF0480084C7D0 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432FD12FDF0200084C7D0 /* parser.h */; };
 		6A54330612FDF0480084C7D0 /* ParserBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432FE12FDF0200084C7D0 /* ParserBlock.h */; };
 		6A54330712FDF0480084C7D0 /* PXParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A54330012FDF0200084C7D0 /* PXParser.cpp */; };
-		6A54330C12FDF1C40084C7D0 /* PXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A54330B12FDF1C40084C7D0 /* PXBlock.m */; };
 		6A54330D12FDF2310084C7D0 /* libPXParser-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */; };
+		6A57F8D812FEA000009A184A /* PXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A57F8D512FEA000009A184A /* PXBlock.m */; };
+		6A57F8D912FEA000009A184A /* PXLexicon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A57F8D712FEA000009A184A /* PXLexicon.m */; };
 		6A74BC8712FDF32C0019C2ED /* PXParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A54330112FDF0200084C7D0 /* PXParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6ABD1D3B12FE1A240014DF3B /* EvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */; };
 		6ABD1D3F12FE1A610014DF3B /* EvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */; };
@@ -40,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6A16077612FE69F800EC10F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A3A78D512FDE1650016D6AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A4E4AD112FDE8DC0061E729;
+			remoteInfo = lemon;
+		};
 		6A3A790912FDE1650016D6AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A3A78D512FDE1650016D6AD /* Project object */;
@@ -93,8 +101,10 @@
 		6A5432FF12FDF0200084C7D0 /* PXParser_iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PXParser_iOS-Prefix.pch"; sourceTree = "<group>"; };
 		6A54330012FDF0200084C7D0 /* PXParser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PXParser.cpp; sourceTree = "<group>"; };
 		6A54330112FDF0200084C7D0 /* PXParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXParser.h; sourceTree = "<group>"; };
-		6A54330A12FDF1C40084C7D0 /* PXBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBlock.h; sourceTree = "<group>"; };
-		6A54330B12FDF1C40084C7D0 /* PXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBlock.m; sourceTree = "<group>"; };
+		6A57F8D412FEA000009A184A /* PXBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBlock.h; sourceTree = "<group>"; };
+		6A57F8D512FEA000009A184A /* PXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBlock.m; sourceTree = "<group>"; };
+		6A57F8D612FEA000009A184A /* PXLexicon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLexicon.h; sourceTree = "<group>"; };
+		6A57F8D712FEA000009A184A /* PXLexicon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLexicon.m; sourceTree = "<group>"; };
 		6ABD1D3912FE1A240014DF3B /* EvaluationCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationCanvasView.h; sourceTree = "<group>"; };
 		6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationCanvasView.m; sourceTree = "<group>"; };
 		6ABD1D3C12FE1A600014DF3B /* EvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultViewController.h; sourceTree = "<group>"; };
@@ -145,11 +155,11 @@
 		6A3A78D312FDE1650016D6AD = {
 			isa = PBXGroup;
 			children = (
+				6A57F8D312FEA000009A184A /* Runtime */,
 				6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */,
 				6A3A78E812FDE1650016D6AD /* Prolixity */,
 				6A3A790B12FDE1650016D6AD /* ProlixityTests */,
 				6A5432DF12FDEF950084C7D0 /* PXParser-iOS */,
-				6A54330912FDF1C40084C7D0 /* Runtime */,
 				6A5432BF12FDE9ED0084C7D0 /* parser */,
 				6A3A78E112FDE1650016D6AD /* Frameworks */,
 				6A3A78DF12FDE1650016D6AD /* Products */,
@@ -262,11 +272,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6A54330912FDF1C40084C7D0 /* Runtime */ = {
+		6A57F8D312FEA000009A184A /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
-				6A54330A12FDF1C40084C7D0 /* PXBlock.h */,
-				6A54330B12FDF1C40084C7D0 /* PXBlock.m */,
+				6A57F8D412FEA000009A184A /* PXBlock.h */,
+				6A57F8D512FEA000009A184A /* PXBlock.m */,
+				6A57F8D612FEA000009A184A /* PXLexicon.h */,
+				6A57F8D712FEA000009A184A /* PXLexicon.m */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -299,6 +311,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6A16077712FE69F800EC10F1 /* PBXTargetDependency */,
 				6A54330F12FDF24E0084C7D0 /* PBXTargetDependency */,
 			);
 			name = Prolixity;
@@ -450,9 +463,10 @@
 				6A3A78F312FDE1650016D6AD /* ProlixityAppDelegate.m in Sources */,
 				6A3A78F912FDE1650016D6AD /* DetailViewController.m in Sources */,
 				6A3A78FF12FDE1650016D6AD /* RootViewController.m in Sources */,
-				6A54330C12FDF1C40084C7D0 /* PXBlock.m in Sources */,
 				6ABD1D3B12FE1A240014DF3B /* EvaluationCanvasView.m in Sources */,
 				6ABD1D3F12FE1A610014DF3B /* EvaluationResultViewController.m in Sources */,
+				6A57F8D812FEA000009A184A /* PXBlock.m in Sources */,
+				6A57F8D912FEA000009A184A /* PXLexicon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +499,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6A16077712FE69F800EC10F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6A4E4AD112FDE8DC0061E729 /* lemon */;
+			targetProxy = 6A16077612FE69F800EC10F1 /* PBXContainerItemProxy */;
+		};
 		6A3A790A12FDE1650016D6AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A3A78DD12FDE1650016D6AD /* Prolixity */;
