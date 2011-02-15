@@ -38,6 +38,8 @@ namespace Prolixity {
 };
 %}
 
+%option yylineno
+
  /* defines a string-capturing mode */
 %x STRMODE
 %x IDMODE
@@ -56,9 +58,15 @@ PERIOD          \.
 
  /* double dash is treated as comment */
 {DOUBLEDASH}.*\n
+<IDMODE>{DOUBLEDASH}.*\n    { BEGIN(0); }
 
  /* double quote enters string mode */
 {DOUBLEQUOTE} {
+        Prolixity::LexerStringToken = "";
+        BEGIN(STRMODE);
+    }
+
+<IDMODE>{DOUBLEQUOTE} {
         Prolixity::LexerStringToken = "";
         BEGIN(STRMODE);
     }
@@ -109,6 +117,7 @@ PERIOD          \.
 {PERIOD}                { return TOKEN_PERIOD; }
 <IDMODE>{PERIOD}        { BEGIN(0); return TOKEN_PERIOD; }
 {DIGIT}+(\.{DIGIT}+)?   { return TOKEN_NUMBER; }
+<IDMODE>{DIGIT}+(\.{DIGIT}+)?   { BEGIN(0); return TOKEN_NUMBER; }
 {IDENTIFEME}            { BEGIN(IDMODE); return TOKEN_IDENTIFEME; }
 <IDMODE>{IDENTIFEME}    { return TOKEN_IDENTIFEME; }
 {ELLIPSIS}              { return TOKEN_ELLIPSIS; }
