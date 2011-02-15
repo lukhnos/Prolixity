@@ -9,6 +9,7 @@
 #import "ProlixityAppDelegate.h"
 
 #import "RootViewController.h"
+#import "PXLexicon.h"
 
 @implementation ProlixityAppDelegate
 
@@ -23,6 +24,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /*
+    PXLexicon *cl = [[PXLexicon alloc] init];
+
+    [cl build:[NSArray arrayWithObjects:@"init", @"With", @"String:", @"encoding:", nil]];
+
+    [cl build:[NSArray arrayWithObjects:@"initWithString:", @"encoding:", nil]];
+    
+    NSLog(@"1 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithString:", @"encoding:", nil]]);
+    NSLog(@"2 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithString:encoding:", nil]]);
+    NSLog(@"3 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithData:encoding:", nil]]);
+    NSLog(@"4 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithString:", nil]]);
+    
+    
+    [cl release];
+    */
+    
+    [PXLexicon addClass:[NSString class]];
+    
+    [PXLexicon addClass:[NSArray class]];
+    
+    /*
+    NSLog(@"6 %@", [[PXLexicon methodLexicon] candidatesForLexemes:[NSArray arrayWithObjects:@"init", @"with", @"format:", @"arguments:", nil]]);
+    NSLog(@"7 %@", [[PXLexicon classLexicon] candidatesForLexemes:[NSArray arrayWithObjects:@"ns", @"string", nil]]);
+    */
+    
+    
     // Override point for customization after application launch.
     // Add the split view controller's view to the window and display.
     self.window.rootViewController = self.splitViewController;
