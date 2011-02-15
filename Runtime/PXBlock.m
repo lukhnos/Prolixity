@@ -27,6 +27,7 @@
 
 #import "PXBlock.h"
 #import "PXParser.h"
+#import "PXLexicon.h"
 #import <objc/runtime.h>
 
 @interface PXLexer : NSObject
@@ -131,7 +132,7 @@
 - (id)pop;
 - (id)loadFromVariable:(NSString *)inName;
 - (void)storeValue:(id)inValue toVariable:(NSString *)inName;
-- (void)invokeMethod:(SEL)inSelector;
+- (void)invokeMethod:(NSString *)methodName;
 @end
 
 
@@ -311,7 +312,7 @@ static const size_t kObjCMaXTypeLength = 256;
             [self push:tempValue];
         }
         else if (instruction == PXInstructionInvoke) {
-            [self invokeMethod:NSSelectorFromString(object)];
+            [self invokeMethod:object];
         }
     }
         
@@ -516,20 +517,63 @@ static const size_t kObjCMaXTypeLength = 256;
     return evalResult;
 }
 
-- (void)invokeMethod:(SEL)inSelector
+- (void)invokeMethod:(NSString *)methodName
 {
     NSObject *object = (tempValue == [NSNull null] ? nil : tempValue);
-    NSMethodSignature *methodSignature = [object methodSignatureForSelector:inSelector];
+
+    // the simple split
+    
+    NSMutableArray *lexemes = [NSMutableArray array];
+    SEL selector = NULL;
+    
+    NSArray *splitMethodName = [methodName componentsSeparatedByString:@":"];
+    if ([splitMethodName count] == 1) {
+        selector = NSSelectorFromString(methodName);
+    }
+    else {
+        for (NSString *m in splitMethodName) {
+            if (![m length]) {
+                continue;
+            }
+            
+            NSArray *splitM = [m componentsSeparatedByString:@"$"];
+            id lastObject = [splitM lastObject];
+            for (NSString *i in splitM) {
+                if (i == lastObject) {
+                    [lexemes addObject:[NSString stringWithFormat:@"%@:", i]];
+                }
+                else {
+                    [lexemes addObject:i];
+                }
+            }
+        }
+        
+        
+        NSArray *candidates = [[PXLexicon methodLexicon] candidatesForLexemes:lexemes];
+        NSLog(@"input: %@, lexemes: %@, candidates: %@", methodName, lexemes, candidates);
+
+        for (NSString *c in candidates) {
+            SEL s = NSSelectorFromString(c);
+            if ([object respondsToSelector:s]) {
+                selector = s;
+                break;
+            }
+        }
+    }
+    
+    NSAssert(selector != NULL, @"Object must respond to selector");
+    
+    NSMethodSignature *methodSignature = [object methodSignatureForSelector:selector];
     NSAssert(methodSignature != nil, @"Object must respond to selector");
     
-    if (inSelector == @selector(alloc)) {
+    if (selector == @selector(alloc)) {
         id tmp = tempValue;
-        tempValue = [[object alloc] retain];
+        tempValue = [[(Class)object alloc] retain];
         [tmp release];
         return;
     }
     
-    if (inSelector == @selector(class)) {
+    if (selector == @selector(class)) {
         id tmp = tempValue;
         tempValue = (id)[NSString class];
         [tmp release];                
@@ -538,7 +582,7 @@ static const size_t kObjCMaXTypeLength = 256;
     
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
     [invocation setTarget:object];
-    [invocation setSelector:inSelector];
+    [invocation setSelector:selector];
     
     NSUInteger argumentCount = [methodSignature numberOfArguments];
     for (NSUInteger argi = 2 ; argi < argumentCount ; ++argi) {
