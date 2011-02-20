@@ -48,6 +48,7 @@ namespace Prolixity {
 DIGIT           [0-9]
 IDENTIFEME      [A-Za-z_][0-9A-Za-z_]*
 DOUBLEQUOTE	    \"
+ /* this stops some editors from syntax highlighing from the last double quote " */
 SPACE           (" "|\r|\t)
 ELLIPSIS        \.\.\.
 DOUBLEDASH      --
@@ -98,6 +99,7 @@ PERIOD          \.
  /* note that the keyword "taking" does not starts IDMODE because in the grammar it follows an expression */
 (?i:var)                { BEGIN(IDMODE); return TOKEN_VAR; }
 (?i:set)                { return TOKEN_SET; }
+(?i:save)
 (?i:to)                 { BEGIN(IDMODE); return TOKEN_TO; }
 (?i:on)                 { BEGIN(IDMODE); return TOKEN_ON; }
 (?i:invoke)             { BEGIN(IDMODE); return TOKEN_INVOKE; }
@@ -106,10 +108,25 @@ PERIOD          \.
 (?i:end)                { return TOKEN_END; }
 (?i:and)                { BEGIN(IDMODE); return TOKEN_AND; }
 
+(?i:point)              { return TOKEN_POINT; }
+(?i:rectangle)          { return TOKEN_RECT; }
+(?i:rect)               { return TOKEN_RECT; }
+(?i:size)               { return TOKEN_SIZE; }
+(?i:range)              { return TOKEN_RANGE; }
+
+ /*
+(?i:color)
+(?i:alpha)
+(?i:true)
+(?i:false)
+(?i:self)
+ */
+
  /* symbols; $ is an override symbol that starts IDMODE */
  /* this makes this snippet possible: var set union. on a, invoke b, taking $ set union */
 "("                     { return TOKEN_LEFT_PAREN; }
 ")"                     { return TOKEN_RIGHT_PAREN; }
+<IDMODE>")"             { BEGIN(0); return TOKEN_RIGHT_PAREN; }
 "$"                     { BEGIN(IDMODE); }
 <IDMODE>"$"
 {COMMA}                 { return TOKEN_COMMA; }
