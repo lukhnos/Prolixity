@@ -128,6 +128,24 @@ PERIOD          \.
 ")"                     { return TOKEN_RIGHT_PAREN; }
 <IDMODE>")"             { BEGIN(0); return TOKEN_RIGHT_PAREN; }
 "$"                     { BEGIN(IDMODE); }
+
+"="                     { return TOKEN_ASSIGN; }
+<IDMODE>"="             { BEGIN(0); return TOKEN_ASSIGN; }
+
+"+"                     { return TOKEN_PLUS; }
+<IDMODE>"+"             { BEGIN(0); return TOKEN_PLUS; }
+
+"-"                     { return TOKEN_MINUS; }
+<IDMODE>"-"             { BEGIN(0); return TOKEN_MINUS; }
+
+"*"                     { return TOKEN_MUL; }
+<IDMODE>"*"             { BEGIN(0); return TOKEN_MUL; }
+
+"/"                     { return TOKEN_DIV; }
+<IDMODE>"/"             { BEGIN(0); return TOKEN_DIV; }
+
+
+
 <IDMODE>"$"
 {COMMA}                 { return TOKEN_COMMA; }
 <IDMODE>{COMMA}         { BEGIN(0); return TOKEN_COMMA; }

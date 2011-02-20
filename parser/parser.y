@@ -100,6 +100,9 @@
 }
 
 %extra_argument {ParserBlock *pCurrentBlock}
+%left ASSIGN.
+%left PLUS MINUS.
+%left MUL DIV.
 
 %syntax_error
 {
@@ -155,6 +158,11 @@ statement(X) ::= set_statement(Y).
     X = Y;
 }
 
+statement(X) ::= assign_statement(Y).
+{
+    X = Y;
+}
+
 statement(X) ::= expression(Y).
 {
     X = Y;
@@ -193,7 +201,6 @@ set_statement(X) ::= SET TO identifier(ID) set_statement_tail(TAIL).
     delete ID;
 }
 
-
 %type set_statement_tail {ParserBlock*}
 %destructor set_statement_tail {delete $$;}
 
@@ -205,6 +212,18 @@ set_statement_tail(X) ::= .
 set_statement_tail(X) ::= COMMA expression(EXP).
 {
     X = EXP;
+}
+
+%type assign_statement {ParserBlock*}
+%destructor assign_statement { delete $$; }
+
+assign_statement(X) ::= identifier(ID) ASSIGN expression(EXP).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*EXP);
+    X->addStore(*ID);
+    delete ID;
+    delete EXP;
 }
 
 
@@ -383,6 +402,52 @@ nonprs_expression(X) ::= LEFT_PAREN expression(EXP) RIGHT_PAREN.
 {
     X = EXP;
 }
+
+nonprs_expression(X) ::= nonprs_expression(Y) PLUS nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("plus");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) MINUS nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("minus");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) MUL nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("mul");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) DIV nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("div");
+    delete Y;
+    delete Z;
+}
+
+
 
 nonprs_expression(X) ::= identifier(ID).
 {
