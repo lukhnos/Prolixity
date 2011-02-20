@@ -1,0 +1,14 @@
+on "hello", invoke init with data, taking "abcd", and encoding, taking 1234
+
+-- var a
+-- set to a, 0
+
+-- var b
+-- set to b, 10
+
+-- var c
+-- set to c, "hello, world!\nand another line"
+-- on c, invoke dump
+
+-- begin... on a, invoke lt, taking b ...end
+-- invoke whileTrue, taking begin... on a, invoke dump. on a, invoke plus, -- taking 1. set to a. ...end
