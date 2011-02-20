@@ -1,5 +1,8 @@
-all: lexer.cpp parser.cpp driver.cpp
+all: lemon lexer.cpp parser.cpp driver.cpp
 	g++ -g -o pxcompile lexer.cpp parser.cpp driver.cpp -lstdc++
+
+lemon: lemon.c
+	gcc -o $@ $<
 
 lexer.cpp: lexer.l parser.cpp
 	flex -o lexer.cpp lexer.l

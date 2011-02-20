@@ -225,33 +225,173 @@ expression(X) ::= noninvoke_expression(EXP).
 %type noninvoke_expression {ParserBlock*}
 %destructor noninvoke_expression {delete $$;}
 
-noninvoke_expression(X) ::= NUMBER(NUM).
+noninvoke_expression(X) ::= nonprs_expression(Y).
 {
-    X = new ParserBlock;
-    X->addLoadNumber(*NUM);
-    delete NUM;
+    X = Y;
 }
 
-noninvoke_expression(X) ::= STRING(STR).
+noninvoke_expression(X) ::= point_expression(Y).
+{
+    X = Y;
+}
+
+noninvoke_expression(X) ::= size_expression(Y).
+{
+    X = Y;
+}
+
+noninvoke_expression(X) ::= rect_expression(Y).
+{
+    X = Y;
+}
+
+noninvoke_expression(X) ::= range_expression(Y).
+{
+    X = Y;
+}
+
+
+%type point_expression {ParserBlock*}
+%destructor point_expression {delete $$;}
+
+point_expression(E) ::= POINT nonprs_expression(X) COMMA nonprs_expression(Y).
+{
+    E = new ParserBlock;
+
+    if ((*X).isSimpleNumberExp() && (*Y).isSimpleNumberExp()) {        
+        E->addLoadPoint((*X).getSimpleNumber(), (*Y).getSimpleNumber());    
+    }
+    else {
+        E->mergeBlock(*Y);
+        E->addPush();    
+        E->mergeBlock(*X);
+        E->addPush();
+    }
+    
+    // TODO: Create point
+    
+    delete X;
+    delete Y;
+}
+
+%type size_expression {ParserBlock*}
+%destructor size_expression {delete $$;}
+
+size_expression(E) ::= SIZE nonprs_expression(X) COMMA nonprs_expression(Y).
+{
+    E = new ParserBlock;
+
+    if ((*X).isSimpleNumberExp() && (*Y).isSimpleNumberExp()) {        
+        E->addLoadSize((*X).getSimpleNumber(), (*Y).getSimpleNumber());    
+    }
+    else {
+        E->mergeBlock(*Y);
+        E->addPush();    
+        E->mergeBlock(*X);
+        E->addPush();
+        // TODO: Create size
+    }
+    
+    delete X;
+    delete Y;
+}
+
+%type range_expression {ParserBlock*}
+%destructor range_expression {delete $$;}
+
+range_expression(E) ::= RANGE nonprs_expression(X) COMMA nonprs_expression(Y).
+{
+    E = new ParserBlock;
+
+    if ((*X).isSimpleNumberExp() && (*Y).isSimpleNumberExp()) {        
+        E->addLoadRange((*X).getSimpleNumber(), (*Y).getSimpleNumber());    
+    }
+    else {
+        E->mergeBlock(*Y);
+        E->addPush();    
+        E->mergeBlock(*X);
+        E->addPush();
+    }
+    
+    // TODO: Create range
+    
+    delete X;
+    delete Y;
+}
+
+%type rect_expression {ParserBlock*}
+%destructor rect_expression {delete $$;}
+
+rect_expression(E) ::= RECT point_expression(ORIG) COMMA size_expression(SIZE).
+{
+    E = new ParserBlock;
+    E->mergeBlock(*SIZE);
+    E->addPush();
+    E->mergeBlock(*ORIG);
+    E->addPush();
+    
+    // TODO: Create rect
+    
+    delete ORIG;
+    delete SIZE;
+}
+
+rect_expression(E) ::= RECT nonprs_expression(X1) COMMA nonprs_expression(Y1) COMMA nonprs_expression(X2) COMMA nonprs_expression(Y2).
+{
+    E = new ParserBlock;
+
+    if ((*X1).isSimpleNumberExp() && (*Y1).isSimpleNumberExp() && (*X2).isSimpleNumberExp() && (*Y2).isSimpleNumberExp()) {
+        E->addLoadRect4I((*X1).getSimpleNumber(), (*Y1).getSimpleNumber(), (*X2).getSimpleNumber(), (*Y2).getSimpleNumber());        
+    }
+    else {
+        E->mergeBlock(*Y2);
+        E->addPush();    
+        E->mergeBlock(*X2);
+        E->addPush();
+        E->mergeBlock(*Y1);
+        E->addPush();    
+        E->mergeBlock(*X1);
+        E->addPush();
+    }
+
+    // TODO: Create rect
+
+    delete X1;
+    delete Y1;
+    delete X2;
+    delete Y2;
+}
+
+%type nonprs_expression {ParserBlock*}
+%destructor nonprs_expression {delete $$;}
+
+nonprs_expression(X) ::= STRING(STR).
 {
     X = new ParserBlock;
     X->addLoadString(*STR);
     delete STR;
 }
 
-noninvoke_expression(X) ::= LEFT_PAREN expression(EXP) RIGHT_PAREN.
+nonprs_expression(X) ::= NUMBER(NUM).
+{
+    X = new ParserBlock;
+    X->addLoadNumber(*NUM);
+    delete NUM;
+}
+
+nonprs_expression(X) ::= LEFT_PAREN expression(EXP) RIGHT_PAREN.
 {
     X = EXP;
 }
 
-noninvoke_expression(X) ::= identifier(ID).
+nonprs_expression(X) ::= identifier(ID).
 {
     X = new ParserBlock;
     X->addLoad(*ID);
     delete ID;
 }
     
-noninvoke_expression(X) ::= block(BLK).
+nonprs_expression(X) ::= block(BLK).
 {
     X = new ParserBlock;
     X->addBlock(*BLK);

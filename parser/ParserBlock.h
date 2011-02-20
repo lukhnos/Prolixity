@@ -43,6 +43,8 @@ namespace Prolixity {
         std::vector<std::string> instructions;
         std::vector<ParserBlock> blocks;
         std::string lastError;
+
+		std::string simpleNumber;
         
         static const std::string obtainUniqueIdentifier(const std::string& type)
         {
@@ -53,6 +55,17 @@ namespace Prolixity {
         }
     
     public:
+		bool isSimpleNumberExp()
+		{
+			return simpleNumber.length() != 0 && instructions.size() == 1;
+		}
+		
+        const std::string getSimpleNumber()
+		{
+			return simpleNumber;
+		}
+		
+	
         const std::string obtainName()
         {
             name = obtainUniqueIdentifier("b");
@@ -95,6 +108,9 @@ namespace Prolixity {
             sst << " ";
             sst << numberString;
             instructions.push_back(sst.str());
+
+			// TODO: Safe-guard this
+			simpleNumber = numberString;
         }
         
         void addLoadString(const std::string& stringString)
@@ -105,6 +121,54 @@ namespace Prolixity {
             inst += "\"";
             instructions.push_back(inst);
         }
+
+		void addLoadPoint(const std::string& numberX, const std::string& numberY)
+		{
+            std::stringstream sst;
+            sst << "loado_point";
+            sst << " ";
+			sst << numberX;
+            sst << " ";
+			sst << numberY;			
+            instructions.push_back(sst.str());			
+		}
+
+		void addLoadSize(const std::string& numberX, const std::string& numberY)
+		{
+            std::stringstream sst;
+            sst << "loado_size";
+            sst << " ";
+			sst << numberX;
+            sst << " ";
+			sst << numberY;			
+            instructions.push_back(sst.str());			
+		}
+
+		void addLoadRange(const std::string& numberX, const std::string& numberY)
+		{
+            std::stringstream sst;
+            sst << "loado_range";
+            sst << " ";
+			sst << numberX;
+            sst << " ";
+			sst << numberY;			
+            instructions.push_back(sst.str());			
+		}
+
+		void addLoadRect4I(const std::string& numberX1, const std::string& numberY1, const std::string& numberX2, const std::string& numberY2)
+		{
+            std::stringstream sst;
+            sst << "loado_rect";
+            sst << " ";
+			sst << numberX1;
+            sst << " ";
+			sst << numberY1;			
+            sst << " ";
+			sst << numberX2;
+            sst << " ";
+			sst << numberY2;			
+            instructions.push_back(sst.str());			
+		}
         
         void addLoad(const std::string& identifier)
         {
