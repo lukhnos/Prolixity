@@ -33,11 +33,13 @@
     [[PXBlock currentConsoleBuffer] setString:@""];
     
     NSLog(@"source: %@", self.textView.text);
+    
+    /*
     PXBlock *blk = [PXBlock blockWithSource:self.textView.text];
     if (blk) {
         [blk runWithParent:nil];
     }
-    
+    */
     if (!self.evaluationResultViewController) {
         self.evaluationResultViewController = [[[EvaluationResultViewController alloc] initWithNibName:@"EvaluationResultViewController" bundle:nil] autorelease];        
     }
@@ -45,7 +47,9 @@
     self.evaluationResultViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentModalViewController:self.evaluationResultViewController animated:YES];
     
-    self.evaluationResultViewController.evaluationCanvasView.textView.text = [PXBlock currentConsoleBuffer];
+    self.evaluationResultViewController.evaluationCanvasView.source = self.textView.text;
+    
+//    self.evaluationResultViewController.evaluationCanvasView.textView.text = [PXBlock currentConsoleBuffer];
 }
 
 #pragma mark - Managing the detail item

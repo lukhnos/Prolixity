@@ -84,11 +84,19 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">dmFyIGEKc2V0IHRvIGEsIDAKCnZhciBiCnNldCB0byBiLCAxMAoKdmFyIGMKc2V0IHRvIGMsICJoZWxs
-bywgd29ybGQhXG5hbmQgYW5vdGhlciBsaW5lIgpvbiBjLCBpbnZva2UgZHVtcAoKYmVnaW4uLi4gb24g
-YSwgaW52b2tlIGx0LCB0YWtpbmcgYiAuLi5lbmQKaW52b2tlIHdoaWxlVHJ1ZSwgdGFraW5nIGJlZ2lu
-Li4uIG9uIGEsIGludm9rZSBkdW1wLiBvbiBhLCBpbnZva2UgcGx1cywgdGFraW5nIDEuIHNldCB0byBh
-LiAuLi5lbmQKA</string>
+						<string type="base64-UTF8" key="IBUIText">dmFyIGEKc2F2ZSB0byBhLCAwCgp2YXIgYgpzYXZlIHRvIGIsIDEwCgp2YXIgYwpzYXZlIHRvIGMsICJo
+ZWxsbywgd29ybGQhXG5hbmQgYW5vdGhlciBsaW5lIgpvbiBjLCBpbnZva2UgZHVtcAoKYmVnaW4uLi4g
+b24gYSwgaW52b2tlIGx0LCB0YWtpbmcgYiAuLi5lbmQKaW52b2tlIHdoaWxlVHJ1ZSwgdGFraW5nIGJl
+Z2luLi4uIG9uIGEsIGludm9rZSBkdW1wLiBvbiBhLCBpbnZva2UgcGx1cywgdGFraW5nIDEuIHNhdmUg
+dG8gYS4gLi4uZW5kCgoKdmFyIGQKc2F2ZSB0byBkLCBvbiBjYW52YXMsIGludm9rZSBzb21lIHBvaW50
+Cm9uIGQsIGludm9rZSBkdW1wCgp2YXIgZQplID0gcG9pbnQgMTAwLCAxMDAKb24gZSwgaW52b2tlIGR1
+bXAKCnZhciBmCmYgPSAxMAp2YXIgZwpnID0gMTAKZSA9IHBvaW50IGYsIGcKb24gZSwgaW52b2tlIGR1
+bXAKCm9uICJzdGFydCB0ZXN0aW5nIiwgaW52b2tlIGR1bXAKb24gY2FudmFzLCBpbnZva2Ugc2V0IHNv
+bWUgcG9pbnQsIHRha2luZyBlCnNhdmUgdG8gZCwgb24gY2FudmFzLCBpbnZva2Ugc29tZSBwb2ludApv
+biBkLCBpbnZva2UgZHVtcAoKYmVnaW4uLi4gb24gZiwgaW52b2tlIGx0LCB0YWtpbmcgMjAwIC4uLmVu
+ZAppbnZva2Ugd2hpbGVUcnVlLCB0YWtpbmcgYmVnaW4uLi4KCWYgPSBmICsgMjAKCWcgPSBmCgllID0g
+cG9pbnQgZiwgZwoJb24gY2FudmFzLCBpbnZva2Ugc2V0IHNvbWUgcG9pbnQsIHRha2luZyBlCi4uLmVu
+ZAoKCgo</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
@@ -268,13 +276,11 @@ LiAuLi5lbmQKA</string>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>detailDescriptionLabel</string>
 							<string>textView</string>
 							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UILabel</string>
 							<string>UITextView</string>
 							<string>UIToolbar</string>
 						</object>
@@ -283,16 +289,11 @@ LiAuLi5lbmQKA</string>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>detailDescriptionLabel</string>
 							<string>textView</string>
 							<string>toolbar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">detailDescriptionLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">textView</string>
 								<string key="candidateClassName">UITextView</string>

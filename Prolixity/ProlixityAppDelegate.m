@@ -11,6 +11,8 @@
 #import "RootViewController.h"
 #import "PXLexicon.h"
 
+#import "EvaluationCanvasView.h"
+
 @implementation ProlixityAppDelegate
 
 
@@ -43,6 +45,8 @@
     [PXLexicon addClass:[NSString class]];
     
     [PXLexicon addClass:[NSArray class]];
+    
+    [PXLexicon addClass:[EvaluationCanvasView class]];
     
     /*
     NSLog(@"6 %@", [[PXLexicon methodLexicon] candidatesForLexemes:[NSArray arrayWithObjects:@"init", @"with", @"format:", @"arguments:", nil]]);

@@ -11,7 +11,12 @@
 
 @interface EvaluationCanvasView : UIView
 {
+    CGPoint somePoint;
 }
 
+- (CGPoint)somePoint;
+- (void)setSomePoint:(CGPoint)p;
+
+@property (retain, nonatomic) NSString *source;
 @property (retain, nonatomic) IBOutlet UITextView *textView;
 @end

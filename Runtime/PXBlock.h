@@ -42,6 +42,11 @@
 - (id)ifFalse:(PXBlock *)inBlock;
 @end
 
+
+@interface NSValue (PXSupport)
++ (NSValue *)valueWithCGPointNumberX:(NSNumber *)x numberY:(NSNumber *)y;
+@end
+
 @interface PXBlock : NSObject
 {
     NSString *name;
@@ -59,12 +64,16 @@
 - (id)runWithParent:(PXBlock *)inParent;
 
 - (void)declareVariable:(NSString *)inName;
+- (void)exportObject:(id)object toVariable:(id)varName;
+
 - (void)addLoadImmeidate:(id)inObject;
 - (void)addLoad:(NSString *)inName;
 - (void)addStore:(NSString *)inName;
 - (void)addPush;
 - (void)addPop;
 - (void)addInvoke:(SEL)inSelector;
+
+
 
 @property (readonly) NSString *name;
 @end

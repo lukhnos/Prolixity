@@ -153,7 +153,7 @@ statement(X) ::= var_statement(Y).
     X = Y;
 }
 
-statement(X) ::= set_statement(Y).
+statement(X) ::= save_statement(Y).
 {
     X = Y;
 }
@@ -191,25 +191,25 @@ var_statement(X) ::= VAR identifier(ID).
 }
 
 
-%type set_statement {ParserBlock*}
-%destructor set_statement { delete $$; }
+%type save_statement {ParserBlock*}
+%destructor save_statement { delete $$; }
 
-set_statement(X) ::= SET TO identifier(ID) set_statement_tail(TAIL).
+save_statement(X) ::= SAVE TO identifier(ID) save_statement_tail(TAIL).
 {
     X = TAIL;
     X->addStore(*ID);
     delete ID;
 }
 
-%type set_statement_tail {ParserBlock*}
-%destructor set_statement_tail {delete $$;}
+%type save_statement_tail {ParserBlock*}
+%destructor save_statement_tail {delete $$;}
 
-set_statement_tail(X) ::= .
+save_statement_tail(X) ::= .
 {
     X = new ParserBlock;
 }
     
-set_statement_tail(X) ::= COMMA expression(EXP).
+save_statement_tail(X) ::= COMMA expression(EXP).
 {
     X = EXP;
 }
@@ -285,9 +285,9 @@ point_expression(E) ::= POINT nonprs_expression(X) COMMA nonprs_expression(Y).
         E->addPush();    
         E->mergeBlock(*X);
         E->addPush();
+        E->addLoad("NSValue");
+        E->addInvoke("valueWithCGPointNumberX:numberY:");
     }
-    
-    // TODO: Create point
     
     delete X;
     delete Y;
@@ -409,7 +409,7 @@ nonprs_expression(X) ::= nonprs_expression(Y) PLUS nonprs_expression(Z).
     X->mergeBlock(*Z);
     X->addPush();
     X->mergeBlock(*Y);
-    X->addInvoke("plus");
+    X->addInvoke("plus:");
     delete Y;
     delete Z;
 }
@@ -420,7 +420,7 @@ nonprs_expression(X) ::= nonprs_expression(Y) MINUS nonprs_expression(Z).
     X->mergeBlock(*Z);
     X->addPush();
     X->mergeBlock(*Y);
-    X->addInvoke("minus");
+    X->addInvoke("minus:");
     delete Y;
     delete Z;
 }
@@ -431,7 +431,7 @@ nonprs_expression(X) ::= nonprs_expression(Y) MUL nonprs_expression(Z).
     X->mergeBlock(*Z);
     X->addPush();
     X->mergeBlock(*Y);
-    X->addInvoke("mul");
+    X->addInvoke("mul:");
     delete Y;
     delete Z;
 }
@@ -442,7 +442,7 @@ nonprs_expression(X) ::= nonprs_expression(Y) DIV nonprs_expression(Z).
     X->mergeBlock(*Z);
     X->addPush();
     X->mergeBlock(*Y);
-    X->addInvoke("div");
+    X->addInvoke("div:");
     delete Y;
     delete Z;
 }

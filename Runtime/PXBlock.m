@@ -213,6 +213,13 @@
 }
 @end
 
+@implementation NSValue (PXSupport)
++ (NSValue *)valueWithCGPointNumberX:(NSNumber *)x numberY:(NSNumber *)y
+{
+    return [NSValue valueWithCGPoint:CGPointMake([x doubleValue], [y doubleValue])];
+}
+@end
+
 
 static NSString *const PXCurrentBlockInThreadKey = @"PXCurrentBlockInThreadKey";
 static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBufferInThreadKey";
@@ -327,6 +334,11 @@ static const size_t kObjCMaXTypeLength = 256;
     [variables setObject:[NSNull null] forKey:inName];
 }
 
+- (void)exportObject:(id)object toVariable:(id)varName
+{
+    [variables setObject:object forKey:varName];
+}
+
 - (void)addLoadImmeidate:(id)inObject
 {
     [instructions addObject:PXInstructionLoadImmediate];
@@ -420,6 +432,13 @@ static const size_t kObjCMaXTypeLength = 256;
             
             [self addLoadImmeidate:number];
         }
+        else if ([t isEqualToString:@"loado_point"]) {
+            CGFloat x = [[inLexer next] doubleValue];
+            CGFloat y = [[inLexer next] doubleValue];
+            
+            [self addLoadImmeidate:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
+
+        }        
         else if ([t isEqualToString:@"loadis"]) {
             [self addLoadImmeidate:[inLexer next]];
             
@@ -527,10 +546,10 @@ static const size_t kObjCMaXTypeLength = 256;
     SEL selector = NULL;
     
     NSArray *splitMethodName = [methodName componentsSeparatedByString:@":"];
-    if ([splitMethodName count] == 1) {
+/*    if ([splitMethodName count] == 1) {
         selector = NSSelectorFromString(methodName);
     }
-    else {
+    else { */
         for (NSString *m in splitMethodName) {
             if (![m length]) {
                 continue;
@@ -540,7 +559,13 @@ static const size_t kObjCMaXTypeLength = 256;
             id lastObject = [splitM lastObject];
             for (NSString *i in splitM) {
                 if (i == lastObject) {
-                    [lexemes addObject:[NSString stringWithFormat:@"%@:", i]];
+                    
+                    if ([splitMethodName count] == 1) {
+                        [lexemes addObject:i];                        
+                    }
+                    else {
+                        [lexemes addObject:[NSString stringWithFormat:@"%@:", i]];
+                    }
                 }
                 else {
                     [lexemes addObject:i];
@@ -559,7 +584,7 @@ static const size_t kObjCMaXTypeLength = 256;
                 break;
             }
         }
-    }
+/*    } */
     
     NSAssert(selector != NULL, @"Object must respond to selector");
     
@@ -591,6 +616,20 @@ static const size_t kObjCMaXTypeLength = 256;
             id arg = [self pop];
             [invocation setArgument:&arg atIndex:argi];
         }
+        else if (!strcmp(argType, @encode(CGPoint))) {
+            
+            
+            NSValue *arg = [self pop];
+            NSLog(@"passing cgpoint value: %@", arg);
+
+            CGPoint p = CGPointMake(0.0, 0.0);
+            
+            if (!strcmp([arg objCType], @encode(CGPoint))) {
+                [arg getValue:&p];                
+            }
+            
+            [invocation setArgument:&p atIndex:argi];
+        }
         else {
             NSAssert(NO, @"Return type not supported");
         }
@@ -605,6 +644,15 @@ static const size_t kObjCMaXTypeLength = 256;
         id tmp = tempValue;
         tempValue = [NSNull null];
         [tmp release];
+    }
+    else if (!strcmp(returnValueType, @encode(CGPoint))) {
+        CGPoint p = CGPointMake(0.0, 0.0);
+        [invocation getReturnValue:&p];
+        id tmp = tempValue;
+        tempValue = [[NSValue valueWithCGPoint:p] retain];
+        [tmp release];
+        
+        NSLog(@"return value is also some CGPoint: %@", tempValue);
     }
     else if (!strcmp(returnValueType, @encode(id)) || !strcmp(returnValueType, @encode(Class))) {
         id returnValue = nil;

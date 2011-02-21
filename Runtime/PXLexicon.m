@@ -157,6 +157,8 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
     NSString *className = NSStringFromClass(cls);
     [[self classLexicon] build:PXSplitObjectiveCName(className)];
     
+    NSLog(@"ADDING class: %@", className);
+    
     unsigned int numMethods = 0;
     Method *methods = class_copyMethodList(cls, &numMethods);
     for (unsigned int j = 0 ; j < numMethods ; j++) {
@@ -164,6 +166,7 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
         SEL selector = method_getName(method);
         
         NSString *methodName = NSStringFromSelector(selector);
+        // NSLog(@"method: %@", methodName);
         
         NSArray *splitM = [methodName componentsSeparatedByString:@":"];
         if ([splitM count] == 1) {
