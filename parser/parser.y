@@ -100,9 +100,11 @@
 }
 
 %extra_argument {ParserBlock *pCurrentBlock}
+%left IF.
 %left ASSIGN.
 %left PLUS MINUS.
 %left MUL DIV.
+%right LT GT LE GE EQ NEQ NOT.
 
 %syntax_error
 {
@@ -159,6 +161,16 @@ statement(X) ::= save_statement(Y).
 }
 
 statement(X) ::= assign_statement(Y).
+{
+    X = Y;
+}
+
+statement(X) ::= if_statement(Y).
+{
+    X = Y;
+}
+
+statement(X) ::= while_statement(Y).
 {
     X = Y;
 }
@@ -226,6 +238,61 @@ assign_statement(X) ::= identifier(ID) ASSIGN expression(EXP).
     delete EXP;
 }
 
+%type if_statement {ParserBlock*}
+%destructor if_statement { delete $$; }
+
+if_statement(S) ::= IF noninvoke_expression(E) COMMA block(B).
+{
+    S = new ParserBlock;
+    S->addBlock(*B);
+    S->addLoad(B->getName());
+    S->addPush();
+    S->mergeBlock(*E);
+    S->addInvoke("ifTrue:");
+
+    delete B;
+    delete E;
+}
+
+if_statement(S) ::= IF noninvoke_expression(E) COMMA block(TB) COMMA ELSE block(FB).
+{
+    S = new ParserBlock;
+
+    S->addBlock(*FB);
+    S->addLoad(FB->getName());
+    S->addPush();
+
+    S->addBlock(*TB);
+    S->addLoad(TB->getName());
+    S->addPush();
+    
+    S->mergeBlock(*E);
+    S->addInvoke("ifTrue:");
+    S->addInvoke("ifFalse:");
+
+    delete FB;
+    delete TB;
+    delete E;
+}
+
+%type while_statement {ParserBlock*}
+%destructor while_statement { delete $$; }
+
+while_statement(S) ::= WHILE noninvoke_expression(E) COMMA block(B).
+{
+    S = new ParserBlock;
+    S->addBlock(*B);
+    S->addLoad(B->getName());
+    S->addPush();
+    
+    E->obtainName();
+    S->addBlock(*E);
+    S->addLoad(E->getName());
+    S->addInvoke("whileTrue:");
+
+    delete B;
+    delete E;
+}
 
 %type expression { ParserBlock* }
 %destructor expression { delete $$; }
@@ -446,6 +513,81 @@ nonprs_expression(X) ::= nonprs_expression(Y) DIV nonprs_expression(Z).
     delete Y;
     delete Z;
 }
+
+nonprs_expression(X) ::= nonprs_expression(Y) LT nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("lt:");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) GT nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("gt:");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) LE nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("le:");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) GE nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("ge:");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) EQ nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("eq:");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= nonprs_expression(Y) NEQ nonprs_expression(Z).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Z);
+    X->addPush();
+    X->mergeBlock(*Y);
+    X->addInvoke("neq:");
+    delete Y;
+    delete Z;
+}
+
+nonprs_expression(X) ::= NOT nonprs_expression(Y).
+{
+    X = new ParserBlock;
+    X->mergeBlock(*Y);
+    X->addInvoke("negate");
+    delete Y;
+}
+
 
 
 

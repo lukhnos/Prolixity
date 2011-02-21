@@ -113,6 +113,10 @@ PERIOD          \.
 (?i:size)               { return TOKEN_SIZE; }
 (?i:range)              { return TOKEN_RANGE; }
 
+(?i:if)                 { return TOKEN_IF; }
+(?i:else)               { return TOKEN_ELSE; }
+(?i:while)              { return TOKEN_WHILE; }
+
  /*
 (?i:color)
 (?i:alpha)
@@ -128,8 +132,17 @@ PERIOD          \.
 <IDMODE>")"             { BEGIN(0); return TOKEN_RIGHT_PAREN; }
 "$"                     { BEGIN(IDMODE); }
 
+"=="                     { return TOKEN_EQ; }
+<IDMODE>"=="             { BEGIN(0); return TOKEN_EQ; }
+
 "="                     { return TOKEN_ASSIGN; }
 <IDMODE>"="             { BEGIN(0); return TOKEN_ASSIGN; }
+
+"!="                    { return TOKEN_NEQ; }
+<IDMODE>"!="            { BEGIN(0); return TOKEN_NEQ; }
+
+"!"                     { return TOKEN_NOT; }
+<IDMODE>"!"             { BEGIN(0); return TOKEN_NOT; }
 
 "+"                     { return TOKEN_PLUS; }
 <IDMODE>"+"             { BEGIN(0); return TOKEN_PLUS; }
@@ -142,6 +155,18 @@ PERIOD          \.
 
 "/"                     { return TOKEN_DIV; }
 <IDMODE>"/"             { BEGIN(0); return TOKEN_DIV; }
+
+"<="                    { return TOKEN_LE; }
+<IDMODE>"<="            { BEGIN(0); return TOKEN_LE; }
+
+"<"                     { return TOKEN_LT; }
+<IDMODE>"<"             { BEGIN(0); return TOKEN_LT; }
+
+">="                    { return TOKEN_GE; }
+<IDMODE>">="            { BEGIN(0); return TOKEN_GE; }
+
+">"                     { return TOKEN_GT; }
+<IDMODE>">"             { BEGIN(0); return TOKEN_GT; }
 
 
 
