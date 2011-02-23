@@ -35,6 +35,9 @@
 		6A57F8D812FEA000009A184A /* PXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A57F8D512FEA000009A184A /* PXBlock.m */; };
 		6A57F8D912FEA000009A184A /* PXLexicon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A57F8D712FEA000009A184A /* PXLexicon.m */; };
 		6A74BC8712FDF32C0019C2ED /* PXParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A54330112FDF0200084C7D0 /* PXParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD1F1314B0B200FA6E76 /* Prolixity.png */; };
+		6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD201314B0B200FA6E76 /* Prolixity72.png */; };
+		6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */; };
 		6ABD1D3B12FE1A240014DF3B /* EvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */; };
 		6ABD1D3F12FE1A610014DF3B /* EvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */; };
 		6ABD1D4012FE1A610014DF3B /* EvaluationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3E12FE1A600014DF3B /* EvaluationResultViewController.xib */; };
@@ -105,6 +108,9 @@
 		6A57F8D512FEA000009A184A /* PXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBlock.m; sourceTree = "<group>"; };
 		6A57F8D612FEA000009A184A /* PXLexicon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLexicon.h; sourceTree = "<group>"; };
 		6A57F8D712FEA000009A184A /* PXLexicon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLexicon.m; sourceTree = "<group>"; };
+		6A95AD1F1314B0B200FA6E76 /* Prolixity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity.png; sourceTree = "<group>"; };
+		6A95AD201314B0B200FA6E76 /* Prolixity72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity72.png; sourceTree = "<group>"; };
+		6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prolixty@2x.png"; sourceTree = "<group>"; };
 		6ABD1D3912FE1A240014DF3B /* EvaluationCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationCanvasView.h; sourceTree = "<group>"; };
 		6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationCanvasView.m; sourceTree = "<group>"; };
 		6ABD1D3C12FE1A600014DF3B /* EvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultViewController.h; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 		6A3A78E812FDE1650016D6AD /* Prolixity */ = {
 			isa = PBXGroup;
 			children = (
+				6A95AD1E1314B0B200FA6E76 /* Images */,
 				6A3A78F112FDE1650016D6AD /* ProlixityAppDelegate.h */,
 				6A3A78F212FDE1650016D6AD /* ProlixityAppDelegate.m */,
 				6A3A78F412FDE1650016D6AD /* MainWindow.xib */,
@@ -281,6 +288,16 @@
 				6A57F8D712FEA000009A184A /* PXLexicon.m */,
 			);
 			path = Runtime;
+			sourceTree = "<group>";
+		};
+		6A95AD1E1314B0B200FA6E76 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6A95AD1F1314B0B200FA6E76 /* Prolixity.png */,
+				6A95AD201314B0B200FA6E76 /* Prolixity72.png */,
+				6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +423,9 @@
 				6A3A78F612FDE1650016D6AD /* MainWindow.xib in Resources */,
 				6A3A78FC12FDE1650016D6AD /* DetailView.xib in Resources */,
 				6ABD1D4012FE1A610014DF3B /* EvaluationResultViewController.xib in Resources */,
+				6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */,
+				6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */,
+				6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
