@@ -29,6 +29,8 @@
     #include "ParserBlock.h"
     #include <assert.h>
 
+    #define YYSTACKDEPTH 0
+
     using namespace Prolixity;
     
     #define PROLIXITY_ID_CONCAT_STRING  "$"

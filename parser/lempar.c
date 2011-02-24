@@ -240,7 +240,7 @@ static void yyGrowStack(yyParser *p){
   yyStackEntry *pNew;
 
   newSize = p->yystksz*2 + 100;
-  pNew = realloc(p->yystack, newSize*sizeof(pNew[0]));
+  pNew = (yyStackEntry *)realloc(p->yystack, newSize*sizeof(pNew[0]));
   if( pNew ){
     p->yystack = pNew;
     p->yystksz = newSize;
