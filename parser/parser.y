@@ -34,6 +34,9 @@
     #define PROLIXITY_ID_CONCAT_STRING  "$"
     
     namespace Prolixity {
+        typedef std::pair<ParserBlock, ParserBlock> BlockPair;
+        typedef std::vector<BlockPair> PairVector;
+    
         class InvocationList {
         private:
             std::vector<std::string> methodNameParts;
@@ -469,11 +472,53 @@ rect_expression(E) ::= RECT nonprs_expression(X1) COMMA nonprs_expression(Y1) CO
 %type array_expression {ParserBlock*}
 %destructor array_expression {delete $$;}
 
-array_expression ::= ARRAY.
-array_expression ::= ARRAY array_obj_list.
+array_expression(X) ::= ARRAY.
+{
+    X = new ParserBlock;
+    X->addLoad("NSMutableArray");
+    X->addInvoke("array");
+}
 
-array_obj_list ::= noninvoke_expression.
-array_obj_list ::= noninvoke_expression COMMA array_obj_list.
+array_expression(X) ::= ARRAY array_obj_list(LIST).
+{
+    X = new ParserBlock;
+    
+    size_t count = 0;
+    for (PairVector::reverse_iterator pi = LIST->rbegin(), pe = LIST->rend() ; pi != pe ; ++pi) {
+        X->mergeBlock((*pi).first);
+        X->addPush();
+        ++count;
+    }
+    
+    X->addLoad("NSMutableArray");
+    X->addInvoke("array");
+
+    std::string tempVar;
+    tempVar = X->obtainTempVar();
+    X->addStore(tempVar);
+
+    for (size_t i = 0 ; i < count ; ++i) {
+        X->addLoad(tempVar);
+        X->addInvoke("addObject:");
+    }
+    
+    X->addLoad(tempVar);
+}
+
+%type array_obj_list {PairVector*}
+%destructor array_obj_list {delete $$;}
+
+array_obj_list(LIST) ::= noninvoke_expression(EXP).
+{
+    LIST = new PairVector;    
+    LIST->push_back(BlockPair(*EXP, ParserBlock()));
+}
+
+array_obj_list(L1) ::= noninvoke_expression(EXP) COMMA array_obj_list(L2).
+{
+    L1 = L2;
+    L1->insert(L1->begin(), BlockPair(*EXP, ParserBlock()));
+}
 
 %type map_expression {ParserBlock*}
 %destructor map_expression {delete $$;}
