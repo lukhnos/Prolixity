@@ -1,3 +1,29 @@
+Prolixity
+
+Prolixity is my personal project to design a programming language for iOS devices. Even at an early stage, the language is mostly complete and can be used for small programs.
+
+The syntax of the language is designed to be usable on a touch-screen keyboard: It requires few special symbols, and auto-correcting spell checkers on mobile devices will be friendly with its keywords and identifiers. The runtime system directly piggybacks on the Objective-C runtime, and therefore can access to any Objective-C API that is exposed to it.
+
+With the design goals, the language will be useful for quick scripting on mobile devices. It can also be used as an embedded scripting language for your own app, so that you can enable user scripting or allow a "dev mode" for easier debugging.
+
+
+The Language
+
+
+Using the Language in Your App
+
+Design and Implementation of the Language
+
+Design Concept
+
+The Lexer
+
+The Parser
+
+The Runtime System
+
+
+
 
 var a.
 on b, invoke new.
