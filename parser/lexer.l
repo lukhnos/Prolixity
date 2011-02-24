@@ -115,6 +115,7 @@ PERIOD          \.
 (?i:size)               { return TOKEN_SIZE; }
 (?i:range)              { return TOKEN_RANGE; }
 (?i:array)              { return TOKEN_ARRAY; }
+(?i:map)                { return TOKEN_MAP; }
 
 (?i:if)                 { return TOKEN_IF; }
 (?i:else)               { return TOKEN_ELSE; }

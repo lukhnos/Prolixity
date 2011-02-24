@@ -503,6 +503,7 @@ array_expression(X) ::= ARRAY array_obj_list(LIST).
     }
     
     X->addLoad(tempVar);
+    delete LIST;
 }
 
 %type array_obj_list {PairVector*}
@@ -512,22 +513,73 @@ array_obj_list(LIST) ::= noninvoke_expression(EXP).
 {
     LIST = new PairVector;    
     LIST->push_back(BlockPair(*EXP, ParserBlock()));
+    delete EXP;
 }
 
 array_obj_list(L1) ::= noninvoke_expression(EXP) COMMA array_obj_list(L2).
 {
     L1 = L2;
     L1->insert(L1->begin(), BlockPair(*EXP, ParserBlock()));
+    delete EXP;
 }
 
 %type map_expression {ParserBlock*}
 %destructor map_expression {delete $$;}
 
-map_expression ::= MAP.
-map_expression ::= MAP map_pair_list.
+map_expression(X) ::= MAP.
+{
+    X = new ParserBlock;
+    X->addLoad("NSMutableDictionary");
+    X->addInvoke("dictionary");
+}
 
-map_pair_list ::= nonprs_expression COMMA TO nonprs_expression.
-map_pair_list ::= nonprs_expression COMMA TO nonprs_expression COMMA map_pair_list.
+map_expression(X) ::= MAP map_pair_list(LIST).
+{
+    X = new ParserBlock;
+    
+    size_t count = 0;
+    for (PairVector::reverse_iterator pi = LIST->rbegin(), pe = LIST->rend() ; pi != pe ; ++pi) {
+        X->mergeBlock((*pi).first);
+        X->addPush();
+        X->mergeBlock((*pi).second);
+        X->addPush();
+        ++count;
+    }
+    
+    X->addLoad("NSMutableDictionary");
+    X->addInvoke("dictionary");
+
+    std::string tempVar;
+    tempVar = X->obtainTempVar();
+    X->addStore(tempVar);
+
+    for (size_t i = 0 ; i < count ; ++i) {
+        X->addLoad(tempVar);
+        X->addInvoke("setObject:forKey:");
+    }
+    
+    X->addLoad(tempVar);
+    delete LIST;
+}
+
+%type map_pair_list {PairVector*}
+%destructor map_pair_list {delete $$;}
+
+map_pair_list(LIST) ::= noninvoke_expression(E1) COMMA TO noninvoke_expression(E2).
+{
+    LIST = new PairVector;
+    LIST->push_back(BlockPair(*E1, *E2));
+    delete E1;
+    delete E2;    
+}
+
+map_pair_list(L1) ::= noninvoke_expression(E1) COMMA TO noninvoke_expression(E2) COMMA map_pair_list(L2).
+{
+    L1 = L2;
+    L1->insert(L1->begin(), BlockPair(*E1, *E2));
+    delete E1;
+    delete E2;
+}
 
 %type nonprs_expression {ParserBlock*}
 %destructor nonprs_expression {delete $$;}
