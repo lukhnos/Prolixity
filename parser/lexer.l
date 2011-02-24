@@ -98,10 +98,12 @@ PERIOD          \.
  /* keywords */
  /* note that the keyword "taking" does not starts IDMODE because in the grammar it follows an expression */
 (?i:var)                { BEGIN(IDMODE); return TOKEN_VAR; }
-(?i:save)               { return TOKEN_SAVE; }
-(?i:to)                 { BEGIN(IDMODE); return TOKEN_TO; }
+(?i:save{SPACE}+to)     { BEGIN(IDMODE); return TOKEN_SAVE_TO; }
+(?i:to)                 { return TOKEN_TO; }
 (?i:on)                 { BEGIN(IDMODE); return TOKEN_ON; }
 (?i:invoke)             { BEGIN(IDMODE); return TOKEN_INVOKE; }
+(?i:get)                { BEGIN(IDMODE); return TOKEN_GET; }
+(?i:set)                { BEGIN(IDMODE); return TOKEN_SET; }
 (?i:taking)             { return TOKEN_TAKING; }
 (?i:begin)              { return TOKEN_BEGIN; }
 (?i:end)                { return TOKEN_END; }
@@ -112,6 +114,7 @@ PERIOD          \.
 (?i:rect)               { return TOKEN_RECT; }
 (?i:size)               { return TOKEN_SIZE; }
 (?i:range)              { return TOKEN_RANGE; }
+(?i:array)              { return TOKEN_ARRAY; }
 
 (?i:if)                 { return TOKEN_IF; }
 (?i:else)               { return TOKEN_ELSE; }

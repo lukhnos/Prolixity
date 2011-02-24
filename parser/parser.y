@@ -206,7 +206,7 @@ var_statement(X) ::= VAR identifier(ID).
 %type save_statement {ParserBlock*}
 %destructor save_statement { delete $$; }
 
-save_statement(X) ::= SAVE TO identifier(ID) save_statement_tail(TAIL).
+save_statement(X) ::= SAVE_TO identifier(ID) save_statement_tail(TAIL).
 {
     X = TAIL;
     X->addStore(*ID);
@@ -302,11 +302,30 @@ expression(X) ::= invocation(INVOCATION).
     X = INVOCATION;
 }
 
+expression(X) ::= get_expression(GETEXP).
+{
+    X = GETEXP;
+}
+
+expression(X) ::= set_expression(SETEXP).
+{
+    X = SETEXP;
+}
+
 expression(X) ::= noninvoke_expression(EXP).
 {
     X = EXP;
 }
 
+expression(X) ::= array_expression(Y).
+{
+    X = Y;
+}
+
+expression(X) ::= map_expression(Y).
+{
+    X = Y;
+}
 
 %type noninvoke_expression {ParserBlock*}
 %destructor noninvoke_expression {delete $$;}
@@ -335,7 +354,6 @@ noninvoke_expression(X) ::= range_expression(Y).
 {
     X = Y;
 }
-
 
 %type point_expression {ParserBlock*}
 %destructor point_expression {delete $$;}
@@ -447,6 +465,24 @@ rect_expression(E) ::= RECT nonprs_expression(X1) COMMA nonprs_expression(Y1) CO
     delete X2;
     delete Y2;
 }
+
+%type array_expression {ParserBlock*}
+%destructor array_expression {delete $$;}
+
+array_expression ::= ARRAY.
+array_expression ::= ARRAY array_obj_list.
+
+array_obj_list ::= noninvoke_expression.
+array_obj_list ::= noninvoke_expression COMMA array_obj_list.
+
+%type map_expression {ParserBlock*}
+%destructor map_expression {delete $$;}
+
+map_expression ::= MAP.
+map_expression ::= MAP map_pair_list.
+
+map_pair_list ::= nonprs_expression COMMA TO nonprs_expression.
+map_pair_list ::= nonprs_expression COMMA TO nonprs_expression COMMA map_pair_list.
 
 %type nonprs_expression {ParserBlock*}
 %destructor nonprs_expression {delete $$;}
@@ -605,6 +641,116 @@ nonprs_expression(X) ::= block(BLK).
     X->addLoad(BLK->getName());
     delete BLK;
 }
+
+%type get_expression {ParserBlock*}
+%destructor get_expression { delete $$; }
+    
+get_expression(X) ::= optional_on(OBJ) GET identifier(ID).
+{
+    X = new ParserBlock;
+    if (OBJ) {
+        X->mergeBlock(*OBJ);
+        delete OBJ;
+    }
+    X->addInvoke(*ID);
+    delete ID;
+}
+
+get_expression(X) ::= optional_on(OBJ) GET STRING(STR).
+{
+    X = new ParserBlock;
+    
+    std::string tempVar;
+    if (!OBJ) {
+        tempVar = X->obtainTempVar();
+        X->addStore(tempVar);
+    }
+    
+    X->addLoadString(*STR);
+    X->addPush();
+    delete STR;
+    
+    if (OBJ) {
+        X->mergeBlock(*OBJ);
+        delete OBJ;
+    }
+    else {
+        X->addLoad(tempVar);
+    }
+        
+    X->addInvoke("valueForKey:");
+}
+
+get_expression(X) ::= optional_on(OBJ) GET NUMBER(NUM).
+{
+    X = new ParserBlock;
+    
+    std::string tempVar;
+    if (!OBJ) {
+        tempVar = X->obtainTempVar();
+        X->addStore(tempVar);
+    }
+    
+    X->addLoadNumber(*NUM);
+    X->addPush();
+    delete NUM;
+    
+    if (OBJ) {
+        X->mergeBlock(*OBJ);
+        delete OBJ;
+    }
+    else {
+        X->addLoad(tempVar);
+    }
+    
+    X->addInvoke("objectAtIndex:");
+}
+
+%type set_expression {ParserBlock*}
+%destructor set_expression { delete $$; }
+    
+set_expression(X) ::= optional_on(OBJ) SET identifier(ID) COMMA TO expression(EXP).
+{
+    X = new ParserBlock;
+    
+    std::string tempVar;
+    if (!OBJ) {
+        tempVar = X->obtainTempVar();
+        X->addStore(tempVar);
+    }
+    
+    X->mergeBlock(*EXP);
+    X->addPush();
+    delete EXP;
+
+    if (OBJ) {
+        X->mergeBlock(*OBJ);
+        delete OBJ;
+    }
+    else {
+        X->addLoad(tempVar);
+    }
+    
+    X->addInvoke(std::string("set$") + *ID + ":");
+}    
+
+set_expression(X) ::= optional_on(OBJ) SET STRING(STR) COMMA TO expression(EXP).
+{
+    X = new ParserBlock;
+    X->addLoadString(*STR);
+    X->addPush();
+    delete STR;
+    
+    X->mergeBlock(*EXP);
+    X->addPush();
+
+    if (OBJ) {
+        X->mergeBlock(*OBJ);
+        delete OBJ;
+    }
+
+    X->addInvoke("setValue:forKey:");
+}    
 
     
 %type invocation {ParserBlock*}
