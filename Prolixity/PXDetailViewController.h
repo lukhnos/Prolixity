@@ -38,6 +38,7 @@
 @property (nonatomic, retain) NSString *currentSnippetIdentifier;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) id detailItem;
+@property (nonatomic, retain) IBOutlet UIView *innerView;
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) PXEvaluationResultViewController *evaluationResultViewController;
 @end

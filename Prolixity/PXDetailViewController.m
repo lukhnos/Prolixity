@@ -46,6 +46,7 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 @synthesize detailItem;
 @synthesize popoverController;
 @synthesize textView;
+@synthesize innerView;
 @synthesize evaluationResultViewController;
 
 - (void)dealloc
@@ -157,13 +158,12 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
     self.popoverController = nil;
 }
 
-/*
- // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil]; 
 }
- */
 
 - (void)viewDidUnload
 {
@@ -171,7 +171,9 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
-	self.popoverController = nil;
+	self.popoverController = nil;    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];    
 }
 
 #pragma mark - Memory management
@@ -218,4 +220,70 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 {
     [self deferredSaveCurrentSnippet];
 }
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)aTextView
+{
+    [self.textView resignFirstResponder];
+    return YES;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    // from Apple sample code (KeyboardAccessory)
+
+    /*
+     Reduce the size of the text view so that it's not obscured by the keyboard.
+     Animate the resize so that it's in sync with the appearance of the keyboard.
+     */
+
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // Get the origin of the keyboard when it's displayed.
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    // Get the top of the keyboard as the y coordinate of its origin in self's view's coordinate system. The bottom of the text view's frame should align with the top of the keyboard's final position.
+    CGRect keyboardRect = [aValue CGRectValue];
+    keyboardRect = [self.innerView convertRect:keyboardRect fromView:nil];
+    
+    CGFloat keyboardTop = keyboardRect.origin.y;
+    CGRect newTextViewFrame = self.innerView.bounds;
+    newTextViewFrame.size.height = keyboardTop - self.innerView.bounds.origin.y;
+    
+    // Get the duration of the animation.
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    // Animate the resize of the text view's frame in sync with the keyboard's appearance.
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animationDuration];
+    
+    self.textView.frame = newTextViewFrame;
+    
+    [UIView commitAnimations];
+}
+
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    // from Apple sample code (KeyboardAccessory)
+    
+    NSDictionary* userInfo = [notification userInfo];
+    
+    /*
+     Restore the size of the text view (fill self's view).
+     Animate the resize so that it's in sync with the disappearance of the keyboard.
+     */
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animationDuration];
+    
+    self.textView.frame = self.innerView.bounds;
+    
+    [UIView commitAnimations];
+}
+
 @end
