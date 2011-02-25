@@ -271,21 +271,24 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             id arg = [self pop];
             [invocation setArgument:&arg atIndex:argi];
         }
+        else if (!strcmp(argType, @encode(NSUInteger))) {
+            NSUInteger arg = [[self pop] unsignedIntegerValue];
+            [invocation setArgument:&arg atIndex:argi];
+        }
+        else if (!strcmp(argType, @encode(NSInteger))) {
+            NSUInteger arg = [[self pop] integerValue];
+            [invocation setArgument:&arg atIndex:argi];
+        }
         else if (!strcmp(argType, @encode(CGPoint))) {
-            
-            
             NSValue *arg = [self pop];
-
             CGPoint p = CGPointMake(0.0, 0.0);
-            
             if (!strcmp([arg objCType], @encode(CGPoint))) {
                 [arg getValue:&p];                
             }
-            
             [invocation setArgument:&p atIndex:argi];
         }
         else {
-            NSAssert(NO, @"Return type not supported");
+            NSAssert1(NO, @"Argument type not supported: %s", argType);
         }
     }
          
@@ -306,6 +309,16 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
         tempValue = [[NSValue valueWithCGPoint:p] retain];
         [tmp release];
     }
+    else if (!strcmp(returnValueType, @encode(NSUInteger))) {
+        NSUInteger i = 0;
+        [invocation getReturnValue:&i];        
+        PXRetainAssign(tempValue, [NSNumber numberWithUnsignedInteger:i]);
+    }
+    else if (!strcmp(returnValueType, @encode(NSInteger))) {
+        NSUInteger i = 0;
+        [invocation getReturnValue:&i];        
+        PXRetainAssign(tempValue, [NSNumber numberWithInteger:i]);
+    }
     else if (!strcmp(returnValueType, @encode(id)) || !strcmp(returnValueType, @encode(Class))) {
         id returnValue = nil;
         [invocation getReturnValue:&returnValue];
@@ -315,7 +328,7 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
         [tmp release];
     }
     else {
-        NSAssert(NO, @"Return type not supported");
+        NSAssert1(NO, @"Return type not supported: %s", returnValueType);
     }    
 }
 @end
