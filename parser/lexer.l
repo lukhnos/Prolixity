@@ -41,6 +41,7 @@ namespace Prolixity {
 %option yylineno
 
  /* defines a string-capturing mode */
+%X COMMENTMODE
 %x STRMODE
 %x IDMODE
 
@@ -58,7 +59,10 @@ PERIOD          \.
 %%
 
  /* double dash is treated as comment */
-{DOUBLEDASH}.*\n
+{DOUBLEDASH}                { BEGIN(COMMENTMODE); }
+<COMMENTMODE>\n             { BEGIN(0); }
+<COMMENTMODE>.
+
 <IDMODE>{DOUBLEDASH}.*\n    { BEGIN(0); }
 
  /* double quote enters string mode */
