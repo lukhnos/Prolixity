@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// PXLexer.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -26,3 +26,15 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@interface PXLexer : NSObject
+{
+    const char *str;
+    const char *pos;
+    
+    NSString *nextToken;
+}
+- (id)initWithCString:(const char *)inString;
+- (NSString *)peek;
+- (NSString *)next;
+@end

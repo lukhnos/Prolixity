@@ -27,25 +27,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class PXBlock;
+enum {
+    PXBlockParserError = 1
+};
 
-@interface NSObject (PXSupport)
-- (void)dump;
-@end
-
-@interface NSNumber (PXSupport)
-- (NSNumber *)plus:(NSNumber *)inNumber;
-- (NSNumber *)mul:(NSNumber *)inNumber;
-- (NSNumber *)gt:(NSNumber *)inNumber;
-- (NSNumber *)lt:(NSNumber *)inNumber;
-- (id)ifTrue:(PXBlock *)inBlock;
-- (id)ifFalse:(PXBlock *)inBlock;
-@end
-
-
-@interface NSValue (PXSupport)
-+ (NSValue *)valueWithCGPointNumberX:(NSNumber *)x numberY:(NSNumber *)y;
-@end
+extern NSString *const PXBlockErrorDomain;
 
 @interface PXBlock : NSObject
 {
@@ -57,26 +43,13 @@
     NSMutableDictionary *variables;
     NSMutableArray *instructions;
 }
-
-+ (NSMutableString *)currentConsoleBuffer;
 + (PXBlock *)blockWithSource:(NSString *)inSource error:(NSError **)outError;
+
++ (PXBlock *)currentBlock;
++ (NSMutableString *)currentConsoleBuffer;
+
 - (id)runWithParent:(PXBlock *)inParent;
-
-- (void)declareVariable:(NSString *)inName;
 - (void)exportObject:(id)object toVariable:(id)varName;
-
-- (void)addLoadImmeidate:(id)inObject;
-- (void)addLoad:(NSString *)inName;
-- (void)addStore:(NSString *)inName;
-- (void)addPush;
-- (void)addPop;
-- (void)addInvoke:(SEL)inSelector;
 
 @property (readonly) NSString *name;
 @end
-
-enum {
-    PXBlockParserError = 1
-};
-
-extern NSString *const PXBlockErrorDomain;

@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// PXBlock+PXSupport.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "PXBlock.h"
+
+@interface PXBlock (PXSupport)
+- (id)whileTrue:(PXBlock *)inBlock;
+@end

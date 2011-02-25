@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// NSString+PXUtilities.m
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "NSString+PXUtilities.h"
+
+@implementation NSString (PXUtilities)
++ (NSString *)generateUniqueIdentifier
+{
+    CFUUIDRef uuid = CFUUIDCreate(NULL);
+    if (uuid) {
+        CFStringRef str = CFUUIDCreateString(NULL, uuid);
+        CFRelease(uuid);
+        return [NSMakeCollectable(str) autorelease];
+    }
+    return nil;
+}
+@end

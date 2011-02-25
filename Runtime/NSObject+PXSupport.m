@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// NSObject+PXSupport.m
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,18 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "NSObject+PXSupport.h"
+#import "PXBlock.h"
+
+@implementation NSObject (PXSupport)
+- (id)dump
+{
+    [[PXBlock currentConsoleBuffer] appendFormat:@"%@\n", [self description]];
+    return self;
+}
+
+- (id)print
+{
+    return [self dump];
+}
+@end

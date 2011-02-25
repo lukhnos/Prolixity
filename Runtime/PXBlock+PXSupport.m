@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// PXBlock+PXSupport.m
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,20 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "PXBlock+PXSupport.h"
+
+@implementation PXBlock (PXSupport)
+- (id)whileTrue:(PXBlock *)inBlock
+{
+    PXBlock *currentBlock = [PXBlock currentBlock];
+    
+    id evalResult = nil;
+    id result;
+    
+    while ((result = [self runWithParent:currentBlock]) == (id)kCFBooleanTrue) {
+        evalResult = [inBlock runWithParent:currentBlock];
+    }
+    
+    return evalResult;
+}
+@end

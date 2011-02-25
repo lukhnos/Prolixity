@@ -26,6 +26,8 @@
 //
 
 #import "PXBlock.h"
+#import "PXBlock+Builder.h"
+#import "PXBlock+Bytecode.h"
 #import "PXParser.h"
 #import "PXLexicon.h"
 #import "PXUtilities.h"
@@ -33,104 +35,12 @@
 
 NSString *const PXBlockErrorDomain = @"org.lukhnos.Prolixity.PXBlock";
 
-@interface PXLexer : NSObject
-{
-    const char *str;
-    const char *pos;
-    
-    NSString *nextToken;
-}
-- (id)initWithCString:(const char *)inString;
-- (NSString *)peek;
-- (NSString *)next;
-@end
+static const size_t kObjCMaXTypeLength = 256;
 
-@implementation PXLexer
-- (void)dealloc
-{
-    [nextToken release], nextToken = nil;
-    [super dealloc];
-}
+static NSString *const PXCurrentBlockInThreadKey = @"PXCurrentBlockInThreadKey";
+static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBufferInThreadKey";
 
-- (id)initWithCString:(const char *)inString
-{
-    self = [super init];
-    if (self) {
-        str = inString;
-        pos = str;
-    }
-    return self;
-}
-
-- (NSString *)peek
-{
-    if (nextToken) {
-        return nextToken;
-    }
-    
-    if (!*pos) {
-        return nil;
-    }
-    
-    #define ISWHITESPACE(x) (x == ' ' || x == '\t' || x == '\n' || x == '\r')
-    
-    char c;
-    while ((c = *pos)) {
-        if (!ISWHITESPACE(c)) {
-            break;
-        }
-        ++pos;
-    }
-    
-    if (!*pos) {
-        return nil;
-    }
-
-    BOOL stringMode = NO;
-    
-    if (*pos == '\"') {
-        ++pos;
-        stringMode = YES;
-    }
-
-    const char *start = pos;
-    while ((c = *pos)) {
-        if ((stringMode && c == '\"') || (!stringMode && ISWHITESPACE(c))) {
-            break;
-        }
-        ++pos;
-    }
-    
-    
-    nextToken = [[NSString alloc] initWithBytes:start length:(NSUInteger)(pos - start) encoding:NSUTF8StringEncoding];
-
-    if (*pos == '\"') {
-        ++pos;
-        
-        // TODO: Handle string escape
-    }
-
-    return nextToken;
-}
-
-- (NSString *)next
-{
-    if (!nextToken) {
-        [self peek];
-    }
-        
-    NSString *result = [nextToken autorelease];
-    nextToken = nil;
-    return result;
-}
-@end
-
-
-@interface PXBlock ()
-+ (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm;
-- (void)parse:(PXLexer *)inLexer;
-
-+ (PXBlock *)currentBlock;
+@interface PXBlock (Runtime)
 + (void)setCurrentBlock:(PXBlock *)inBlock;
 - (void)push:(id)inObject;
 - (id)pop;
@@ -139,102 +49,6 @@ NSString *const PXBlockErrorDomain = @"org.lukhnos.Prolixity.PXBlock";
 - (void)invokeMethod:(NSString *)methodName;
 @end
 
-
-
-@implementation NSObject (PXSupport)
-- (void)dump
-{
-    NSLog(@"%@", self);    
-    [[PXBlock currentConsoleBuffer] appendFormat:@"%@\n", [self description]];
-}
-@end
-
-@implementation NSNumber (PXSupport)
-- (NSNumber *)plus:(NSNumber *)inNumber
-{
-    const char *aType = [self objCType];
-    const char *bType = [inNumber objCType];
-    
-    if (!strcmp(aType, "d") || !strcmp(bType, "d")) {
-        return [NSNumber numberWithDouble:[self doubleValue] + [inNumber doubleValue]];
-    }
-    else if (!strcmp(aType, "f") || !strcmp(bType, "f")) {
-        return [NSNumber numberWithFloat:[self floatValue] + [inNumber floatValue]];
-    }
-    else {
-        // TODO: Expand type support
-        return [NSNumber numberWithInteger:[self integerValue] + [inNumber integerValue]];
-    }
-}
-
-- (NSNumber *)mul:(NSNumber *)inNumber
-{
-    const char *aType = [self objCType];
-    const char *bType = [inNumber objCType];
-    
-    if (!strcmp(aType, "d") || !strcmp(bType, "d")) {
-        return [NSNumber numberWithDouble:[self doubleValue] * [inNumber doubleValue]];
-    }
-    else if (!strcmp(aType, "f") || !strcmp(bType, "f")) {
-        return [NSNumber numberWithFloat:[self floatValue] * [inNumber floatValue]];
-    }
-    else {
-        // TODO: Expand type support
-        return [NSNumber numberWithInteger:[self integerValue] * [inNumber integerValue]];
-    }
-}
-
-- (NSNumber *)gt:(NSNumber *)inNumber
-{
-    return ([self compare:inNumber] == NSOrderedDescending) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
-}
-
-- (NSNumber *)lt:(NSNumber *)inNumber
-{
-    return ([self compare:inNumber] == NSOrderedAscending) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
-}
-
-
-- (id)ifTrue:(PXBlock *)inBlock
-{
-    if ([self boolValue]) {
-        PXBlock *currentBlock = [PXBlock currentBlock];
-        [inBlock runWithParent:currentBlock];
-        return (id)kCFBooleanTrue;
-    }
-    return (id)kCFBooleanFalse;
-}
-
-- (id)ifFalse:(PXBlock *)inBlock
-{
-    if ([self boolValue]) {
-        return (id)kCFBooleanTrue;
-    }
-
-    PXBlock *currentBlock = [PXBlock currentBlock];
-    [inBlock runWithParent:currentBlock];
-    return (id)kCFBooleanFalse;
-}
-@end
-
-@implementation NSValue (PXSupport)
-+ (NSValue *)valueWithCGPointNumberX:(NSNumber *)x numberY:(NSNumber *)y
-{
-    return [NSValue valueWithCGPoint:CGPointMake([x doubleValue], [y doubleValue])];
-}
-@end
-
-
-static NSString *const PXCurrentBlockInThreadKey = @"PXCurrentBlockInThreadKey";
-static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBufferInThreadKey";
-static NSString *const PXInstructionLoadImmediate = @"loadi";
-static NSString *const PXInstructionLoad = @"load";
-static NSString *const PXInstructionStore = @"save";
-static NSString *const PXInstructionInvoke = @"invoke";
-static NSString *const PXInstructionPop = @"pop";
-static NSString *const PXInstructionPush = @"push";
-
-static const size_t kObjCMaXTypeLength = 256;
 
 @implementation PXBlock
 - (void)dealloc
@@ -271,15 +85,20 @@ static const size_t kObjCMaXTypeLength = 256;
     return [self blockWithBlockAssembly:data];
 }
 
-+ (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm
++ (PXBlock *)currentBlock
 {
-    PXLexer *lexer = [[PXLexer alloc] initWithCString:[inAsm UTF8String]];    
-    PXBlock *block = [[PXBlock alloc] init];
+    return [[[NSThread currentThread] threadDictionary] objectForKey:PXCurrentBlockInThreadKey];
+}
+
++ (NSMutableString *)currentConsoleBuffer
+{
+    NSMutableString *consoleBuffer = [[[NSThread currentThread] threadDictionary] objectForKey:PXCurrentConsoleBufferInThreadKey];
+    if (!consoleBuffer) {
+        consoleBuffer = [NSMutableString string];
+        [[[NSThread currentThread] threadDictionary] setValue:consoleBuffer forKey:PXCurrentConsoleBufferInThreadKey];
+    }
     
-    [block parse:lexer];
-    
-    [lexer release];
-    return [block autorelease];
+    return consoleBuffer;
 }
 
 - (id)init
@@ -339,148 +158,15 @@ static const size_t kObjCMaXTypeLength = 256;
     return tempValue;
 }
 
-- (void)declareVariable:(NSString *)inName
-{
-    [variables setObject:[NSNull null] forKey:inName];
-}
-
 - (void)exportObject:(id)object toVariable:(id)varName
 {
     [variables setObject:object forKey:varName];
 }
+@synthesize name;
+@end
 
-- (void)addLoadImmeidate:(id)inObject
-{
-    [instructions addObject:PXInstructionLoadImmediate];
-    [instructions addObject:inObject];
-}
 
-- (void)addLoad:(NSString *)inName
-{
-    [instructions addObject:PXInstructionLoad];
-    [instructions addObject:inName];    
-}
-
-- (void)addStore:(NSString *)inName
-{
-    [instructions addObject:PXInstructionStore];
-    [instructions addObject:inName];
-}
-
-- (void)addPush
-{
-    [instructions addObject:PXInstructionPush];
-    [instructions addObject:[NSNull null]];    
-}
-
-- (void)addPop
-{
-    [instructions addObject:PXInstructionPop];
-    [instructions addObject:[NSNull null]];
-}
-
-- (void)addInvoke:(SEL)inSelector
-{
-    [instructions addObject:PXInstructionInvoke];
-    [instructions addObject:NSStringFromSelector(inSelector)];
-}
-
-#pragma Private methods
-
-- (void)parse:(PXLexer *)inLexer
-{
-    NSString *t = [inLexer peek];
-    if (![t isEqualToString:@"block"]) {
-        return;
-    }
-
-    [inLexer next];
-    t = [inLexer next];
-    if (!t) {
-        return;
-    }
-    
-    id tmp = name;
-    name = [t copy];
-    [tmp release];
-    
-    while ((t = [inLexer peek])) {
-        if ([t isEqualToString:@"block"]) {
-            PXBlock *newBlock = [[PXBlock alloc] init];
-            [newBlock parse:inLexer];
-            
-            [variables setObject:newBlock forKey:newBlock.name];
-            [newBlock release];
-            continue;
-        }
-
-        [inLexer next];
-        
-        if ([t isEqualToString:@"end"]) {
-            return;
-        }
-        
-        if ([t isEqualToString:@"var"]) {
-            [self declareVariable:[inLexer next]];
-        }
-        else if ([t isEqualToString:@"load"]) {
-            [self addLoad:[inLexer next]];            
-        }
-        else if ([t isEqualToString:@"store"]) {
-            [self addStore:[inLexer next]];
-            
-        }
-        else if ([t isEqualToString:@"loadin"]) {
-            NSString *numberText = [inLexer next];            
-            NSNumber *number = nil;
-            if ([numberText rangeOfString:@"."].location != NSNotFound) {
-                number = [NSNumber numberWithDouble:[numberText doubleValue]];
-            }
-            else {
-                number = [NSNumber numberWithInteger:[numberText integerValue]];
-            }
-            
-            [self addLoadImmeidate:number];
-        }
-        else if ([t isEqualToString:@"loado_point"]) {
-            CGFloat x = [[inLexer next] doubleValue];
-            CGFloat y = [[inLexer next] doubleValue];
-            
-            [self addLoadImmeidate:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
-
-        }        
-        else if ([t isEqualToString:@"loadis"]) {
-            [self addLoadImmeidate:[inLexer next]];
-            
-        }
-        else if ([t isEqualToString:@"push"]) {
-            [self addPush];            
-        }
-        else if ([t isEqualToString:@"pop"]) {
-            [self addPop];
-        }
-        else if ([t isEqualToString:@"invoke"]) {
-            [self addInvoke:NSSelectorFromString([inLexer next])];
-        }
-    }
-}
-
-+ (NSMutableString *)currentConsoleBuffer
-{
-    NSMutableString *consoleBuffer = [[[NSThread currentThread] threadDictionary] objectForKey:PXCurrentConsoleBufferInThreadKey];
-    if (!consoleBuffer) {
-        consoleBuffer = [NSMutableString string];
-        [[[NSThread currentThread] threadDictionary] setValue:consoleBuffer forKey:PXCurrentConsoleBufferInThreadKey];
-    }
-    
-    return consoleBuffer;
-}
-
-+ (PXBlock *)currentBlock
-{
-    return [[[NSThread currentThread] threadDictionary] objectForKey:PXCurrentBlockInThreadKey];
-}
-
+@implementation PXBlock (Runtime)
 + (void)setCurrentBlock:(PXBlock *)inBlock
 {
     [[[NSThread currentThread] threadDictionary] setValue:inBlock forKey:PXCurrentBlockInThreadKey];
@@ -530,20 +216,6 @@ static const size_t kObjCMaXTypeLength = 256;
             NSAssert(0, @"Cannot find the variable");            
         }
     }
-}
-
-- (id)whileTrue:(PXBlock *)inBlock
-{
-    PXBlock *currentBlock = [PXBlock currentBlock];
-    
-    id evalResult = nil;
-    id result;
-    
-    while ((result = [self runWithParent:currentBlock]) == (id)kCFBooleanTrue) {
-        evalResult = [inBlock runWithParent:currentBlock];
-    }
-    
-    return evalResult;
 }
 
 - (void)invokeMethod:(NSString *)methodName
@@ -676,6 +348,4 @@ static const size_t kObjCMaXTypeLength = 256;
         NSAssert(NO, @"Return type not supported");
     }    
 }
-
-@synthesize name;
 @end

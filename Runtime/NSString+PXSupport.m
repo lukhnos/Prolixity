@@ -26,16 +26,3 @@
 //
 
 #import "NSString+PXSupport.h"
-
-@implementation NSString (PXSupport)
-+ (NSString *)generateUniqueIdentifier
-{
-    CFUUIDRef uuid = CFUUIDCreate(NULL);
-    if (uuid) {
-        CFStringRef str = CFUUIDCreateString(NULL, uuid);
-        CFRelease(uuid);
-        return [NSMakeCollectable(str) autorelease];
-    }
-    return nil;
-}
-@end

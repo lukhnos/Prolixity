@@ -25,7 +25,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "NSString+PXSupport.h"
+#import "NSString+PXUtilities.h"
 #import "PXBlock.h"
 #import "PXLexicon.h"
 #import "PXUtilities.h"

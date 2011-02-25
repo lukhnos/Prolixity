@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A38658E13179801008B6B20 /* NSNumber+PXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A38657F131797FE008B6B20 /* NSNumber+PXSupport.m */; };
+		6A38658F13179801008B6B20 /* NSObject+PXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A386581131797FE008B6B20 /* NSObject+PXSupport.m */; };
+		6A38659013179801008B6B20 /* NSString+PXUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A386583131797FE008B6B20 /* NSString+PXUtilities.m */; };
+		6A38659113179801008B6B20 /* NSValue+PXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A386585131797FE008B6B20 /* NSValue+PXSupport.m */; };
+		6A38659213179801008B6B20 /* PXBlock+Builder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A386587131797FF008B6B20 /* PXBlock+Builder.m */; };
+		6A38659313179801008B6B20 /* PXBlock+Bytecode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A386589131797FF008B6B20 /* PXBlock+Bytecode.m */; };
+		6A38659413179801008B6B20 /* PXBlock+PXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A38658B131797FF008B6B20 /* PXBlock+PXSupport.m */; };
+		6A38659513179801008B6B20 /* PXLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A38658D13179800008B6B20 /* PXLexer.m */; };
 		6A3A78E312FDE1650016D6AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E212FDE1650016D6AD /* UIKit.framework */; };
 		6A3A78E512FDE1650016D6AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E412FDE1650016D6AD /* Foundation.framework */; };
 		6A3A78E712FDE1650016D6AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E612FDE1650016D6AD /* CoreGraphics.framework */; };
@@ -27,7 +35,7 @@
 		6A5432DE12FDEF950084C7D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E412FDE1650016D6AD /* Foundation.framework */; };
 		6A54330212FDF0480084C7D0 /* lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432F812FDF0200084C7D0 /* lexer.cpp */; };
 		6A54330312FDF0480084C7D0 /* lexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432F912FDF0200084C7D0 /* lexer.h */; };
-		6A54330412FDF0480084C7D0 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432FC12FDF0200084C7D0 /* parser.cpp */; };
+		6A54330412FDF0480084C7D0 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432FC12FDF0200084C7D0 /* parser.cpp */; settings = {COMPILER_FLAGS = "-Wno-unused-variable"; }; };
 		6A54330512FDF0480084C7D0 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432FD12FDF0200084C7D0 /* parser.h */; };
 		6A54330612FDF0480084C7D0 /* ParserBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432FE12FDF0200084C7D0 /* ParserBlock.h */; };
 		6A54330712FDF0480084C7D0 /* PXParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A54330012FDF0200084C7D0 /* PXParser.cpp */; };
@@ -72,6 +80,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A38657E131797FE008B6B20 /* NSNumber+PXSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+PXSupport.h"; sourceTree = "<group>"; };
+		6A38657F131797FE008B6B20 /* NSNumber+PXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+PXSupport.m"; sourceTree = "<group>"; };
+		6A386580131797FE008B6B20 /* NSObject+PXSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PXSupport.h"; sourceTree = "<group>"; };
+		6A386581131797FE008B6B20 /* NSObject+PXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PXSupport.m"; sourceTree = "<group>"; };
+		6A386582131797FE008B6B20 /* NSString+PXUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PXUtilities.h"; sourceTree = "<group>"; };
+		6A386583131797FE008B6B20 /* NSString+PXUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PXUtilities.m"; sourceTree = "<group>"; };
+		6A386584131797FE008B6B20 /* NSValue+PXSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+PXSupport.h"; sourceTree = "<group>"; };
+		6A386585131797FE008B6B20 /* NSValue+PXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+PXSupport.m"; sourceTree = "<group>"; };
+		6A386586131797FF008B6B20 /* PXBlock+Builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXBlock+Builder.h"; sourceTree = "<group>"; };
+		6A386587131797FF008B6B20 /* PXBlock+Builder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXBlock+Builder.m"; sourceTree = "<group>"; };
+		6A386588131797FF008B6B20 /* PXBlock+Bytecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXBlock+Bytecode.h"; sourceTree = "<group>"; };
+		6A386589131797FF008B6B20 /* PXBlock+Bytecode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXBlock+Bytecode.m"; sourceTree = "<group>"; };
+		6A38658A131797FF008B6B20 /* PXBlock+PXSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXBlock+PXSupport.h"; sourceTree = "<group>"; };
+		6A38658B131797FF008B6B20 /* PXBlock+PXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXBlock+PXSupport.m"; sourceTree = "<group>"; };
+		6A38658C13179800008B6B20 /* PXLexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLexer.h; sourceTree = "<group>"; };
+		6A38658D13179800008B6B20 /* PXLexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLexer.m; sourceTree = "<group>"; };
 		6A3A78DE12FDE1650016D6AD /* Prolixity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prolixity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A3A78E212FDE1650016D6AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6A3A78E412FDE1650016D6AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -296,10 +320,26 @@
 		6A57F8D312FEA000009A184A /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				6A38657E131797FE008B6B20 /* NSNumber+PXSupport.h */,
+				6A38657F131797FE008B6B20 /* NSNumber+PXSupport.m */,
+				6A386580131797FE008B6B20 /* NSObject+PXSupport.h */,
+				6A386581131797FE008B6B20 /* NSObject+PXSupport.m */,
 				6AE091D3131751B90039E5E4 /* NSString+PXSupport.h */,
 				6AE091D4131751B90039E5E4 /* NSString+PXSupport.m */,
+				6A386582131797FE008B6B20 /* NSString+PXUtilities.h */,
+				6A386583131797FE008B6B20 /* NSString+PXUtilities.m */,
+				6A386584131797FE008B6B20 /* NSValue+PXSupport.h */,
+				6A386585131797FE008B6B20 /* NSValue+PXSupport.m */,
 				6A57F8D412FEA000009A184A /* PXBlock.h */,
 				6A57F8D512FEA000009A184A /* PXBlock.m */,
+				6A386586131797FF008B6B20 /* PXBlock+Builder.h */,
+				6A386587131797FF008B6B20 /* PXBlock+Builder.m */,
+				6A386588131797FF008B6B20 /* PXBlock+Bytecode.h */,
+				6A386589131797FF008B6B20 /* PXBlock+Bytecode.m */,
+				6A38658A131797FF008B6B20 /* PXBlock+PXSupport.h */,
+				6A38658B131797FF008B6B20 /* PXBlock+PXSupport.m */,
+				6A38658C13179800008B6B20 /* PXLexer.h */,
+				6A38658D13179800008B6B20 /* PXLexer.m */,
 				6A57F8D612FEA000009A184A /* PXLexicon.h */,
 				6A57F8D712FEA000009A184A /* PXLexicon.m */,
 				6AE091D91317525C0039E5E4 /* PXRuntime.h */,
@@ -511,6 +551,14 @@
 				6AE091D7131751B90039E5E4 /* NSString+PXSupport.m in Sources */,
 				6AE091D8131751B90039E5E4 /* PXUtilities.m in Sources */,
 				6AE091DC1317571D0039E5E4 /* PXRuntime.m in Sources */,
+				6A38658E13179801008B6B20 /* NSNumber+PXSupport.m in Sources */,
+				6A38658F13179801008B6B20 /* NSObject+PXSupport.m in Sources */,
+				6A38659013179801008B6B20 /* NSString+PXUtilities.m in Sources */,
+				6A38659113179801008B6B20 /* NSValue+PXSupport.m in Sources */,
+				6A38659213179801008B6B20 /* PXBlock+Builder.m in Sources */,
+				6A38659313179801008B6B20 /* PXBlock+Bytecode.m in Sources */,
+				6A38659413179801008B6B20 /* PXBlock+PXSupport.m in Sources */,
+				6A38659513179801008B6B20 /* PXLexer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +685,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Prolixity/Prolixity-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "Prolixity/Prolixity-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				OTHER_LDFLAGS = "-lstdc++";
@@ -649,9 +698,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Prolixity/Prolixity-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "Prolixity/Prolixity-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				OTHER_LDFLAGS = "-lstdc++";
@@ -673,6 +724,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ProlixityTests/ProlixityTests-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "ProlixityTests/ProlixityTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -688,7 +740,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Prolixity.app/Prolixity";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -696,6 +748,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ProlixityTests/ProlixityTests-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "ProlixityTests/ProlixityTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -715,7 +768,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
@@ -732,7 +785,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -744,10 +797,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				DSTROOT = /tmp/PXParser_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "parser/PXParser_iOS-Prefix.pch";
+				GCC_VERSION = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -761,6 +815,7 @@
 				DSTROOT = /tmp/PXParser_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "parser/PXParser_iOS-Prefix.pch";
+				GCC_VERSION = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

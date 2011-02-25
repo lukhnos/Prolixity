@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// NSNumber+PXSupport.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,13 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "PXBlock.h"
+
+@interface NSNumber (PXSupport)
+- (NSNumber *)plus:(NSNumber *)inNumber;
+- (NSNumber *)mul:(NSNumber *)inNumber;
+- (NSNumber *)gt:(NSNumber *)inNumber;
+- (NSNumber *)lt:(NSNumber *)inNumber;
+- (id)ifTrue:(PXBlock *)inBlock;
+- (id)ifFalse:(PXBlock *)inBlock;
+@end

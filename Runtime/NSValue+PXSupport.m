@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// NSValue+PXSupport.m
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "NSValue+PXSupport.h"
+
+@implementation NSValue (PXSupport)
++ (NSValue *)valueWithCGPointNumberX:(NSNumber *)x numberY:(NSNumber *)y
+{
+    return [NSValue valueWithCGPoint:CGPointMake([x doubleValue], [y doubleValue])];
+}
+@end

@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// PXBlock+Bytecode.m
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "PXBlock+Bytecode.h"
+
+NSString *const PXInstructionLoadImmediate = @"loadi";
+NSString *const PXInstructionLoad = @"load";
+NSString *const PXInstructionStore = @"save";
+NSString *const PXInstructionInvoke = @"invoke";
+NSString *const PXInstructionPop = @"pop";
+NSString *const PXInstructionPush = @"push";

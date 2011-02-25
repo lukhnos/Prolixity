@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// NSObject+PXSupport.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -26,3 +26,8 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@interface NSObject (PXSupport)
+- (id)dump;
+- (id)print;
+@end

@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// PXBlock+Builder.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,4 +25,18 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import "PXBlock.h"
+#import "PXLexer.h"
+
+@interface PXBlock (Builder)
++ (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm;
+- (void)parse:(PXLexer *)inLexer;
+
+- (void)declareVariable:(NSString *)inName;
+- (void)addLoadImmeidate:(id)inObject;
+- (void)addLoad:(NSString *)inName;
+- (void)addStore:(NSString *)inName;
+- (void)addPush;
+- (void)addPop;
+- (void)addInvoke:(SEL)inSelector;
+@end

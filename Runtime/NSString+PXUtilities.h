@@ -1,5 +1,5 @@
 //
-// NSString+PXSupport.h
+// NSString+PXUtilities.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -26,3 +26,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@interface NSString (PXUtilities)
++ (NSString *)generateUniqueIdentifier;
+@end
