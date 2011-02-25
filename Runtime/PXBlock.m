@@ -285,7 +285,21 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             if (!strcmp([arg objCType], @encode(CGPoint))) {
                 [arg getValue:&p];                
             }
+            else {
+                NSAssert2(NO, @"Invalid argument type, expected: %s, actual: %@", argType, arg);
+            }
             [invocation setArgument:&p atIndex:argi];
+        }
+        else if (!strcmp(argType, @encode(CGRect))) {
+            NSValue *arg = [self pop];
+            CGRect r = CGRectMake(0.0, 0.0, 0.0, 0.0);
+            if (!strcmp([arg objCType], @encode(CGRect))) {
+                [arg getValue:&r];                
+            }
+            else {
+                NSAssert2(NO, @"Invalid argument type, expected: %s, actual: %@", argType, arg);
+            }
+            [invocation setArgument:&r atIndex:argi];
         }
         else {
             NSAssert1(NO, @"Argument type not supported: %s", argType);

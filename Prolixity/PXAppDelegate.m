@@ -60,7 +60,12 @@
     [PXLexicon addClass:[NSArray class]];
     [PXLexicon addClass:[NSMutableArray class]];    
     [PXLexicon addClass:[NSMutableDictionary class]];    
-    [PXLexicon addClass:[NSDictionary class]];    
+    [PXLexicon addClass:[NSDictionary class]];
+
+    [PXLexicon addClass:[UIColor class]];
+    [PXLexicon addClass:[UIBezierPath class]];
+
+    
     [PXLexicon addClass:[PXEvaluationCanvasView class]];
 
     if ([PXSnippetManager sharedManager].firstTimeUser) {

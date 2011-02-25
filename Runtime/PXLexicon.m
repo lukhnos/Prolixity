@@ -186,15 +186,8 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
     return instance;    
 }
 
-+ (void)addClass:(Class)cls
++ (void)addMethods:(Method *)methods count:(unsigned int)numMethods
 {
-    NSString *className = NSStringFromClass(cls);
-    [[self classLexicon] build:PXSplitObjectiveCName(className)];
-    
-    NSLog(@"Adding class: %@", className);
-    
-    unsigned int numMethods = 0;
-    Method *methods = class_copyMethodList(cls, &numMethods);
     for (unsigned int j = 0 ; j < numMethods ; j++) {
         Method method = methods[j];
         SEL selector = method_getName(method);
@@ -214,13 +207,30 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
                     // reached the last part actually
                     continue;
                 }
-            
+                
                 NSString *namePartWithColon = [m stringByAppendingString:@":"];
                 [lexemes addObjectsFromArray:PXSplitObjectiveCName(namePartWithColon)];
             }
             [[self methodLexicon] build:lexemes];
         }
-    }
+    }    
+}
+
++ (void)addClass:(Class)cls
+{
+    NSString *className = NSStringFromClass(cls);
+    [[self classLexicon] build:PXSplitObjectiveCName(className)];
+    
+    NSLog(@"Adding class: %@", className);
+    
+    unsigned int numMethods = 0;
+    Method *methods = class_copyMethodList(cls, &numMethods);
+    [self addMethods:methods count:numMethods];
+
+    // get the class methods
+    methods = class_copyMethodList(object_getClass(cls), &numMethods);
+    [self addMethods:methods count:numMethods];
+
     free(methods);
 }
 @end
