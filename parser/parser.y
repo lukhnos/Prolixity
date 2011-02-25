@@ -183,6 +183,11 @@ statement(X) ::= while_statement(Y).
     X = Y;
 }
 
+statement(X) ::= print_statement(Y).
+{
+    X = Y;
+}
+
 statement(X) ::= expression(Y).
 {
     X = Y;
@@ -303,6 +308,19 @@ while_statement(S) ::= WHILE noninvoke_expression(E) COMMA block(B).
     delete B;
     delete E;
 }
+
+
+%type print_statement {ParserBlock*}
+%destructor print_statement { delete $$; }
+
+print_statement(S) ::= PRINT expression(EXP).
+{
+    S = new ParserBlock;
+    S->mergeBlock(*EXP);
+    S->addInvoke("print");    
+    delete EXP;
+}
+
 
 %type expression { ParserBlock* }
 %destructor expression { delete $$; }
@@ -426,9 +444,9 @@ range_expression(E) ::= RANGE nonprs_expression(X) COMMA nonprs_expression(Y).
         E->addPush();    
         E->mergeBlock(*X);
         E->addPush();
+        E->addLoad("NSValue");
+        E->addInvoke("valueWithNSRangeNumberLocation:numberLength:");
     }
-    E->addLoad("NSValue");
-    E->addInvoke("valueWithNSRangeNumberLocation:numberLength:");
     
     delete X;
     delete Y;
@@ -468,10 +486,9 @@ rect_expression(E) ::= RECT nonprs_expression(X1) COMMA nonprs_expression(Y1) CO
         E->addPush();    
         E->mergeBlock(*X1);
         E->addPush();
+        E->addLoad("NSValue");
+        E->addInvoke("valueWithCGRectNumberX1:numberY1:numberX2:numberY2:");
     }
-
-    E->addLoad("NSValue");
-    E->addInvoke("valueWithCGRectNumberX1:numberY1:numberX2:numberY2:");
 
     delete X1;
     delete Y1;

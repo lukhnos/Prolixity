@@ -108,6 +108,7 @@ PERIOD          \.
 (?i:invoke)             { BEGIN(IDMODE); return TOKEN_INVOKE; }
 (?i:get)                { BEGIN(IDMODE); return TOKEN_GET; }
 (?i:set)                { BEGIN(IDMODE); return TOKEN_SET; }
+(?i:print)              { BEGIN(IDMODE); return TOKEN_PRINT; }
 (?i:taking)             { return TOKEN_TAKING; }
 (?i:begin)              { return TOKEN_BEGIN; }
 (?i:end)                { return TOKEN_END; }
@@ -136,6 +137,7 @@ PERIOD          \.
  /* symbols; $ is an override symbol that starts IDMODE */
  /* this makes this snippet possible: var set union. on a, invoke b, taking $ set union */
 "("                     { return TOKEN_LEFT_PAREN; }
+<IDMODE>"("             { BEGIN(0); return TOKEN_LEFT_PAREN; }
 ")"                     { return TOKEN_RIGHT_PAREN; }
 <IDMODE>")"             { BEGIN(0); return TOKEN_RIGHT_PAREN; }
 "$"                     { BEGIN(IDMODE); }
