@@ -27,8 +27,10 @@
 //
 
     #include "ParserBlock.h"
+    #include "lexer.h"
     #include <assert.h>
 
+    // forces Lemon to grow the parser stack -- the default value is too small for our purposes
     #define YYSTACKDEPTH 0
 
     using namespace Prolixity;
@@ -114,7 +116,7 @@
 
 %syntax_error
 {
-    pCurrentBlock->recordError("Syntax error");
+    // the default syntax handler, doing nothing for now
 }
 
 %token_type {std::string*}
@@ -194,7 +196,9 @@ statement(X) ::= .
 statement(X) ::= error .
 {
     X = new ParserBlock;
-    X->recordError("Syntax error");
+    std::stringstream sst;
+    sst << "Line " << yylineno << ": Syntax error";
+    pCurrentBlock->recordError(sst.str());
 }
 
 

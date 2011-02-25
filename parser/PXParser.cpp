@@ -34,7 +34,7 @@
 #include <cstdlib>
 
 #ifndef PX_PARSER_TRACE
-#define PX_PARSER_TRACE 1
+#define PX_PARSER_TRACE 0
 #endif
 
 extern void *ParseAlloc(void *(*mallocProc)(size_t));
@@ -44,6 +44,9 @@ void ParseFree(void *p, void (*freeProc)(void*));
 
 char *PXParserParseSource(const char *source, char **outError)
 {
+    // reset lexer lieno
+    yylineno = 0;
+    
     if (!source) {
         if (outError) {
             *outError = strdup("No source code is given.");

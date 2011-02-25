@@ -84,7 +84,10 @@ namespace Prolixity {
         
         void recordError(const std::string& error)
         {
-            lastError += "\n";
+            if (lastError.length()) {
+                lastError += "\n";
+            }
+
             lastError += error;
         }
         
