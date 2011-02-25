@@ -29,4 +29,8 @@
 
 @interface NSValue (PXSupport)
 + (NSValue *)valueWithCGPointNumberX:(NSNumber *)x numberY:(NSNumber *)y;
++ (NSValue *)valueWithCGSizeNumberWidth:(NSNumber *)width numberHeight:(NSNumber *)height;
++ (NSValue *)valueWithNSRangeNumberLocation:(NSNumber *)location numberLength:(NSNumber *)length;
++ (NSValue *)valueWithCGRectValueCGPoint:(NSValue *)pointValue valueCGSize:(NSValue *)sizeValue;
++ (NSValue *)valueWithCGRectNumberX1:(NSNumber *)x1 numberY1:(NSNumber *)y1 numberX2:(NSNumber *)x2 numberY2:(NSNumber *)y2;
 @end

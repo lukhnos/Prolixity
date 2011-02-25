@@ -112,8 +112,6 @@ namespace Prolixity {
             sst << " ";
             sst << numberString;
             instructions.push_back(sst.str());
-
-			// TODO: Safe-guard this
 			simpleNumber = numberString;
         }
         

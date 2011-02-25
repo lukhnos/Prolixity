@@ -32,4 +32,31 @@
 {
     return [NSValue valueWithCGPoint:CGPointMake([x doubleValue], [y doubleValue])];
 }
+
++ (NSValue *)valueWithCGSizeNumberWidth:(NSNumber *)width numberHeight:(NSNumber *)height
+{
+    return [NSValue valueWithCGSize:CGSizeMake([width doubleValue], [height doubleValue])];
+}
+
++ (NSValue *)valueWithNSRangeNumberLocation:(NSNumber *)location numberLength:(NSNumber *)length
+{
+    return [NSValue valueWithRange:NSMakeRange([location integerValue], [length integerValue])];
+}
+
++ (NSValue *)valueWithCGRectValueCGPoint:(NSValue *)pointValue valueCGSize:(NSValue *)sizeValue
+{
+    CGRect rect;
+    rect.origin = [pointValue CGPointValue];
+    rect.size = [sizeValue CGSizeValue];
+    return [NSValue valueWithCGRect:rect];
+}
+
++ (NSValue *)valueWithCGRectNumberX1:(NSNumber *)x1 numberY1:(NSNumber *)y1 numberX2:(NSNumber *)x2 numberY2:(NSNumber *)y2
+{
+    double dx1 = [x1 doubleValue];
+    double dy1 = [y1 doubleValue];
+    double dx2 = [x2 doubleValue];
+    double dy2 = [y2 doubleValue];
+    return [NSValue valueWithCGRect:CGRectMake(dx1, dy1, (fabs(dx2 - dx1) + 1), (fabs(dy2 - dy1) + 1))];
+}
 @end

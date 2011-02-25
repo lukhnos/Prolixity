@@ -403,7 +403,8 @@ size_expression(E) ::= SIZE nonprs_expression(X) COMMA nonprs_expression(Y).
         E->addPush();    
         E->mergeBlock(*X);
         E->addPush();
-        // TODO: Create size
+        E->addLoad("NSValue");
+        E->addInvoke("valueWithCGSizeNumberWidth:numberHeight:");
     }
     
     delete X;
@@ -426,8 +427,8 @@ range_expression(E) ::= RANGE nonprs_expression(X) COMMA nonprs_expression(Y).
         E->mergeBlock(*X);
         E->addPush();
     }
-    
-    // TODO: Create range
+    E->addLoad("NSValue");
+    E->addInvoke("valueWithNSRangeNumberLocation:numberLength:");
     
     delete X;
     delete Y;
@@ -444,7 +445,8 @@ rect_expression(E) ::= RECT point_expression(ORIG) COMMA size_expression(SIZE).
     E->mergeBlock(*ORIG);
     E->addPush();
     
-    // TODO: Create rect
+    E->addLoad("NSValue");
+    E->addInvoke("valueWithCGRectValueCGPoint:valueCGSize:");
     
     delete ORIG;
     delete SIZE;
@@ -468,7 +470,8 @@ rect_expression(E) ::= RECT nonprs_expression(X1) COMMA nonprs_expression(Y1) CO
         E->addPush();
     }
 
-    // TODO: Create rect
+    E->addLoad("NSValue");
+    E->addInvoke("valueWithCGRectNumberX1:numberY1:numberX2:numberY2:");
 
     delete X1;
     delete Y1;
