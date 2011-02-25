@@ -30,9 +30,13 @@
 #import "PXRuntime.h"
 #import "PXSnippetManager.h"
 
+static const NSTimeInterval kAutosaveInterval = 10.0;
+
 @interface PXDetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
 - (void)configureView;
+- (void)killPreviousDeferredSaveInvocation;
+- (void)deferredSaveCurrentSnippet;
 @end
 
 @implementation PXDetailViewController
@@ -43,6 +47,17 @@
 @synthesize popoverController;
 @synthesize textView;
 @synthesize evaluationResultViewController;
+
+- (void)dealloc
+{
+    [currentSnippetIdentifier release];
+    [evaluationResultViewController release];
+    [popoverController release];
+    [toolbar release];
+    [detailItem release];
+    [textView release];
+    [super dealloc];
+}
 
 - (IBAction)runAction
 {    
@@ -171,20 +186,36 @@
 
 - (void)setCurrentSnippetIdentifier:(NSString *)identifier
 {
+    [self saveCurrentSnippet];
+    
     NSString *snippet = [[PXSnippetManager sharedManager] snippetForID:identifier];
     self.textView.text = snippet;
     PXRetainAssign(currentSnippetIdentifier, identifier);
 }
 
-- (void)dealloc
+- (void)killPreviousDeferredSaveInvocation
 {
-    [currentSnippetIdentifier release];
-    [evaluationResultViewController release];
-    [popoverController release];
-    [toolbar release];
-    [detailItem release];
-    [textView release];
-    [super dealloc];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveCurrentSnippet) object:nil];
 }
 
+- (void)deferredSaveCurrentSnippet
+{
+    [self killPreviousDeferredSaveInvocation];
+    [self performSelector:@selector(saveCurrentSnippet) withObject:nil afterDelay:kAutosaveInterval];
+}
+
+- (void)saveCurrentSnippet
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self killPreviousDeferredSaveInvocation];
+    if ([currentSnippetIdentifier length] > 0) {
+        [[PXSnippetManager sharedManager] setSnippet:self.textView.text forSnippetID:currentSnippetIdentifier];
+    }    
+}
+
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [self deferredSaveCurrentSnippet];
+}
 @end

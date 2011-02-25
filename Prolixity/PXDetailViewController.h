@@ -28,11 +28,12 @@
 #import <UIKit/UIKit.h>
 #import "PXEvaluationResultViewController.h"
 
-@interface PXDetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate>
+@interface PXDetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, UITextViewDelegate>
 {
 }
 
 - (IBAction)runAction;
+- (void)saveCurrentSnippet;
 
 @property (nonatomic, retain) NSString *currentSnippetIdentifier;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;

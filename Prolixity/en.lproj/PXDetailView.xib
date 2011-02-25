@@ -12,9 +12,9 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIBarButtonItem</string>
-			<string>IBUIToolbar</string>
 			<string>IBUITextView</string>
+			<string>IBUIToolbar</string>
+			<string>IBUIBarButtonItem</string>
 			<string>IBUIView</string>
 			<string>IBProxyObject</string>
 		</object>
@@ -75,6 +75,7 @@
 						<string key="NSFrame">{{0, 44}, {768, 960}}</string>
 						<reference key="NSSuperview" ref="647120888"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -83,21 +84,7 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">dmFyIGRpY3QKc2F2ZSB0byBkaWN0LCBtYXAgMTAwLCB0byAyMDAKb24gZGljdCwgaW52b2tlIGR1bXAK
-CnNhdmUgdG8gZGljdCwgbWFwICJhYmNkIiwgdG8gcG9pbnQgMTAwLCAyMDAKb24gZGljdCwgaW52b2tl
-IGR1bXAKCnZhciBhCnNhdmUgdG8gYSwgMAoKdmFyIGIKc2F2ZSB0byBiLCAxMAoKdmFyIGMKc2F2ZSB0
-byBjLCAiaGVsbG8sIHdvcmxkIVxuYW5kIGFub3RoZXIgbGluZSIKb24gYywgaW52b2tlIGR1bXAKCmJl
-Z2luLi4uIG9uIGEsIGludm9rZSBsdCwgdGFraW5nIGIgLi4uZW5kCmludm9rZSB3aGlsZVRydWUsIHRh
-a2luZyBiZWdpbi4uLiBvbiBhLCBpbnZva2UgZHVtcC4gb24gYSwgaW52b2tlIHBsdXMsIHRha2luZyAx
-LiBzYXZlIHRvIGEuIC4uLmVuZAoKCnZhciBkCnNhdmUgdG8gZCwgb24gY2FudmFzLCBpbnZva2Ugc29t
-ZSBwb2ludApvbiBkLCBpbnZva2UgZHVtcAoKdmFyIGUKZSA9IHBvaW50IDEwMCwgMTAwCm9uIGUsIGlu
-dm9rZSBkdW1wCgp2YXIgZgpmID0gMTAKdmFyIGcKZyA9IDEwCmUgPSBwb2ludCBmLCBnCm9uIGUsIGlu
-dm9rZSBkdW1wCgpvbiAic3RhcnQgdGVzdGluZyIsIGludm9rZSBkdW1wCm9uIGNhbnZhcywgaW52b2tl
-IHNldCBzb21lIHBvaW50LCB0YWtpbmcgZQpzYXZlIHRvIGQsIG9uIGNhbnZhcywgaW52b2tlIHNvbWUg
-cG9pbnQKb24gZCwgaW52b2tlIGR1bXAKCmJlZ2luLi4uIG9uIGYsIGludm9rZSBsdCwgdGFraW5nIDIw
-MCAuLi5lbmQKaW52b2tlIHdoaWxlVHJ1ZSwgdGFraW5nIGJlZ2luLi4uCglmID0gZiArIDIwCglnID0g
-ZgoJZSA9IHBvaW50IGYsIGcKCW9uIGNhbnZhcywgaW52b2tlIHNldCBzb21lIHBvaW50LCB0YWtpbmcg
-ZQouLi5lbmQKCgoKA</string>
+						<string key="IBUIText">-- lorem ipsum</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
@@ -159,6 +146,14 @@ ZQouLi5lbmQKCgoKA</string>
 					</object>
 					<int key="connectionID">72</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="473289366"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">79</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -191,6 +186,11 @@ ZQouLi5lbmQKCgoKA</string>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">70</int>
+						<reference key="object" ref="473289366"/>
+						<reference key="parent" ref="647120888"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">63</int>
 						<reference key="object" ref="410698538"/>
 						<object class="NSMutableArray" key="children">
@@ -201,19 +201,14 @@ ZQouLi5lbmQKCgoKA</string>
 						<reference key="parent" ref="647120888"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">67</int>
-						<reference key="object" ref="467147552"/>
-						<reference key="parent" ref="410698538"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">68</int>
 						<reference key="object" ref="409565025"/>
 						<reference key="parent" ref="410698538"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">70</int>
-						<reference key="object" ref="473289366"/>
-						<reference key="parent" ref="647120888"/>
+						<int key="objectID">67</int>
+						<reference key="object" ref="467147552"/>
+						<reference key="parent" ref="410698538"/>
 					</object>
 				</object>
 			</object>
@@ -254,7 +249,7 @@ ZQouLi5lbmQKCgoKA</string>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">72</int>
+			<int key="maxID">79</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
