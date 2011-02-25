@@ -162,7 +162,6 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
 }
 @end
 
-
 @implementation PXLexicon (RuntimeSupport)
 + (PXLexicon *)classLexicon
 {
@@ -186,6 +185,7 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
     return instance;    
 }
 
+// private method
 + (void)addMethods:(Method *)methods count:(unsigned int)numMethods
 {
     for (unsigned int j = 0 ; j < numMethods ; j++) {
