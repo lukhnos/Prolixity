@@ -27,7 +27,8 @@
 
 #import "PXDetailViewController.h"
 #import "PXRootViewController.h"
-#import "PXBlock.h"
+#import "PXRuntime.h"
+#import "PXSnippetManager.h"
 
 @interface PXDetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
@@ -36,16 +37,12 @@
 
 @implementation PXDetailViewController
 
-@synthesize toolbar=_toolbar;
-
-@synthesize detailItem=_detailItem;
-
-
-@synthesize popoverController=_myPopoverController;
-
-@synthesize textView = _textView;
-
-@synthesize  evaluationResultViewController;
+@synthesize currentSnippetIdentifier;
+@synthesize toolbar;
+@synthesize detailItem;
+@synthesize popoverController;
+@synthesize textView;
+@synthesize evaluationResultViewController;
 
 - (IBAction)runAction
 {    
@@ -67,6 +64,8 @@
     [self presentModalViewController:self.evaluationResultViewController animated:YES];
     
     self.evaluationResultViewController.evaluationCanvasView.source = self.textView.text;
+
+    [self.evaluationResultViewController.evaluationCanvasView setNeedsDisplay];
     
 //    self.evaluationResultViewController.evaluationCanvasView.textView.text = [PXBlock currentConsoleBuffer];
 }
@@ -78,9 +77,9 @@
  */
 - (void)setDetailItem:(id)newDetailItem
 {
-    if (_detailItem != newDetailItem) {
-        [_detailItem release];
-        _detailItem = [newDetailItem retain];
+    if (detailItem != newDetailItem) {
+        [detailItem release];
+        detailItem = [newDetailItem retain];
         
         // Update the view.
         [self configureView];
@@ -170,13 +169,21 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
+- (void)setCurrentSnippetIdentifier:(NSString *)identifier
+{
+    NSString *snippet = [[PXSnippetManager sharedManager] snippetForID:identifier];
+    self.textView.text = snippet;
+    PXRetainAssign(currentSnippetIdentifier, identifier);
+}
+
 - (void)dealloc
 {
+    [currentSnippetIdentifier release];
     [evaluationResultViewController release];
-    [_myPopoverController release];
-    [_toolbar release];
-    [_detailItem release];
-    [_textView release];
+    [popoverController release];
+    [toolbar release];
+    [detailItem release];
+    [textView release];
     [super dealloc];
 }
 

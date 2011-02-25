@@ -34,7 +34,7 @@
 #include <cstdlib>
 
 #ifndef PX_PARSER_TRACE
-#define PX_PARSER_TRACE 0
+#define PX_PARSER_TRACE 1
 #endif
 
 extern void *ParseAlloc(void *(*mallocProc)(size_t));

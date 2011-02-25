@@ -29,44 +29,109 @@
 #import "PXRootViewController.h"
 #import "PXLexicon.h"
 #import "PXEvaluationCanvasView.h"
+#import "PXRuntime.h"
+#import "PXSnippetManager.h"
 
 @implementation PXAppDelegate
-@synthesize window=_window;
-@synthesize splitViewController=_splitViewController;
-@synthesize rootViewController=_rootViewController;
-@synthesize detailViewController=_detailViewController;
+@synthesize window;
+@synthesize splitViewController;
+@synthesize rootViewController;
+@synthesize detailViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*
-    PXLexicon *cl = [[PXLexicon alloc] init];
-
-    [cl build:[NSArray arrayWithObjects:@"init", @"With", @"String:", @"encoding:", nil]];
-
-    [cl build:[NSArray arrayWithObjects:@"initWithString:", @"encoding:", nil]];
-    
-    NSLog(@"1 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithString:", @"encoding:", nil]]);
-    NSLog(@"2 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithString:encoding:", nil]]);
-    NSLog(@"3 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithData:encoding:", nil]]);
-    NSLog(@"4 %@", [cl candidatesForLexemes:[NSArray arrayWithObjects:@"initWithString:", nil]]);
-    
-    
-    [cl release];
-    */
-    
     [PXLexicon addClass:[NSString class]];    
     [PXLexicon addClass:[NSNumber class]];    
     [PXLexicon addClass:[NSArray class]];
     [PXLexicon addClass:[NSMutableArray class]];    
     [PXLexicon addClass:[NSMutableDictionary class]];    
     [PXLexicon addClass:[NSDictionary class]];    
-    
     [PXLexicon addClass:[PXEvaluationCanvasView class]];
-    
-    /*
-    NSLog(@"6 %@", [[PXLexicon methodLexicon] candidatesForLexemes:[NSArray arrayWithObjects:@"init", @"with", @"format:", @"arguments:", nil]]);
-    NSLog(@"7 %@", [[PXLexicon classLexicon] candidatesForLexemes:[NSArray arrayWithObjects:@"ns", @"string", nil]]);
-    */
+
+    if ([PXSnippetManager sharedManager].firstTimeUser) {
+        
+        NSString *testBedCode = @"var dict\n"
+        @"save to dict, map 100, to 200\n"
+        @"on dict, invoke dump\n"
+        @"\n"
+        @"save to dict, map \"abcd\", to point 100, 200\n"
+        @"on dict, invoke dump\n"
+        @"\n"
+        @"var a\n"
+        @"save to a, 0\n"
+        @"\n"
+        @"var b\n"
+        @"save to b, 10\n"
+        @"\n"
+        @"var c\n"
+        @"save to c, \"hello, world!\\nand another line\"\n"
+        @"on c, invoke dump\n"
+        @"\n"
+        @"begin... on a, invoke lt, taking b ...end\n"
+        @"invoke whileTrue, taking begin... on a, invoke dump. on a, invoke plus, taking 1. save to a. ...end\n"
+        @"\n"
+        @"\n"
+        @"var d\n"
+        @"save to d, on canvas, invoke some point\n"
+        @"on d, invoke dump\n"
+        @"\n"
+        @"var e\n"
+        @"e = point 100, 100\n"
+        @"on e, invoke dump\n"
+        @"\n"
+        @"var f\n"
+        @"f = 10\n"
+        @"var g\n"
+        @"g = 10\n"
+        @"e = point f, g\n"
+        @"on e, invoke dump\n"
+        @"\n"
+        @"on \"start testing\", invoke dump\n"
+        @"on canvas, invoke set some point, taking e\n"
+        @"save to d, on canvas, invoke some point\n"
+        @"on d, invoke dump\n"
+        @"\n"
+        @"begin... on f, invoke lt, taking 200 ...end\n"
+        @"invoke whileTrue, taking begin...\n"
+        @"	f = f + 20\n"
+        @"	g = f\n"
+        @"	e = point f, g\n"
+        @"	on canvas, invoke set some point, taking e\n"
+        @"...end\n";        
+        
+        NSString *identifier = nil;
+        
+        identifier = [[PXSnippetManager sharedManager] createSnippet];
+        [[PXSnippetManager sharedManager] setSnippetTitle:PXLSTR(@"Hello, world!") forSnippetID:identifier];
+        [[PXSnippetManager sharedManager] setSnippetDescription:PXLSTR(@"Explains what Prolixity is") forSnippetID:identifier];
+        [[PXSnippetManager sharedManager] setSnippet:@"-- the first program\n"
+                                         @"var x\n"
+                                         @"save to x, \"hello, world!\"\n"
+                                         @"on x, invoke dump\n"
+                                        forSnippetID:identifier];
+
+
+        identifier = [[PXSnippetManager sharedManager] createSnippet];
+        [[PXSnippetManager sharedManager] setSnippetTitle:PXLSTR(@"A Simple Loop") forSnippetID:identifier];
+        [[PXSnippetManager sharedManager] setSnippetDescription:PXLSTR(@"Basic syntax") forSnippetID:identifier];
+        [[PXSnippetManager sharedManager] setSnippet:@"-- the second program\n"
+                                         @"var x\n"
+                                         @"save to x, \"hello, world!\"\n"
+                                         @"on x, invoke dump\n"
+                                        forSnippetID:identifier];
+
+        identifier = [[PXSnippetManager sharedManager] createSnippet];
+        [[PXSnippetManager sharedManager] setSnippetTitle:PXLSTR(@"Test Bed Code") forSnippetID:identifier];
+        [[PXSnippetManager sharedManager] setSnippetDescription:PXLSTR(@"lorem ipsum") forSnippetID:identifier];
+        [[PXSnippetManager sharedManager] setSnippet:testBedCode forSnippetID:identifier];
+        
+        
+        identifier = [[PXSnippetManager sharedManager] createSnippet];
+        [[PXSnippetManager sharedManager] setSnippetTitle:PXLSTR(@"Try It!") forSnippetID:identifier];
+        [[PXSnippetManager sharedManager] setSnippet:@"-- try yours!\n" forSnippetID:identifier];
+
+        [[PXSnippetManager sharedManager] markFirstTimeDataAsPopulated];
+    }
     
     
     // Override point for customization after application launch.
@@ -117,10 +182,10 @@
 
 - (void)dealloc
 {
-    [_window release];
-    [_splitViewController release];
-    [_rootViewController release];
-    [_detailViewController release];
+    [window release];
+    [splitViewController release];
+    [rootViewController release];
+    [detailViewController release];
     [super dealloc];
 }
 

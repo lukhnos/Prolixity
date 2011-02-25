@@ -32,7 +32,7 @@ static NSString *const kSnippetListKey = @"SnippetList_1.0";
 static NSString *const kSnippetStorageKey = @"SnippetStorage_1.0";
 
 static NSString *const kSnippetObjectContentKey = @"Content";
-static NSString *const kSnippetObjectDescriptionKey = @"Content";
+static NSString *const kSnippetObjectDescriptionKey = @"Description";
 static NSString *const kSnippetObjectTitleKey = @"Title";
 
 @interface PXSnippetManager ()
@@ -107,6 +107,7 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
     
     [snippetStorage setObject:snippet forKey:identifier];
     [snippetList addObject:identifier];
+    [self writeBack];
     return identifier;
 }
 
@@ -117,7 +118,8 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 
 - (void)setSnippetTitle:(NSString *)snippet forSnippetID:(NSString *)identifier
 {
-    return [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectTitleKey];
+    [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectTitleKey];
+    [self writeBack];
 }
 
 - (NSString *)snippetDescriptionForID:(NSString *)identifier
@@ -127,7 +129,8 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 
 - (void)setSnippetDescription:(NSString *)snippet forSnippetID:(NSString *)identifier
 {
-    return [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectDescriptionKey];
+    [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectDescriptionKey];
+    [self writeBack];
 }
 
 
@@ -138,7 +141,8 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 
 - (void)setSnippet:(NSString *)snippet forSnippetID:(NSString *)identifier
 {
-    return [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectContentKey];
+    [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectContentKey];
+    [self writeBack];
 }
 
 - (void)markFirstTimeDataAsPopulated

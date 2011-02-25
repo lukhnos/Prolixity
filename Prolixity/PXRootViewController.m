@@ -7,11 +7,16 @@
 //
 
 #import "PXRootViewController.h"
-
 #import "PXDetailViewController.h"
+#import "PXSnippetManager.h"
+#import "PXRuntime.h"
+#import "PXAppDelegate.h"
+
+@interface PXRootViewController ()
+- (IBAction)addSnippetAction;
+@end
 
 @implementation PXRootViewController
-		
 @synthesize detailViewController;
 
 - (void)viewDidLoad
@@ -19,6 +24,9 @@
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+    self.title = PXLSTR(@"Prolixity Snippets");
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSnippetAction)] autorelease];                                        
 }
 
 		
@@ -55,22 +63,38 @@
 		
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [[PXSnippetManager sharedManager] snippetCount];
     		
 }
 
 		
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *const defaultCellID = @"DefaultCell";
+    static NSString *const descriptiveCellID = @"DescriptiveCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+    UITableViewCell *cell = nil;
+    
+    NSString *identifier = [[PXSnippetManager sharedManager] snippetIDAtIndex:indexPath.row];
+    NSString *title = [[PXSnippetManager sharedManager] snippetTitleForID:identifier];
+    NSString *description = [[PXSnippetManager sharedManager] snippetDescriptionForID:identifier];
 
-    // Configure the cell.
-    		
+    if ([description length] > 0) {        
+        cell = [tableView dequeueReusableCellWithIdentifier:descriptiveCellID];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:descriptiveCellID] autorelease];            
+        }
+        
+        cell.detailTextLabel.text = description;
+    }
+    else {
+        cell = [tableView dequeueReusableCellWithIdentifier:defaultCellID];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:defaultCellID] autorelease];            
+        }
+    }
+    
+    cell.textLabel.text = title;    		
     return cell;
 }
 
@@ -107,15 +131,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here -- for example, create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     NSManagedObject *selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    NSString *identifier = [[PXSnippetManager sharedManager] snippetIDAtIndex:indexPath.row];
+    ((PXAppDelegate *)[[UIApplication sharedApplication] delegate]).detailViewController.currentSnippetIdentifier = identifier;
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,4 +155,8 @@
     [super dealloc];
 }
 
+- (IBAction)addSnippetAction
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
 @end

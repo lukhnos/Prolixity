@@ -27,8 +27,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class RootViewController;
-@class DetailViewController;
+@class PXRootViewController;
+@class PXDetailViewController;
 
 @interface PXAppDelegate : NSObject <UIApplicationDelegate>
 {
@@ -36,6 +36,6 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
-@property (nonatomic, retain) IBOutlet RootViewController *rootViewController;
-@property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
+@property (nonatomic, retain) IBOutlet PXRootViewController *rootViewController;
+@property (nonatomic, retain) IBOutlet PXDetailViewController *detailViewController;
 @end

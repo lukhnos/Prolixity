@@ -34,6 +34,7 @@
 
 - (IBAction)runAction;
 
+@property (nonatomic, retain) NSString *currentSnippetIdentifier;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) id detailItem;
 @property (nonatomic, retain) IBOutlet UITextView *textView;
