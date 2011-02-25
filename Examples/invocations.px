@@ -1,0 +1,36 @@
+-- Prolixity makes use of the Objective-C runtime, and is therefore able to invoke Objective-C methods ("send messages" is technically the more precise term).
+
+-- In fact, every object in Prolixty is a native Objective-C object.
+
+-- The print statement you see previously:
+print "hello, world"
+
+-- Is actually a shorthand for the invocation:
+on "hello, world", invoke print
+
+-- Which calls -[NSString print], a method that Prolixity implements to support printing to its virutal console
+
+-- Now let's do more things. Remember in the Basics section, we mentioned that identifiers in Proxlity need not be written in one word, so
+var dict
+save to dict, on ns mutable dictionary, invoke dictionary
+
+-- This equals to
+save to dict, on NSMutableDictionary, invoke dictionary
+
+-- or
+dict = on NSMutableDictionary, invoke dictionary
+
+-- then
+on dict, invoke set object, taking "hello, world!", and for key, taking "words"
+on dict, invoke setObject, taking "bar", and forKey, taking "foo"
+print dict
+
+-- the syntax might look strange, this is because we don't want to use extra symbols
+
+-- we also have shorthands for getters and setters
+var a
+a = on ns mutable string, invoke string
+on a, set string, to "hello, world"
+print "length of string '" + a + "' is: " + (on a, get length)
+
+-- by the way, the numbers in Prolixity are NSNumber objects. But doesn't -[NSString length] return an NSUInteger primitive? don't worry, Prolixity does all the autoboxing for you, both for return values and argument values.

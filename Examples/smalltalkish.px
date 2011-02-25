@@ -1,0 +1,30 @@
+-- Don't be fooled by the syntactic sugars in Prolixity: It is actually a Smalltalk-ish language. Everything is an object.
+
+-- Here's how "if" is actually implemented. Say
+var x
+var y
+x = 5
+y = 10
+if x < y, begin ... print "x < y" ... end
+
+-- Actually, under the hood, it is
+on (on x, invoke lt, taking y), invoke $if true, taking begin ... print "x < y" ... end
+
+-- note that the "$" means we want to use a reserved word as part of the identifier, we can also write ifTrue, and that's what it is in Smalltalk
+
+-- same for while
+while x < y, begin...
+  print x
+  x = x + 1
+...end
+
+-- again
+x = 5
+on (begin... on x, invoke lt, taking y ...end), invoke whileTrue, taking begin...
+  print x.
+  
+  -- now you'll appreciate "x = x + 1"
+  save to x, on x, invoke plus, taking 1
+...end
+
+  

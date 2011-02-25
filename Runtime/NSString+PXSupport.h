@@ -26,3 +26,8 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@interface NSString (PXSupport)
+- (NSString *)plus:(NSString *)another;
+- (NSString *)mul:(NSNumber *)times;
+@end

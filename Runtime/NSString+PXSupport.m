@@ -26,3 +26,21 @@
 //
 
 #import "NSString+PXSupport.h"
+
+@implementation NSString (PXSupport)
+- (NSString *)plus:(NSString *)another
+{
+    return [self stringByAppendingString:[another description]];
+}
+
+- (NSString *)mul:(NSNumber *)times
+{
+    NSMutableString *result = [NSMutableString string];
+    
+    for (NSUInteger i = 0, j = [times unsignedIntegerValue] ; i < j ; i++) {
+        [result appendString:self];
+    }
+    
+    return result;
+}
+@end

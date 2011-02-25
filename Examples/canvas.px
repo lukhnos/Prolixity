@@ -1,0 +1,18 @@
+-- I plan to implement simple canvas graphics support in Prolixity, maybe Logo-ish?
+
+-- for now, here's what we have (for more complex stuff, see "UIKit Graphics" section)
+-- this is silly, I know
+
+var i
+i = 100
+
+while i < 420, begin ...
+  Var j
+  J = 100
+  while j < 420, begin ...
+    -- canvas is an exported object from our app
+    on canvas, invoke draw dot, taking point i, j
+    j = j + 20
+  ... end
+  i = i + 20
+...end

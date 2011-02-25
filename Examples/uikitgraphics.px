@@ -1,0 +1,30 @@
+-- UIKit integration
+--
+-- This snippet demos how to use UIKit (UIColor and UIBezierPath) in Prolixity
+
+print "UIKit integration demo"
+
+-- get UIColor class, save it to a variable as shorthand
+Var u
+U = ui color
+
+-- create an array of colors
+Var colors
+Colors = array (on u, invoke red color), (on u, invoke green color), (on u, invoke blue color), (on u, invoke yellow color)
+
+-- for each color, draw an oval
+Var i
+I = 0
+While i < (on colors, get count), begin...
+  Var c
+  C =  on colors, invoke object at index, taking i
+
+  Var r
+  R = rect point 100 + i * 10, 100 + i * 10, size 200, 200
+
+  On c, invoke set fill
+  On ui bezier path, invoke bezier path with oval in rect, taking r
+  Invoke fill
+
+  I = i + 1
+...end

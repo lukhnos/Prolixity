@@ -38,20 +38,4 @@
     }
     return nil;
 }
-
-- (NSString *)plus:(NSString *)another
-{
-    return [self stringByAppendingString:another];
-}
-
-- (NSString *)mul:(NSNumber *)times
-{
-    NSMutableString *result = [NSMutableString string];
-    
-    for (NSUInteger i = 0, j = [times unsignedIntegerValue] ; i < j ; i++) {
-        [result appendString:self];
-    }
-    
-    return result;
-}
 @end

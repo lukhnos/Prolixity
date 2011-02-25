@@ -36,6 +36,8 @@
 - (CGPoint)somePoint;
 - (void)setSomePoint:(CGPoint)p;
 
+- (void)drawDot:(CGPoint)p;
+
 @property (retain, nonatomic) NSString *source;
 @property (retain, nonatomic) IBOutlet UITextView *textView;
 @end

@@ -1,0 +1,42 @@
+-- In addition to strings (NSMutableString) and numbers (NSNumber) — the bread and butter of any programming language — Prolixity also supports the following types of objects.
+
+-- arrays (NSMutableArray)
+var a
+a = array 1, 2, 3, 4, 5, "hello"
+print "array:" + (on a, invoke components joined by string, taking ", ")
+
+-- maps, or dictionaries (NSMutableDictionary)
+var d
+d = map "model", to "MacBook Pro", "year", to 2010, "memory", to "8 GB"
+print d
+
+-- points (autoboxed CGPoint as NSValue)
+var p
+p = point 100, 200
+print p
+
+-- rectangless (autoboxed CGRect as NSValue)
+var r
+r = rect 100, 100, 299, 299
+r = rect point 100, 100, size 200, 200
+print r
+
+-- sizes (autoboxed CGSize as NSValue)
+var s
+s = size 100, 100
+print s
+
+-- ranges (autoboxed NSRange as NSValue)
+var n
+n = range 0, 100
+print n
+
+-- blocks, a Prolixity syntactic unit; blocks are first-class objects in Prolixity
+var b
+b = begin...
+  print "hello, world"
+...end
+
+print b
+
+-- note, though, Prolixity blocks are not interoperable with Objective-C blocks, at least not yet...

@@ -15,6 +15,7 @@
 		6A38659313179801008B6B20 /* PXBlock+Bytecode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A386589131797FF008B6B20 /* PXBlock+Bytecode.m */; };
 		6A38659413179801008B6B20 /* PXBlock+PXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A38658B131797FF008B6B20 /* PXBlock+PXSupport.m */; };
 		6A38659513179801008B6B20 /* PXLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A38658D13179800008B6B20 /* PXLexer.m */; };
+		6A3865A31317B7BC008B6B20 /* Examples in Resources */ = {isa = PBXBuildFile; fileRef = 6A3865A21317B7BB008B6B20 /* Examples */; };
 		6A3A78E312FDE1650016D6AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E212FDE1650016D6AD /* UIKit.framework */; };
 		6A3A78E512FDE1650016D6AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E412FDE1650016D6AD /* Foundation.framework */; };
 		6A3A78E712FDE1650016D6AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E612FDE1650016D6AD /* CoreGraphics.framework */; };
@@ -96,6 +97,7 @@
 		6A38658B131797FF008B6B20 /* PXBlock+PXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXBlock+PXSupport.m"; sourceTree = "<group>"; };
 		6A38658C13179800008B6B20 /* PXLexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLexer.h; sourceTree = "<group>"; };
 		6A38658D13179800008B6B20 /* PXLexer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLexer.m; sourceTree = "<group>"; };
+		6A3865A21317B7BB008B6B20 /* Examples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Examples; sourceTree = "<group>"; };
 		6A3A78DE12FDE1650016D6AD /* Prolixity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prolixity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A3A78E212FDE1650016D6AD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6A3A78E412FDE1650016D6AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -197,6 +199,7 @@
 		6A3A78D312FDE1650016D6AD = {
 			isa = PBXGroup;
 			children = (
+				6A3865A21317B7BB008B6B20 /* Examples */,
 				6A3A78E812FDE1650016D6AD /* Prolixity */,
 				6A3A790B12FDE1650016D6AD /* ProlixityTests */,
 				6A5432DF12FDEF950084C7D0 /* PXParser-iOS */,
@@ -486,6 +489,7 @@
 				6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */,
 				6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */,
 				6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */,
+				6A3865A31317B7BC008B6B20 /* Examples in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

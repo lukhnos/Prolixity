@@ -1,0 +1,47 @@
+-- This snippet shows the basic syntax and supported objects in Prolixity
+
+-- Apparently, this is a comment line
+-- Anything after two dashes "--" is treated as a comment
+
+print "This shows how comment works" -- now you know
+
+-- Each statement can be written in a single line, or separated by periods
+print "Print another line"
+print "The second line". print "and the third line"
+
+-- numbers and strings work like what you expected
+print 1 + 1
+print "hello"
+
+-- variables need to be declared
+var a
+var b
+
+-- one very important feature of Prolixity is that variable names need not be written in one word; this feature enables working with the virtual keyboard on the iPad, so if we have
+
+var some number
+
+-- then these are the same
+some number = 2.71828183
+somenumber = 3.1415926
+print somenumber
+
+-- "save to" saves something to the variable
+save to a, 100
+save to b, "world"
+print a
+print b
+
+-- "save to" also saves the last evaluation result
+200 + 300
+save to a
+print a
+
+-- alternatively, we can use the assignment operator
+a = 600
+print a
+
+-- works for strings, too
+a = "hello" + ", " + "world" + "!"
+print a
+

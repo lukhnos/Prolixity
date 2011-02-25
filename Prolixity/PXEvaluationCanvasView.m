@@ -59,6 +59,12 @@
     [[UIBezierPath bezierPathWithOvalInRect:CGRectMake(p.x - 5.0, p.x - 5.0, 10.0, 10.0)] fill];
 }
 
+- (void)drawDot:(CGPoint)p
+{
+    [[UIColor redColor] setFill];
+    [[UIBezierPath bezierPathWithOvalInRect:CGRectMake(p.x - 5.0, p.y - 5.0, 10.0, 10.0)] fill];    
+}
+
 - (void)drawRect:(CGRect)rect
 {
     if (![source length]) {

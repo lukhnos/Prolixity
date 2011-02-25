@@ -1,14 +1,21 @@
-on "hello", invoke init with data, taking "abcd", and encoding, taking 1234
+-- Prolixity has the basic control structures that you find in other languages
 
--- var a
--- set to a, 0
+-- branching
+var x
+var y
+x = 5
+y = 10
 
--- var b
--- set to b, 10
+if x < y, begin ...
+  print "x < y"
+...end, else begin ...
+  print "it's not that x < y"
+...end
 
--- var c
--- set to c, "hello, world!\nand another line"
--- on c, invoke dump
+-- while
+while x < y, begin...
+  print x
+  x = x + 1
+...end
 
--- begin... on a, invoke lt, taking b ...end
--- invoke whileTrue, taking begin... on a, invoke dump. on a, invoke plus, -- taking 1. set to a. ...end
+-- in fact, "if" and "while" are syntactic sugars, see the "Smalltalkish" for details!
