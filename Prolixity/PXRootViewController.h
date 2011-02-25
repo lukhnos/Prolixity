@@ -32,6 +32,8 @@
 @interface PXRootViewController : UITableViewController
 {
 }
-		
+
+- (void)selectSnippetIndex:(NSUInteger)index;
+
 @property (nonatomic, retain) IBOutlet PXDetailViewController *detailViewController;
 @end

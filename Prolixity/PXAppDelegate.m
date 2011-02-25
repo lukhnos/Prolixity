@@ -155,6 +155,7 @@
     }
 
     self.detailViewController.currentSnippetIdentifier = [[PXSnippetManager sharedManager] snippetIDAtIndex:0];
+    [self.rootViewController selectSnippetIndex:0];
     
     return YES;
 }

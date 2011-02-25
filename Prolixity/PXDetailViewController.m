@@ -224,7 +224,6 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 
 - (void)saveCurrentSnippet
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     [self killPreviousDeferredSaveInvocation];
     if ([currentSnippetIdentifier length] > 0) {
         [[PXSnippetManager sharedManager] setSnippet:self.textView.text forSnippetID:currentSnippetIdentifier];

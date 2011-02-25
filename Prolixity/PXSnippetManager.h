@@ -27,6 +27,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const PXSnippetManagerDidUpdateNotification;
+
 @interface PXSnippetManager : NSObject
 {
     BOOL firstTimeUser;
@@ -37,6 +39,7 @@
 
 - (NSUInteger)snippetCount;
 - (NSString *)snippetIDAtIndex:(NSUInteger)index;
+- (NSUInteger)indexForSnippetID:(NSString *)identifier;
 
 - (NSString *)createSnippet;
 

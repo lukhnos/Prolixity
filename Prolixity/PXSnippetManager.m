@@ -28,6 +28,8 @@
 #import "PXSnippetManager.h"
 #import "PXRuntime.h"
 
+NSString *const PXSnippetManagerDidUpdateNotification = @"PXSnippetManagerDidUpdateNotification";
+
 static NSString *const kSnippetListKey = @"SnippetList_1.0";
 static NSString *const kSnippetStorageKey = @"SnippetStorage_1.0";
 
@@ -37,6 +39,7 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 
 @interface PXSnippetManager ()
 - (void)writeBack;
+- (void)postNotification;
 @end
 
 @implementation PXSnippetManager
@@ -95,6 +98,11 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
     return [snippetList objectAtIndex:index];
 }
 
+- (NSUInteger)indexForSnippetID:(NSString *)identifier
+{
+    return [snippetList indexOfObject:identifier];
+}
+
 - (NSString *)createSnippet
 {
     NSMutableDictionary *snippet = [NSMutableDictionary dictionary];
@@ -108,6 +116,7 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
     [snippetStorage setObject:snippet forKey:identifier];
     [snippetList addObject:identifier];
     [self writeBack];
+    [self postNotification];
     return identifier;
 }
 
@@ -120,6 +129,7 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 {
     [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectTitleKey];
     [self writeBack];
+    [self postNotification];
 }
 
 - (NSString *)snippetDescriptionForID:(NSString *)identifier
@@ -131,6 +141,7 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 {
     [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectDescriptionKey];
     [self writeBack];
+    [self postNotification];
 }
 
 
@@ -155,5 +166,10 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
     [[NSUserDefaults standardUserDefaults] setObject:snippetList forKey:kSnippetListKey];
     [[NSUserDefaults standardUserDefaults] setObject:snippetStorage forKey:kSnippetStorageKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)postNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:PXSnippetManagerDidUpdateNotification object:self];
 }
 @end

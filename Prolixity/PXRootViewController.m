@@ -27,8 +27,14 @@
     self.title = PXLSTR(@"Prolixity Snippets");
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSnippetAction)] autorelease];                                        
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView:) name:PXSnippetManagerDidUpdateNotification object:nil];
 }
 
+- (void)viewDidUnload
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 		
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -143,12 +149,6 @@
     // Relinquish ownership any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload
-{
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-}
-
 - (void)dealloc
 {
     [detailViewController release];
@@ -157,6 +157,20 @@
 
 - (IBAction)addSnippetAction
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSString *identifier = [[PXSnippetManager sharedManager] createSnippet];
+    ((PXAppDelegate *)[[UIApplication sharedApplication] delegate]).detailViewController.currentSnippetIdentifier = identifier;
+    
+    NSUInteger index = [[PXSnippetManager sharedManager] indexForSnippetID:identifier];
+    [self selectSnippetIndex:index];
+}
+
+- (void)selectSnippetIndex:(NSUInteger)index
+{
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+}
+
+- (void)reloadTableView:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 @end
