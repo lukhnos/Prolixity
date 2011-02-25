@@ -201,7 +201,7 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
                 return cls;
             }
 
-            NSAssert(0, @"Cannot find the variable");
+            NSAssert1(0, @"Cannot find the variable: %@", inName);
         }
     }
 
@@ -218,7 +218,7 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             [parent storeValue:inValue toVariable:inName];
         }
         else {
-            NSAssert(0, @"Cannot find the variable");            
+            NSAssert1(0, @"Cannot find the variable: %@", inName);            
         }
     }
 }
@@ -241,10 +241,10 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             }
         }
     }    
-    NSAssert(selector != NULL, @"Object must respond to selector");
+    NSAssert1(selector != NULL, @"Object must respond to one of the selectors: %@", methodNameCandidates);
     
     NSMethodSignature *methodSignature = [object methodSignatureForSelector:selector];
-    NSAssert(methodSignature != nil, @"Object must respond to selector");
+    NSAssert1(methodSignature != nil, @"Object must respond to selector: %@", NSStringFromSelector(selector));
     
     if (selector == @selector(alloc)) {
         id tmp = tempValue;

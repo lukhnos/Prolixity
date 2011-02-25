@@ -46,6 +46,24 @@
     }
 }
 
+- (NSNumber *)minus:(NSNumber *)inNumber
+{
+    const char *aType = [self objCType];
+    const char *bType = [inNumber objCType];
+    
+    if (!strcmp(aType, "d") || !strcmp(bType, "d")) {
+        return [NSNumber numberWithDouble:[self doubleValue] - [inNumber doubleValue]];
+    }
+    else if (!strcmp(aType, "f") || !strcmp(bType, "f")) {
+        return [NSNumber numberWithFloat:[self floatValue] - [inNumber floatValue]];
+    }
+    else {
+        // TODO: Expand type support
+        return [NSNumber numberWithInteger:[self integerValue] - [inNumber integerValue]];
+    }
+}
+
+
 - (NSNumber *)mul:(NSNumber *)inNumber
 {
     const char *aType = [self objCType];
@@ -63,9 +81,30 @@
     }
 }
 
+- (NSNumber *)div:(NSNumber *)inNumber
+{
+    const char *aType = [self objCType];
+    const char *bType = [inNumber objCType];
+    
+    if (!strcmp(aType, "d") || !strcmp(bType, "d")) {
+        return [NSNumber numberWithDouble:[self doubleValue] / [inNumber doubleValue]];
+    }
+    else if (!strcmp(aType, "f") || !strcmp(bType, "f")) {
+        return [NSNumber numberWithFloat:[self floatValue] / [inNumber floatValue]];
+    }
+    else {
+        // TODO: Expand type support
+        return [NSNumber numberWithInteger:[self integerValue] / [inNumber integerValue]];
+    }
+}
 - (NSNumber *)gt:(NSNumber *)inNumber
 {
     return ([self compare:inNumber] == NSOrderedDescending) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
+}
+
+- (NSNumber *)ge:(NSNumber *)inNumber
+{
+    return ([self compare:inNumber] != NSOrderedAscending) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
 }
 
 - (NSNumber *)lt:(NSNumber *)inNumber
@@ -73,6 +112,15 @@
     return ([self compare:inNumber] == NSOrderedAscending) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
 }
 
+- (NSNumber *)le:(NSNumber *)inNumber
+{
+    return ([self compare:inNumber] != NSOrderedDescending) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
+}
+
+- (NSNumber *)negate
+{
+    return [NSNumber numberWithBool:![self boolValue]];
+}
 
 - (id)ifTrue:(PXBlock *)inBlock
 {

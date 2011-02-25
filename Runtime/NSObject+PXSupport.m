@@ -39,4 +39,14 @@
 {
     return [self dump];
 }
+
+- (NSNumber *)eq:(id)another
+{
+    return [self isEqual:another] ? (NSNumber *)kCFBooleanTrue : (NSNumber *)kCFBooleanFalse;
+}
+
+- (NSNumber *)neq:(id)another
+{
+    return [self isEqual:another] ? (NSNumber *)kCFBooleanFalse : (NSNumber *)kCFBooleanTrue;
+}
 @end

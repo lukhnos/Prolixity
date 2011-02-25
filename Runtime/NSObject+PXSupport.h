@@ -30,4 +30,6 @@
 @interface NSObject (PXSupport)
 - (id)dump;
 - (id)print;
+- (NSNumber *)eq:(id)another;
+- (NSNumber *)neq:(id)another;
 @end

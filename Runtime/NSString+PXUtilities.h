@@ -29,4 +29,6 @@
 
 @interface NSString (PXUtilities)
 + (NSString *)generateUniqueIdentifier;
+- (NSString *)plus:(NSString *)another;
+- (NSString *)mul:(NSNumber *)times;
 @end
