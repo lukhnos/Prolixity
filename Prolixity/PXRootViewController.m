@@ -6,11 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "PXRootViewController.h"
 
-#import "DetailViewController.h"
+#import "PXDetailViewController.h"
 
-@implementation RootViewController
+@implementation PXRootViewController
 		
 @synthesize detailViewController;
 

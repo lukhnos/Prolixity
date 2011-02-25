@@ -104,7 +104,8 @@
     };
 }
 
-%extra_argument {ParserBlock *pCurrentBlock}
+/* we use __unused to stop compiler from complaining an unsed var in a generated function */
+%extra_argument {ParserBlock *__unused pCurrentBlock}
 %left IF.
 %left ASSIGN.
 %left PLUS MINUS.

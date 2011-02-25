@@ -1,5 +1,5 @@
 //
-// PXParser.h
+// PXEvaluationCanvasView.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,12 +25,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if __cplusplus
-extern "C" {
-#endif
+#import <UIKit/UIKit.h>
 
-    char* PXParserParseSource(const char* source, char** outError);
 
-#if __cplusplus
-};
-#endif
+@interface PXEvaluationCanvasView : UIView
+{
+    CGPoint somePoint;
+}
+
+- (CGPoint)somePoint;
+- (void)setSomePoint:(CGPoint)p;
+
+@property (retain, nonatomic) NSString *source;
+@property (retain, nonatomic) IBOutlet UITextView *textView;
+@end

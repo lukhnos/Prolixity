@@ -78,13 +78,14 @@ namespace Prolixity {
             instructions.insert(instructions.end(), anotherBlock.instructions.begin(), anotherBlock.instructions.end());
             blocks.insert(blocks.end(), anotherBlock.blocks.begin(), anotherBlock.blocks.end());
             if (anotherBlock.lastError.length()) {
-                lastError = anotherBlock.lastError;
+                lastError = anotherBlock.lastError + "\n" + lastError;
             }
         }
         
         void recordError(const std::string& error)
         {
-            lastError = error;
+            lastError += "\n";
+            lastError += error;
         }
         
         void declareVariable(const std::string& name)
@@ -208,6 +209,11 @@ namespace Prolixity {
         const std::string getName()
         {
             return name;
+        }
+        
+        const std::string getLastError()
+        {
+            return lastError;
         }
         
         const std::string dump(size_t level = 0, size_t tabWidth = 4, char tabChar = ' ') const

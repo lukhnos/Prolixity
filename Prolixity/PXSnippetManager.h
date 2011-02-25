@@ -1,5 +1,5 @@
 //
-// PXParser.h
+// PXSnippetManager.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,12 +25,24 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if __cplusplus
-extern "C" {
-#endif
+#import <Foundation/Foundation.h>
 
-    char* PXParserParseSource(const char* source, char** outError);
+@interface PXSnippetManager : NSObject
+{
+    NSMutableArray *snippetList;
+    NSMutableDictionary *snippetStorage;
+}
++ (PXSnippetManager *)sharedManager;
 
-#if __cplusplus
-};
-#endif
+- (NSUInteger)snippetCount;
+- (NSString *)snippetIDAtIndex:(NSUInteger)index;
+
+- (NSString *)snippetTitleForID:(NSString *)identifier;
+- (void)setSnippetTitle:(NSString *)snippet forSnippetID:(NSString *)identifier;
+
+- (NSString *)snippetDescriptionForID:(NSString *)identifier;
+- (void)setSnippetDescription:(NSString *)snippet forSnippetID:(NSString *)identifier;
+
+- (NSString *)snippetForID:(NSString *)identifier;
+- (void)setSnippet:(NSString *)snippet forSnippetID:(NSString *)identifier;
+@end

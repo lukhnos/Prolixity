@@ -1,5 +1,5 @@
 //
-// PXParser.h
+// PXAppDelegate.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,12 +25,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if __cplusplus
-extern "C" {
-#endif
+#import <UIKit/UIKit.h>
 
-    char* PXParserParseSource(const char* source, char** outError);
+@class RootViewController;
+@class DetailViewController;
 
-#if __cplusplus
-};
-#endif
+@interface PXAppDelegate : NSObject <UIApplicationDelegate>
+{
+}
+
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
+@property (nonatomic, retain) IBOutlet RootViewController *rootViewController;
+@property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
+@end

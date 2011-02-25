@@ -1,5 +1,5 @@
 //
-// PXParser.h
+// PXDetailViewController.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,12 +25,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if __cplusplus
-extern "C" {
-#endif
+#import <UIKit/UIKit.h>
+#import "PXEvaluationResultViewController.h"
 
-    char* PXParserParseSource(const char* source, char** outError);
+@interface PXDetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate>
+{
+}
 
-#if __cplusplus
-};
-#endif
+- (IBAction)runAction;
+
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) id detailItem;
+@property (nonatomic, retain) IBOutlet UITextView *textView;
+@property (nonatomic, retain) PXEvaluationResultViewController *evaluationResultViewController;
+@end

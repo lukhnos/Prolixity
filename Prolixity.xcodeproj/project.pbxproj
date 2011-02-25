@@ -12,11 +12,11 @@
 		6A3A78E712FDE1650016D6AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E612FDE1650016D6AD /* CoreGraphics.framework */; };
 		6A3A78ED12FDE1650016D6AD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A78EB12FDE1650016D6AD /* InfoPlist.strings */; };
 		6A3A78F012FDE1650016D6AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A78EF12FDE1650016D6AD /* main.m */; };
-		6A3A78F312FDE1650016D6AD /* ProlixityAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A78F212FDE1650016D6AD /* ProlixityAppDelegate.m */; };
+		6A3A78F312FDE1650016D6AD /* PXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A78F212FDE1650016D6AD /* PXAppDelegate.m */; };
 		6A3A78F612FDE1650016D6AD /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A78F412FDE1650016D6AD /* MainWindow.xib */; };
-		6A3A78F912FDE1650016D6AD /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A78F812FDE1650016D6AD /* DetailViewController.m */; };
-		6A3A78FC12FDE1650016D6AD /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A78FA12FDE1650016D6AD /* DetailView.xib */; };
-		6A3A78FF12FDE1650016D6AD /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A78FE12FDE1650016D6AD /* RootViewController.m */; };
+		6A3A78F912FDE1650016D6AD /* PXDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A78F812FDE1650016D6AD /* PXDetailViewController.m */; };
+		6A3A78FC12FDE1650016D6AD /* PXDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A78FA12FDE1650016D6AD /* PXDetailView.xib */; };
+		6A3A78FF12FDE1650016D6AD /* PXRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A78FE12FDE1650016D6AD /* PXRootViewController.m */; };
 		6A3A790612FDE1650016D6AD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E212FDE1650016D6AD /* UIKit.framework */; };
 		6A3A790712FDE1650016D6AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E412FDE1650016D6AD /* Foundation.framework */; };
 		6A3A790812FDE1650016D6AD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E612FDE1650016D6AD /* CoreGraphics.framework */; };
@@ -38,9 +38,13 @@
 		6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD1F1314B0B200FA6E76 /* Prolixity.png */; };
 		6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD201314B0B200FA6E76 /* Prolixity72.png */; };
 		6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */; };
-		6ABD1D3B12FE1A240014DF3B /* EvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */; };
-		6ABD1D3F12FE1A610014DF3B /* EvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */; };
-		6ABD1D4012FE1A610014DF3B /* EvaluationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3E12FE1A600014DF3B /* EvaluationResultViewController.xib */; };
+		6AA3954713174F7F00C034E0 /* PXSnippetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3954613174F7F00C034E0 /* PXSnippetManager.m */; };
+		6ABD1D3B12FE1A240014DF3B /* PXEvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3A12FE1A240014DF3B /* PXEvaluationCanvasView.m */; };
+		6ABD1D3F12FE1A610014DF3B /* PXEvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3D12FE1A600014DF3B /* PXEvaluationResultViewController.m */; };
+		6ABD1D4012FE1A610014DF3B /* PXEvaluationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3E12FE1A600014DF3B /* PXEvaluationResultViewController.xib */; };
+		6AE091D7131751B90039E5E4 /* NSString+PXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE091D4131751B90039E5E4 /* NSString+PXSupport.m */; };
+		6AE091D8131751B90039E5E4 /* PXUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE091D6131751B90039E5E4 /* PXUtilities.m */; };
+		6AE091DC1317571D0039E5E4 /* PXRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE091DB1317571D0039E5E4 /* PXRuntime.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,14 +80,14 @@
 		6A3A78EC12FDE1650016D6AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A3A78EE12FDE1650016D6AD /* Prolixity-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prolixity-Prefix.pch"; sourceTree = "<group>"; };
 		6A3A78EF12FDE1650016D6AD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6A3A78F112FDE1650016D6AD /* ProlixityAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProlixityAppDelegate.h; sourceTree = "<group>"; };
-		6A3A78F212FDE1650016D6AD /* ProlixityAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProlixityAppDelegate.m; sourceTree = "<group>"; };
+		6A3A78F112FDE1650016D6AD /* PXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXAppDelegate.h; sourceTree = "<group>"; };
+		6A3A78F212FDE1650016D6AD /* PXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXAppDelegate.m; sourceTree = "<group>"; };
 		6A3A78F512FDE1650016D6AD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		6A3A78F712FDE1650016D6AD /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		6A3A78F812FDE1650016D6AD /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		6A3A78FB12FDE1650016D6AD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailView.xib; sourceTree = "<group>"; };
-		6A3A78FD12FDE1650016D6AD /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		6A3A78FE12FDE1650016D6AD /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		6A3A78F712FDE1650016D6AD /* PXDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXDetailViewController.h; sourceTree = "<group>"; };
+		6A3A78F812FDE1650016D6AD /* PXDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXDetailViewController.m; sourceTree = "<group>"; };
+		6A3A78FB12FDE1650016D6AD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PXDetailView.xib; sourceTree = "<group>"; };
+		6A3A78FD12FDE1650016D6AD /* PXRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PXRootViewController.h; sourceTree = "<group>"; };
+		6A3A78FE12FDE1650016D6AD /* PXRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PXRootViewController.m; sourceTree = "<group>"; };
 		6A3A790512FDE1650016D6AD /* ProlixityTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProlixityTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A3A790D12FDE1650016D6AD /* ProlixityTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ProlixityTests-Info.plist"; sourceTree = "<group>"; };
 		6A3A790F12FDE1650016D6AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -111,11 +115,19 @@
 		6A95AD1F1314B0B200FA6E76 /* Prolixity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity.png; sourceTree = "<group>"; };
 		6A95AD201314B0B200FA6E76 /* Prolixity72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity72.png; sourceTree = "<group>"; };
 		6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prolixty@2x.png"; sourceTree = "<group>"; };
-		6ABD1D3912FE1A240014DF3B /* EvaluationCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationCanvasView.h; sourceTree = "<group>"; };
-		6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationCanvasView.m; sourceTree = "<group>"; };
-		6ABD1D3C12FE1A600014DF3B /* EvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultViewController.h; sourceTree = "<group>"; };
-		6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationResultViewController.m; sourceTree = "<group>"; };
-		6ABD1D3E12FE1A600014DF3B /* EvaluationResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationResultViewController.xib; sourceTree = "<group>"; };
+		6AA3954513174F7E00C034E0 /* PXSnippetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSnippetManager.h; sourceTree = "<group>"; };
+		6AA3954613174F7F00C034E0 /* PXSnippetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSnippetManager.m; sourceTree = "<group>"; };
+		6ABD1D3912FE1A240014DF3B /* PXEvaluationCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEvaluationCanvasView.h; sourceTree = "<group>"; };
+		6ABD1D3A12FE1A240014DF3B /* PXEvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationCanvasView.m; sourceTree = "<group>"; };
+		6ABD1D3C12FE1A600014DF3B /* PXEvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEvaluationResultViewController.h; sourceTree = "<group>"; };
+		6ABD1D3D12FE1A600014DF3B /* PXEvaluationResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationResultViewController.m; sourceTree = "<group>"; };
+		6ABD1D3E12FE1A600014DF3B /* PXEvaluationResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXEvaluationResultViewController.xib; sourceTree = "<group>"; };
+		6AE091D3131751B90039E5E4 /* NSString+PXSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PXSupport.h"; sourceTree = "<group>"; };
+		6AE091D4131751B90039E5E4 /* NSString+PXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PXSupport.m"; sourceTree = "<group>"; };
+		6AE091D5131751B90039E5E4 /* PXUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXUtilities.h; sourceTree = "<group>"; };
+		6AE091D6131751B90039E5E4 /* PXUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXUtilities.m; sourceTree = "<group>"; };
+		6AE091D91317525C0039E5E4 /* PXRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXRuntime.h; sourceTree = "<group>"; };
+		6AE091DB1317571D0039E5E4 /* PXRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRuntime.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,12 +173,11 @@
 		6A3A78D312FDE1650016D6AD = {
 			isa = PBXGroup;
 			children = (
-				6A57F8D312FEA000009A184A /* Runtime */,
-				6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */,
 				6A3A78E812FDE1650016D6AD /* Prolixity */,
 				6A3A790B12FDE1650016D6AD /* ProlixityTests */,
 				6A5432DF12FDEF950084C7D0 /* PXParser-iOS */,
 				6A5432BF12FDE9ED0084C7D0 /* parser */,
+				6A57F8D312FEA000009A184A /* Runtime */,
 				6A3A78E112FDE1650016D6AD /* Frameworks */,
 				6A3A78DF12FDE1650016D6AD /* Products */,
 			);
@@ -178,6 +189,7 @@
 				6A3A78DE12FDE1650016D6AD /* Prolixity.app */,
 				6A3A790512FDE1650016D6AD /* ProlixityTests.octest */,
 				6A4E4AD212FDE8DC0061E729 /* lemon */,
+				6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,21 +207,23 @@
 		6A3A78E812FDE1650016D6AD /* Prolixity */ = {
 			isa = PBXGroup;
 			children = (
-				6A95AD1E1314B0B200FA6E76 /* Images */,
-				6A3A78F112FDE1650016D6AD /* ProlixityAppDelegate.h */,
-				6A3A78F212FDE1650016D6AD /* ProlixityAppDelegate.m */,
 				6A3A78F412FDE1650016D6AD /* MainWindow.xib */,
-				6A3A78F712FDE1650016D6AD /* DetailViewController.h */,
-				6A3A78F812FDE1650016D6AD /* DetailViewController.m */,
-				6A3A78FA12FDE1650016D6AD /* DetailView.xib */,
-				6A3A78FD12FDE1650016D6AD /* RootViewController.h */,
-				6A3A78FE12FDE1650016D6AD /* RootViewController.m */,
+				6A3A78F112FDE1650016D6AD /* PXAppDelegate.h */,
+				6A3A78F212FDE1650016D6AD /* PXAppDelegate.m */,
+				6A3A78F712FDE1650016D6AD /* PXDetailViewController.h */,
+				6A3A78F812FDE1650016D6AD /* PXDetailViewController.m */,
+				6A3A78FA12FDE1650016D6AD /* PXDetailView.xib */,
+				6ABD1D3912FE1A240014DF3B /* PXEvaluationCanvasView.h */,
+				6ABD1D3A12FE1A240014DF3B /* PXEvaluationCanvasView.m */,
+				6ABD1D3C12FE1A600014DF3B /* PXEvaluationResultViewController.h */,
+				6ABD1D3D12FE1A600014DF3B /* PXEvaluationResultViewController.m */,
+				6ABD1D3E12FE1A600014DF3B /* PXEvaluationResultViewController.xib */,
+				6A3A78FD12FDE1650016D6AD /* PXRootViewController.h */,
+				6A3A78FE12FDE1650016D6AD /* PXRootViewController.m */,
+				6AA3954513174F7E00C034E0 /* PXSnippetManager.h */,
+				6AA3954613174F7F00C034E0 /* PXSnippetManager.m */,
+				6A95AD1E1314B0B200FA6E76 /* Images */,
 				6A3A78E912FDE1650016D6AD /* Supporting Files */,
-				6ABD1D3912FE1A240014DF3B /* EvaluationCanvasView.h */,
-				6ABD1D3A12FE1A240014DF3B /* EvaluationCanvasView.m */,
-				6ABD1D3C12FE1A600014DF3B /* EvaluationResultViewController.h */,
-				6ABD1D3D12FE1A600014DF3B /* EvaluationResultViewController.m */,
-				6ABD1D3E12FE1A600014DF3B /* EvaluationResultViewController.xib */,
 			);
 			path = Prolixity;
 			sourceTree = "<group>";
@@ -282,10 +296,16 @@
 		6A57F8D312FEA000009A184A /* Runtime */ = {
 			isa = PBXGroup;
 			children = (
+				6AE091D3131751B90039E5E4 /* NSString+PXSupport.h */,
+				6AE091D4131751B90039E5E4 /* NSString+PXSupport.m */,
 				6A57F8D412FEA000009A184A /* PXBlock.h */,
 				6A57F8D512FEA000009A184A /* PXBlock.m */,
 				6A57F8D612FEA000009A184A /* PXLexicon.h */,
 				6A57F8D712FEA000009A184A /* PXLexicon.m */,
+				6AE091D91317525C0039E5E4 /* PXRuntime.h */,
+				6AE091DB1317571D0039E5E4 /* PXRuntime.m */,
+				6AE091D5131751B90039E5E4 /* PXUtilities.h */,
+				6AE091D6131751B90039E5E4 /* PXUtilities.m */,
 			);
 			path = Runtime;
 			sourceTree = "<group>";
@@ -421,8 +441,8 @@
 			files = (
 				6A3A78ED12FDE1650016D6AD /* InfoPlist.strings in Resources */,
 				6A3A78F612FDE1650016D6AD /* MainWindow.xib in Resources */,
-				6A3A78FC12FDE1650016D6AD /* DetailView.xib in Resources */,
-				6ABD1D4012FE1A610014DF3B /* EvaluationResultViewController.xib in Resources */,
+				6A3A78FC12FDE1650016D6AD /* PXDetailView.xib in Resources */,
+				6ABD1D4012FE1A610014DF3B /* PXEvaluationResultViewController.xib in Resources */,
 				6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */,
 				6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */,
 				6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */,
@@ -480,13 +500,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A3A78F012FDE1650016D6AD /* main.m in Sources */,
-				6A3A78F312FDE1650016D6AD /* ProlixityAppDelegate.m in Sources */,
-				6A3A78F912FDE1650016D6AD /* DetailViewController.m in Sources */,
-				6A3A78FF12FDE1650016D6AD /* RootViewController.m in Sources */,
-				6ABD1D3B12FE1A240014DF3B /* EvaluationCanvasView.m in Sources */,
-				6ABD1D3F12FE1A610014DF3B /* EvaluationResultViewController.m in Sources */,
+				6A3A78F312FDE1650016D6AD /* PXAppDelegate.m in Sources */,
+				6A3A78F912FDE1650016D6AD /* PXDetailViewController.m in Sources */,
+				6A3A78FF12FDE1650016D6AD /* PXRootViewController.m in Sources */,
+				6ABD1D3B12FE1A240014DF3B /* PXEvaluationCanvasView.m in Sources */,
+				6ABD1D3F12FE1A610014DF3B /* PXEvaluationResultViewController.m in Sources */,
 				6A57F8D812FEA000009A184A /* PXBlock.m in Sources */,
 				6A57F8D912FEA000009A184A /* PXLexicon.m in Sources */,
+				6AA3954713174F7F00C034E0 /* PXSnippetManager.m in Sources */,
+				6AE091D7131751B90039E5E4 /* NSString+PXSupport.m in Sources */,
+				6AE091D8131751B90039E5E4 /* PXUtilities.m in Sources */,
+				6AE091DC1317571D0039E5E4 /* PXRuntime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,12 +577,12 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		6A3A78FA12FDE1650016D6AD /* DetailView.xib */ = {
+		6A3A78FA12FDE1650016D6AD /* PXDetailView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6A3A78FB12FDE1650016D6AD /* en */,
 			);
-			name = DetailView.xib;
+			name = PXDetailView.xib;
 			sourceTree = "<group>";
 		};
 		6A3A790E12FDE1650016D6AD /* InfoPlist.strings */ = {

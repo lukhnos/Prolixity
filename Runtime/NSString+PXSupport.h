@@ -1,5 +1,5 @@
 //
-// PXParser.h
+// NSString+PXSupport.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,12 +25,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if __cplusplus
-extern "C" {
-#endif
+#import <Foundation/Foundation.h>
 
-    char* PXParserParseSource(const char* source, char** outError);
-
-#if __cplusplus
-};
-#endif
+@interface NSString (PXSupport)
++ (NSString *)generateUniqueIdentifier;
+@end
