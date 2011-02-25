@@ -1,2 +1,5 @@
 xcuserdata
 project.xcworkspace
+*.mode*
+*.pbxuser
+build

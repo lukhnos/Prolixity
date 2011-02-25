@@ -261,7 +261,7 @@
 					<string key="className">PXAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="detailViewController">DetailViewController</string>
+						<string key="detailViewController">PXDetailViewController</string>
 						<string key="rootViewController">PXRootViewController</string>
 						<string key="splitViewController">UISplitViewController</string>
 						<string key="window">UIWindow</string>
