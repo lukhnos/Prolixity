@@ -28,12 +28,15 @@
 #import <UIKit/UIKit.h>
 #import "PXEvaluationResultViewController.h"
 
-@interface PXDetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, UITextViewDelegate>
+@interface PXDetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, UITextViewDelegate, UIAlertViewDelegate>
 {
+    UIAlertView *errorAlertView;
+    NSUInteger lastErrorLineNumber;
 }
 
 - (IBAction)runAction;
 - (void)saveCurrentSnippet;
+- (void)highlightLine:(NSUInteger)lineNumber;
 
 @property (nonatomic, retain) NSString *currentSnippetIdentifier;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;

@@ -51,6 +51,7 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 
 - (void)dealloc
 {
+    [errorAlertView release];
     [currentSnippetIdentifier release];
     [evaluationResultViewController release];
     [popoverController release];
@@ -64,26 +65,41 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 {    
     [[PXBlock currentConsoleBuffer] setString:@""];
     
-    NSLog(@"source: %@", self.textView.text);
+    NSError *error = nil;
+    PXBlock *__unused blk = [PXBlock blockWithSource:self.textView.text error:&error];
     
-    /*
-    PXBlock *blk = [PXBlock blockWithSource:self.textView.text];
-    if (blk) {
-        [blk runWithParent:nil];
+    if (error) {
+        lastErrorLineNumber = NSNotFound;
+        
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^Line (\\d+):" options:0 error:NULL];
+        NSString *errDesc = [error localizedDescription];
+        [regex enumerateMatchesInString:errDesc options:0 range:NSMakeRange(0, [errDesc length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+            if (result.range.location != NSNotFound) {
+                NSRange lineNoRange = [result rangeAtIndex:1];
+                lastErrorLineNumber = [[errDesc substringWithRange:lineNoRange] integerValue];
+            }
+        }];
+        
+        NSString *buttonTitle = (lastErrorLineNumber == NSNotFound) ? PXLSTR(@"Dismiss") : PXLSTR(@"Edit");
+        [[[[UIAlertView alloc] initWithTitle:PXLSTR(@"Error in code") message:errDesc delegate:self cancelButtonTitle:buttonTitle otherButtonTitles:nil] autorelease] show];
+        return;
     }
-    */
+    
     if (!self.evaluationResultViewController) {
         self.evaluationResultViewController = [[[PXEvaluationResultViewController alloc] initWithNibName:@"PXEvaluationResultViewController" bundle:nil] autorelease];        
     }
  
     self.evaluationResultViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentModalViewController:self.evaluationResultViewController animated:YES];
-    
     self.evaluationResultViewController.evaluationCanvasView.source = self.textView.text;
-
     [self.evaluationResultViewController.evaluationCanvasView setNeedsDisplay];
-    
-//    self.evaluationResultViewController.evaluationCanvasView.textView.text = [PXBlock currentConsoleBuffer];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (lastErrorLineNumber != NSNotFound) {
+        [self highlightLine:lastErrorLineNumber];
+    }
 }
 
 #pragma mark - Managing the detail item
@@ -215,6 +231,35 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
     }    
 }
 
+- (void)highlightLine:(NSUInteger)lineNumber
+{
+    if (lineNumber == NSUIntegerMax) {
+        return;
+    }
+    
+    NSString *text = self.textView.text;
+    NSUInteger pos = 0;
+    NSUInteger len = [text length];
+    NSUInteger lineIndex = 0;
+    NSUInteger previousLinePos = 0;
+    
+    for (pos = 0 ;  pos < len ; pos++) {
+        UniChar c = [text characterAtIndex:pos];
+        if (c == '\n') {
+            lineIndex++;
+            
+            if (lineIndex == lineNumber) {
+                NSRange errorRange = NSMakeRange(previousLinePos, (pos + 1) - previousLinePos);
+                self.textView.selectedRange = errorRange;
+                [self.textView scrollRangeToVisible:errorRange];
+                return;
+            }
+            else {
+                previousLinePos = pos + 1;
+            }
+        }
+    }
+}
 
 - (void)textViewDidChange:(UITextView *)textView
 {

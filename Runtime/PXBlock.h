@@ -59,8 +59,7 @@
 }
 
 + (NSMutableString *)currentConsoleBuffer;
-+ (PXBlock *)blockWithSource:(NSString *)inSource;
-+ (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm;
++ (PXBlock *)blockWithSource:(NSString *)inSource error:(NSError **)outError;
 - (id)runWithParent:(PXBlock *)inParent;
 
 - (void)declareVariable:(NSString *)inName;
@@ -73,23 +72,11 @@
 - (void)addPop;
 - (void)addInvoke:(SEL)inSelector;
 
-
-
 @property (readonly) NSString *name;
 @end
 
+enum {
+    PXBlockParserError = 1
+};
 
-@interface PXLexemeBuilder : NSObject
-{
-@private
-    NSMutableDictionary *synonymMap;
-    NSMutableDictionary *directTermMap;
-}
-
-- (void)addSynonym:(NSString *)inSynonym forTerm:(NSString *)inTerm;
-- (void)addObjectiveCMethod:(SEL)inSelector;
-- (void)addObjectiveCClass:(Class)inClass;
-
-- (NSSet *)synonymsForTerm:(NSString *)inTerm;
-- (NSArray *)candidateLexemesFromParts:(NSArray *)inParts;
-@end
+extern NSString *const PXBlockErrorDomain;

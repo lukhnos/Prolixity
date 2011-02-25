@@ -28,7 +28,10 @@
 #import "PXBlock.h"
 #import "PXParser.h"
 #import "PXLexicon.h"
+#import "PXUtilities.h"
 #import <objc/runtime.h>
+
+NSString *const PXBlockErrorDomain = @"org.lukhnos.Prolixity.PXBlock";
 
 @interface PXLexer : NSObject
 {
@@ -124,6 +127,7 @@
 
 
 @interface PXBlock ()
++ (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm;
 - (void)parse:(PXLexer *)inLexer;
 
 + (PXBlock *)currentBlock;
@@ -243,7 +247,7 @@ static const size_t kObjCMaXTypeLength = 256;
     [super dealloc];
 }
 
-+ (PXBlock *)blockWithSource:(NSString *)inSource
++ (PXBlock *)blockWithSource:(NSString *)inSource error:(NSError **)outError
 {
     const char *u8str = [inSource UTF8String];
     char *error = NULL;
@@ -251,6 +255,12 @@ static const size_t kObjCMaXTypeLength = 256;
  
     if (error || !parsed) {
         // TODO: Handles error
+        
+        if (outError) {
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:(error ? [NSString stringWithUTF8String:error] : PXLSTR(@"Unknown error.")), NSLocalizedDescriptionKey, nil];
+            *outError = [[[NSError alloc] initWithDomain:PXBlockErrorDomain code:PXBlockParserError userInfo:userInfo] autorelease];
+        }
+        
         free(error);
         free(parsed);
         return nil;
@@ -668,152 +678,4 @@ static const size_t kObjCMaXTypeLength = 256;
 }
 
 @synthesize name;
-@end
-
-
-@interface PXLexemeBuilder ()
-+ (NSArray *)splitObjectiveCName:(NSString *)inName;
-- (void)addSynonyms:(NSArray *)inOriginalTerms;
-@end
-
-
-@implementation PXLexemeBuilder
-- (id)init {
-    self = [super init];
-    if (self) {
-        synonymMap = [[NSMutableDictionary alloc] init];
-        directTermMap = [[NSMutableDictionary alloc] init];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [synonymMap release], synonymMap = nil;
-    [directTermMap release], directTermMap = nil;
-    [super dealloc];
-}
-
-- (void)addSynonym:(NSString *)inSynonym forTerm:(NSString *)inTerm
-{
-    NSString *lowerCasedKey = [inTerm lowercaseString];
-    NSMutableSet *synonyms = [synonymMap objectForKey:lowerCasedKey];
-    if (!synonyms) {
-        synonyms = [NSMutableSet set];
-        [synonymMap setObject:synonyms forKey:lowerCasedKey];
-    }
-
-    [synonyms addObject:inSynonym];
-}
-
-- (void)addObjectiveCMethod:(SEL)inSelector
-{
-    // ignores the case where e.g. @selector(::::) or @selector(a:b:::) is also possible
-    
-    NSString *methodName = [NSString stringWithUTF8String:sel_getName(inSelector)];
-    NSArray *components = [methodName componentsSeparatedByString:@":"];
-    if ([components count] >= 1) {
-        components = [components subarrayWithRange:NSMakeRange(0, [components count] - 1)];
-    }
-    
-    for (NSString *c in components) {
-        [self addSynonyms:[[self class] splitObjectiveCName:c]];
-    }    
-}
-
-- (void)addObjectiveCClass:(Class)inClass
-{
-    [self addSynonyms:[[self class] splitObjectiveCName:NSStringFromClass(inClass)]];
-    
-    unsigned int numMethods = 0;
-    Method *methods = class_copyMethodList(inClass, &numMethods);
-    for (unsigned int j = 0 ; j < numMethods ; j++) {
-        Method method = methods[j];
-        SEL selector = method_getName(method);
-        [self addSynonyms:[[self class] splitObjectiveCName:NSStringFromSelector(selector)]];        
-    }
-    free(methods);    
-}
-
-- (NSSet *)synonymsForTerm:(NSString *)inTerm
-{
-    NSSet *result = [synonymMap objectForKey:[inTerm lowercaseString]];
-    return result ? result : [NSSet setWithObject:inTerm];
-}
-
-- (NSArray *)candidateLexemesFromParts:(NSArray *)inParts
-{
-    // this definitely needs some help from n-gram model and Viterbi algorithm...
-    NSMutableArray *result = [NSMutableArray arrayWithObject:@""];
-
-    for (NSString *p in inParts) {
-        NSSet *synonyms = [self synonymsForTerm:p];
-        NSMutableArray *newResult = [NSMutableArray array];
-        for (NSString *r in result) {
-            for (NSString *s in synonyms) {
-                [newResult addObject:[r stringByAppendingString:s]];
-            }
-        }
-        result = newResult;
-    }    
-    
-    return result;
-}
-
-- (void)addSynonyms:(NSArray *)inOriginalTerms
-{
-    for (NSString *t in inOriginalTerms) {
-        [self addSynonym:t forTerm:t];
-    }
-    
-    if ([inOriginalTerms count] > 1) {
-        NSString *combined = [inOriginalTerms componentsJoinedByString:@""];
-        [self addSynonym:combined forTerm:combined];
-    }
-}
-
-+ (NSArray *)splitObjectiveCName:(NSString *)inName
-{
-    // this is an inefficient, surrogate-unsafe way of splitting a string
-    BOOL lowerCaseState = YES;
-    
-    NSMutableArray *result = [NSMutableArray array];
-    NSMutableString *currentTerm = [NSMutableString string];
-    
-    for (NSUInteger i = 0, len = [inName length]; i < len; ++i) {
-        UniChar c = [inName characterAtIndex:i];
-        if (islower(c) || !isalpha(c)) {
-            if (lowerCaseState) {
-                [currentTerm appendFormat:@"%C", c];
-            }
-            else {
-                lowerCaseState = YES;
-                if ([currentTerm length] > 1) {
-                    [result addObject:[currentTerm substringToIndex:[currentTerm length] - 1]];
-                    currentTerm = [NSMutableString stringWithFormat:@"%@%C", [currentTerm substringFromIndex:[currentTerm length] - 1], c];
-                }
-                else {
-                    [currentTerm appendFormat:@"%C", c];
-                }
-            }
-        }
-        else {
-            if (lowerCaseState) {
-                if ([currentTerm length]) {
-                    [result addObject:currentTerm];
-                }
-                currentTerm = [NSMutableString stringWithFormat:@"%C", c];
-                lowerCaseState = NO;
-            }
-            else {
-                [currentTerm appendFormat:@"%C", c];
-            }
-        }
-    }
-    if ([currentTerm length] > 0){
-        [result addObject:currentTerm];
-    }
-    
-    return result;
-}
 @end
