@@ -46,7 +46,7 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 - (id)pop;
 - (id)loadFromVariable:(NSString *)inName;
 - (void)storeValue:(id)inValue toVariable:(NSString *)inName;
-- (void)invokeMethod:(NSString *)methodName;
+- (void)invokeMethod:(id)methodNameCandidates;
 @end
 
 
@@ -195,6 +195,12 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             return [parent loadFromVariable:inName];
         }
         else {
+            // see if it's a class object
+            Class cls = NSClassFromString(inName);
+            if (cls) {
+                return cls;
+            }
+
             NSAssert(0, @"Cannot find the variable");
         }
     }
@@ -217,22 +223,24 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
     }
 }
 
-- (void)invokeMethod:(NSString *)methodName
+- (void)invokeMethod:(id)methodNameCandidates
 {
     NSObject *object = (tempValue == [NSNull null] ? nil : tempValue);
 
-    NSArray *lexemes = [PXLexicon lexemesForProlixityMethodName:methodName];
     SEL selector = NULL;
     
-    NSArray *candidates = [[PXLexicon methodLexicon] candidatesForLexemes:lexemes];
-    for (NSString *c in candidates) {
-        SEL s = NSSelectorFromString(c);
-        if ([object respondsToSelector:s]) {
-            selector = s;
-            break;
-        }
+    if ([methodNameCandidates isKindOfClass:[NSString class]]) {
+        selector = NSSelectorFromString(methodNameCandidates);
     }
-    
+    else {
+        for (NSString *c in methodNameCandidates) {
+            SEL s = NSSelectorFromString(c);
+            if ([object respondsToSelector:s]) {
+                selector = s;
+                break;
+            }
+        }
+    }    
     NSAssert(selector != NULL, @"Object must respond to selector");
     
     NSMethodSignature *methodSignature = [object methodSignatureForSelector:selector];

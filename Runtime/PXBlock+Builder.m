@@ -27,6 +27,28 @@
 
 #import "PXBlock+Builder.h"
 #import "PXBlock+Bytecode.h"
+#import "PXLexicon.h"
+
+NS_INLINE NSString *PXIdentifierFromLexemedIdentifier(NSString *identifier)
+{
+    NSArray *lexemes = [PXLexicon lexemesProlixityIdentifier:identifier];
+    NSArray *candidates = [[PXLexicon classLexicon] candidatesForLexemes:lexemes];
+    
+    NSString *result = nil;
+    
+    if ([candidates count] == 0) {
+        result = identifier;
+    }
+    else {
+        result = [candidates objectAtIndex:0];
+    }
+    
+    if (!NSClassFromString(result)) {
+        return [result lowercaseString];
+    }
+    
+    return result;
+}
 
 @implementation PXBlock (Builder)
 + (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm
@@ -102,6 +124,28 @@
             [self addLoadImmeidate:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
 
         }        
+        else if ([t isEqualToString:@"loado_size"]) {
+            CGFloat w = [[inLexer next] doubleValue];
+            CGFloat h = [[inLexer next] doubleValue];
+            
+            [self addLoadImmeidate:[NSValue valueWithCGSize:CGSizeMake(w, h)]];            
+        }        
+        else if ([t isEqualToString:@"loado_range"]) {
+            NSUInteger location = [[inLexer next] integerValue];
+            NSUInteger length = [[inLexer next] integerValue];
+            
+            [self addLoadImmeidate:[NSValue valueWithRange:NSMakeRange(location, length)]];
+            
+        }        
+        else if ([t isEqualToString:@"loado_rect"]) {
+            CGFloat x1 = [[inLexer next] doubleValue];
+            CGFloat y1 = [[inLexer next] doubleValue];
+            CGFloat x2 = [[inLexer next] doubleValue];
+            CGFloat y2 = [[inLexer next] doubleValue];
+            
+            [self addLoadImmeidate:[NSValue valueWithCGRect:CGRectMake(x1, y1, (fabs(x2 - x1) + 1), (fabs(y2 - y1) + 1))]];
+            
+        }
         else if ([t isEqualToString:@"loadis"]) {
             [self addLoadImmeidate:[inLexer next]];
             
@@ -113,14 +157,14 @@
             [self addPop];
         }
         else if ([t isEqualToString:@"invoke"]) {
-            [self addInvoke:NSSelectorFromString([inLexer next])];
+            [self addInvoke:[inLexer next]];
         }
     }
 }
 
 - (void)declareVariable:(NSString *)inName
-{
-    [variables setObject:[NSNull null] forKey:inName];
+{    
+    [variables setObject:[NSNull null] forKey:PXIdentifierFromLexemedIdentifier(inName)];
 }
 
 - (void)addLoadImmeidate:(id)inObject
@@ -132,13 +176,13 @@
 - (void)addLoad:(NSString *)inName
 {
     [instructions addObject:PXInstructionLoad];
-    [instructions addObject:inName];    
+    [instructions addObject:PXIdentifierFromLexemedIdentifier(inName)];
 }
 
 - (void)addStore:(NSString *)inName
 {
     [instructions addObject:PXInstructionStore];
-    [instructions addObject:inName];
+    [instructions addObject:PXIdentifierFromLexemedIdentifier(inName)];
 }
 
 - (void)addPush
@@ -153,9 +197,22 @@
     [instructions addObject:[NSNull null]];
 }
 
-- (void)addInvoke:(SEL)inSelector
+- (void)addInvoke:(NSString *)methodName
 {
+    NSArray *lexemes = [PXLexicon lexemesForProlixityMethodName:methodName];
+    NSArray *candidates = [[PXLexicon methodLexicon] candidatesForLexemes:lexemes];
+    
     [instructions addObject:PXInstructionInvoke];
-    [instructions addObject:NSStringFromSelector(inSelector)];
+    
+    NSUInteger candidateCount = [candidates count];
+    if (candidateCount == 0) {
+        [instructions addObject:methodName];
+    }
+    else if (candidateCount == 1) {
+        [instructions addObject:[candidates objectAtIndex:0]];
+    }
+    else {
+        [instructions addObject:candidates];
+    }
 }
 @end

@@ -31,7 +31,7 @@
 		6A3A791012FDE1650016D6AD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A790E12FDE1650016D6AD /* InfoPlist.strings */; };
 		6A3A791312FDE1650016D6AD /* ProlixityTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 6A3A791212FDE1650016D6AD /* ProlixityTests.h */; };
 		6A3A791512FDE1650016D6AD /* ProlixityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A791412FDE1650016D6AD /* ProlixityTests.m */; };
-		6A5432C112FDEA220084C7D0 /* lemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432C012FDEA220084C7D0 /* lemon.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		6A5432C112FDEA220084C7D0 /* lemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432C012FDEA220084C7D0 /* lemon.c */; };
 		6A5432DE12FDEF950084C7D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A78E412FDE1650016D6AD /* Foundation.framework */; };
 		6A54330212FDF0480084C7D0 /* lexer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A5432F812FDF0200084C7D0 /* lexer.cpp */; };
 		6A54330312FDF0480084C7D0 /* lexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5432F912FDF0200084C7D0 /* lexer.h */; };
@@ -769,7 +769,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -786,7 +786,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

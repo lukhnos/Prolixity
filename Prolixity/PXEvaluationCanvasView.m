@@ -69,11 +69,13 @@
     @try {
         PXBlock *b = [PXBlock blockWithSource:source error:NULL];
         if (b) {
+            /*
             [b exportObject:[NSArray class] toVariable:@"NSArray"];
             [b exportObject:[NSMutableArray class] toVariable:@"NSMutableArray"];
             [b exportObject:[NSDictionary class] toVariable:@"NSDictionary"];
             [b exportObject:[NSMutableDictionary class] toVariable:@"NSMutableDictionary"];
             [b exportObject:[NSValue class] toVariable:@"NSValue"];
+             */
             [b exportObject:self toVariable:@"canvas"];
             [b runWithParent:nil];
         }

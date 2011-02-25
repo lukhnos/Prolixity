@@ -38,5 +38,5 @@
 - (void)addStore:(NSString *)inName;
 - (void)addPush;
 - (void)addPop;
-- (void)addInvoke:(SEL)inSelector;
+- (void)addInvoke:(NSString *)methodName;
 @end

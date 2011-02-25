@@ -55,6 +55,7 @@
     [self.window makeKeyAndVisible];
     
     [PXLexicon addClass:[NSString class]];    
+    [PXLexicon addClass:[NSMutableString class]];
     [PXLexicon addClass:[NSNumber class]];    
     [PXLexicon addClass:[NSArray class]];
     [PXLexicon addClass:[NSMutableArray class]];    
