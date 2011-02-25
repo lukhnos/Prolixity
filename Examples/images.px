@@ -1,0 +1,19 @@
+-- a simple demo how we can use UIImage to draw images
+-- the flower.jpg is pre-stored in this app
+var i
+save to i, on ui image, invoke image named, taking "flower.jpg"
+on i, invoke draw at point, taking point 70, 100
+
+-- of course, we can fetch the image online
+-- change the condition to see what happens
+
+If 1 > 2, begin...
+    Var u
+    Save to u, on nsurl, invoke URLWithString, taking "http://www.google.com/images/logos/ps_logo2.png"
+
+    Var d
+    Save to d, on ns data, invoke dataWithContentsOfURL, taking u
+    Var j
+    Save to j, on ui image, invoke image with data, taking d
+    On j, invoke draw at point, taking point 70, 100
+...end

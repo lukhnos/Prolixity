@@ -85,10 +85,12 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
     [PXLexicon addClass:[NSMutableArray class]];    
     [PXLexicon addClass:[NSMutableDictionary class]];    
     [PXLexicon addClass:[NSDictionary class]];
+    [PXLexicon addClass:[NSURL class]];
+    [PXLexicon addClass:[NSData class]];
 
     [PXLexicon addClass:[UIColor class]];
     [PXLexicon addClass:[UIBezierPath class]];
-
+    [PXLexicon addClass:[UIImage class]];
     
     [PXLexicon addClass:[PXEvaluationCanvasView class]];
     
@@ -102,6 +104,7 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
 
         PXLoadExample(@"canvas", @"Canvas", @"Simple canvas graphics");
         PXLoadExample(@"uikitgraphics", @"UIKit Graphics", @"Integration with UIKit");
+        PXLoadExample(@"images", @"Images", @"Draw images with UIImage");
         
         PXLoadExample(@"smalltalkish", @"Smalltalkish", @"Inside Prolixity");
         PXLoadExample(@"about", @"About Prolixity", @"Copyright, tidbits, etc.");
