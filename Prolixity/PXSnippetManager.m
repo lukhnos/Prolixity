@@ -40,6 +40,8 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 @end
 
 @implementation PXSnippetManager
+@synthesize firstTimeUser;
+
 - (void)dealloc
 {
     [snippetList release], snippetList = nil;
@@ -66,6 +68,10 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
         NSArray *list = [[NSUserDefaults standardUserDefaults] objectForKey:kSnippetListKey];
         NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:kSnippetStorageKey];
         
+        if (!list && !dict) {
+            firstTimeUser = YES;
+        }
+        
         if (![list isKindOfClass:[NSArray class]] || ![dict isKindOfClass:[NSDictionary class]]) {
             list = [NSArray array];
             dict = [NSDictionary dictionary];
@@ -87,6 +93,21 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 - (NSString *)snippetIDAtIndex:(NSUInteger)index
 {
     return [snippetList objectAtIndex:index];
+}
+
+- (NSString *)createSnippet
+{
+    NSMutableDictionary *snippet = [NSMutableDictionary dictionary];
+    NSString *identifier = [NSString generateUniqueIdentifier];
+    
+    
+    [snippet setObject:@"" forKey:kSnippetObjectContentKey];
+    [snippet setObject:@"" forKey:kSnippetObjectDescriptionKey];
+    [snippet setObject:PXLSTR(@"New Snippet") forKey:kSnippetObjectTitleKey];
+    
+    [snippetStorage setObject:snippet forKey:identifier];
+    [snippetList addObject:identifier];
+    return identifier;
 }
 
 - (NSString *)snippetTitleForID:(NSString *)identifier
@@ -118,6 +139,11 @@ static NSString *const kSnippetObjectTitleKey = @"Title";
 - (void)setSnippet:(NSString *)snippet forSnippetID:(NSString *)identifier
 {
     return [[snippetStorage objectForKey:identifier] setValue:snippet forKey:kSnippetObjectContentKey];
+}
+
+- (void)markFirstTimeDataAsPopulated
+{
+    firstTimeUser = NO;
 }
 
 - (void)writeBack

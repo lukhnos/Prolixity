@@ -29,6 +29,7 @@
 
 @interface PXSnippetManager : NSObject
 {
+    BOOL firstTimeUser;
     NSMutableArray *snippetList;
     NSMutableDictionary *snippetStorage;
 }
@@ -36,6 +37,8 @@
 
 - (NSUInteger)snippetCount;
 - (NSString *)snippetIDAtIndex:(NSUInteger)index;
+
+- (NSString *)createSnippet;
 
 - (NSString *)snippetTitleForID:(NSString *)identifier;
 - (void)setSnippetTitle:(NSString *)snippet forSnippetID:(NSString *)identifier;
@@ -45,4 +48,7 @@
 
 - (NSString *)snippetForID:(NSString *)identifier;
 - (void)setSnippet:(NSString *)snippet forSnippetID:(NSString *)identifier;
+
+- (void)markFirstTimeDataAsPopulated;
+@property (assign, nonatomic) BOOL firstTimeUser;
 @end
