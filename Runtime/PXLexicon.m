@@ -126,6 +126,40 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
     }
     return results;
 }
+
++ (NSArray *)lexemesForProlixityMethodName:(NSString *)name
+{
+    NSMutableArray *lexemes = [NSMutableArray array];
+    NSArray *splitMethodName = [name componentsSeparatedByString:@":"];
+    for (NSString *m in splitMethodName) {
+        if (![m length]) {
+            // reached end
+            continue;
+        }
+        
+        NSArray *splitM = [m componentsSeparatedByString:@"$"];
+        id lastObject = [splitM lastObject];
+        for (NSString *i in splitM) {
+            if (i == lastObject) {                
+                if ([splitMethodName count] == 1) {
+                    [lexemes addObject:i];                        
+                }
+                else {
+                    [lexemes addObject:[i stringByAppendingString:@":"]];
+                }
+            }
+            else {
+                [lexemes addObject:i];
+            }
+        }
+    }        
+    return lexemes;
+}
+
++ (NSArray *)lexemesProlixityIdentifier:(NSString *)identifier
+{
+    return [identifier componentsSeparatedByString:@"$"];
+}
 @end
 
 
@@ -157,7 +191,7 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
     NSString *className = NSStringFromClass(cls);
     [[self classLexicon] build:PXSplitObjectiveCName(className)];
     
-    NSLog(@"ADDING class: %@", className);
+    NSLog(@"Adding class: %@", className);
     
     unsigned int numMethods = 0;
     Method *methods = class_copyMethodList(cls, &numMethods);
@@ -166,22 +200,23 @@ static NSArray *PXSplitObjectiveCName(NSString *name);
         SEL selector = method_getName(method);
         
         NSString *methodName = NSStringFromSelector(selector);
-        // NSLog(@"method: %@", methodName);
         
-        NSArray *splitM = [methodName componentsSeparatedByString:@":"];
-        if ([splitM count] == 1) {
+        NSArray *nameParts = [methodName componentsSeparatedByString:@":"];
+        if ([nameParts count] == 1) {
+            // method with no argument, simply split into lexemes
             [[self methodLexicon] build:PXSplitObjectiveCName(methodName)];
         }
         else {
-            NSMutableArray *lexemes = [NSMutableArray array];
-
-            for (NSString *m in splitM) {                
+            // first split method names into nameParts, append colon back to each part, then split each part into lexmes, then add together and build
+            NSMutableArray *lexemes = [NSMutableArray array];            
+            for (NSString *m in nameParts) {                
                 if (![m length]) {
+                    // reached the last part actually
                     continue;
                 }
             
-                NSString *colonM = [m stringByAppendingString:@":"];
-                [lexemes addObjectsFromArray:PXSplitObjectiveCName(colonM)];
+                NSString *namePartWithColon = [m stringByAppendingString:@":"];
+                [lexemes addObjectsFromArray:PXSplitObjectiveCName(namePartWithColon)];
             }
             [[self methodLexicon] build:lexemes];
         }

@@ -35,6 +35,9 @@
 }
 - (void)build:(NSArray *)lexemes;
 - (NSArray *)candidatesForLexemes:(NSArray *)lexemes;
+
++ (NSArray *)lexemesForProlixityMethodName:(NSString *)name;
++ (NSArray *)lexemesProlixityIdentifier:(NSString *)identifier;
 @end
 
 @interface PXLexicon (RuntimeSupport)

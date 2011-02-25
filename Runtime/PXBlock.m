@@ -81,7 +81,6 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
     }
 
     NSString *data = [[[NSString alloc] initWithBytesNoCopy:parsed length:strlen(parsed) encoding:NSUTF8StringEncoding freeWhenDone:YES] autorelease];
-    NSLog(@"parsed block assembly: %@", data);
     return [self blockWithBlockAssembly:data];
 }
 
@@ -222,51 +221,17 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 {
     NSObject *object = (tempValue == [NSNull null] ? nil : tempValue);
 
-    // the simple split
-    
-    NSMutableArray *lexemes = [NSMutableArray array];
+    NSArray *lexemes = [PXLexicon lexemesForProlixityMethodName:methodName];
     SEL selector = NULL;
     
-    NSArray *splitMethodName = [methodName componentsSeparatedByString:@":"];
-/*    if ([splitMethodName count] == 1) {
-        selector = NSSelectorFromString(methodName);
+    NSArray *candidates = [[PXLexicon methodLexicon] candidatesForLexemes:lexemes];
+    for (NSString *c in candidates) {
+        SEL s = NSSelectorFromString(c);
+        if ([object respondsToSelector:s]) {
+            selector = s;
+            break;
+        }
     }
-    else { */
-        for (NSString *m in splitMethodName) {
-            if (![m length]) {
-                continue;
-            }
-            
-            NSArray *splitM = [m componentsSeparatedByString:@"$"];
-            id lastObject = [splitM lastObject];
-            for (NSString *i in splitM) {
-                if (i == lastObject) {
-                    
-                    if ([splitMethodName count] == 1) {
-                        [lexemes addObject:i];                        
-                    }
-                    else {
-                        [lexemes addObject:[NSString stringWithFormat:@"%@:", i]];
-                    }
-                }
-                else {
-                    [lexemes addObject:i];
-                }
-            }
-        }
-        
-        
-        NSArray *candidates = [[PXLexicon methodLexicon] candidatesForLexemes:lexemes];
-        NSLog(@"input: %@, lexemes: %@, candidates: %@", methodName, lexemes, candidates);
-
-        for (NSString *c in candidates) {
-            SEL s = NSSelectorFromString(c);
-            if ([object respondsToSelector:s]) {
-                selector = s;
-                break;
-            }
-        }
-/*    } */
     
     NSAssert(selector != NULL, @"Object must respond to selector");
     
@@ -302,7 +267,6 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             
             
             NSValue *arg = [self pop];
-            NSLog(@"passing cgpoint value: %@", arg);
 
             CGPoint p = CGPointMake(0.0, 0.0);
             
@@ -333,8 +297,6 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
         id tmp = tempValue;
         tempValue = [[NSValue valueWithCGPoint:p] retain];
         [tmp release];
-        
-        NSLog(@"return value is also some CGPoint: %@", tempValue);
     }
     else if (!strcmp(returnValueType, @encode(id)) || !strcmp(returnValueType, @encode(Class))) {
         id returnValue = nil;
