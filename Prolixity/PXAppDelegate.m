@@ -98,9 +98,9 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
         PXLoadExample(@"basics", @"Basics", @"Basic syntax");
         PXLoadExample(@"invocations", @"Invocations", @"Invoking Objective-C methods");
         PXLoadExample(@"objects", @"Objects", @"Objects supported in Prolixity");        
-        PXLoadExample(@"loop", @"Loops and Branches", @"And control structures");
+        PXLoadExample(@"loop", @"Loops and Branches", @"The control structures");
 
-        PXLoadExample(@"canvas", @"Canva", @"Canvas graphics demo");
+        PXLoadExample(@"canvas", @"Canvas", @"Simple canvas graphics");
         PXLoadExample(@"uikitgraphics", @"UIKit Graphics", @"Integration with UIKit");
         
         PXLoadExample(@"smalltalkish", @"Smalltalkish", @"Inside Prolixity");

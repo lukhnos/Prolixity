@@ -4,7 +4,3 @@
 -- This is the first example.
 
 print "hello, world!"
-
--- Alternatively, we can say
-
-on "hello, world!", invoke print
