@@ -14,6 +14,20 @@ Building the Demo App
 Please clone this project and run the app on either the iOS Simulator or your iPad. I have supplied a few example snippets that should give a good overview of this language and the design goals.
 
 
+Note on Building with Xcode 3.2.5
+---------------------------------
+
+Prolixity is developed with Xcode 4. The project contains targets of two platforms: iOS and Mac OS X, and Xcode 3.2.5 doesn't handle it well. To build the project with Xcode 3.2.5, please do this:
+
+1.  After opening the project, Opt-click on the Overview dropdown list (the list that shows the available SDKs, Opt-click expands the list)
+
+2.  Choose "Base SDK"
+
+Then the project should build, first the Lemon parser, an OS X command line tool, then the rest of the targets, which are iOS apps.
+
+Cf. http://lists.apple.com/archives/xcode-users/2010/Jun/msg00308.html
+
+
 Copyright
 ---------
 
