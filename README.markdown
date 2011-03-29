@@ -14,6 +14,14 @@ Building the Demo App
 Please clone this project and run the app on either the iOS Simulator or your iPad. I have supplied a few example snippets that should give a good overview of this language and the design goals.
 
 
+Note on Building From A Fresh Clone
+-----------------------------------
+
+	$ cd parser
+	$ make
+	$ cd ..
+
+
 Note on Building with Xcode 3.2.5
 ---------------------------------
 
