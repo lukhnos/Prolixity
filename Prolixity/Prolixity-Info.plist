@@ -10,6 +10,8 @@
 	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleIconFile</key>
 	<string>Prolixity.png</string>
 	<key>UIPrerenderedIcon</key>
