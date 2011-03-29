@@ -122,7 +122,7 @@
 		6A3A791112FDE1650016D6AD /* ProlixityTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProlixityTests-Prefix.pch"; sourceTree = "<group>"; };
 		6A3A791212FDE1650016D6AD /* ProlixityTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProlixityTests.h; sourceTree = "<group>"; };
 		6A3A791412FDE1650016D6AD /* ProlixityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProlixityTests.m; sourceTree = "<group>"; };
-		6A4E4AD212FDE8DC0061E729 /* lemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lemon; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A4E4AD212FDE8DC0061E729 /* lemon */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = lemon; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A5432C012FDEA220084C7D0 /* lemon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lemon.c; sourceTree = "<group>"; };
 		6A5432DD12FDEF950084C7D0 /* libPXParser-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPXParser-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A5432F712FDF0200084C7D0 /* lempar.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lempar.c; sourceTree = "<group>"; };

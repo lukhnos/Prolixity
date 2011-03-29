@@ -12,9 +12,10 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>Prolixity.png</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>Prolixity.png</string>
 		<string>Prolixity72.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
