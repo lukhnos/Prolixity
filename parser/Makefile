@@ -1,4 +1,4 @@
-all: lemon lexer.cpp parser.cpp driver.cpp
+all: lexer.cpp driver.cpp
 	g++ -g -o pxcompile lexer.cpp parser.cpp driver.cpp -lstdc++
 
 lemon: lemon.c
@@ -7,9 +7,9 @@ lemon: lemon.c
 lexer.cpp: lexer.l parser.cpp
 	flex -o lexer.cpp lexer.l
 
-parser.cpp: parser.y
+parser.cpp: lemon parser.y
 	./lemon parser.y
 	mv parser.c parser.cpp
 
 clean:
-	rm -f parser.h parser.cpp lexer.cpp pxcompile *.o *.out
+	rm -f lemon parser.h parser.cpp lexer.cpp pxcompile *.o *.out
