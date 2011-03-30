@@ -375,7 +375,7 @@
 /* Begin PBXLegacyTarget section */
 		6ADFF7B31343864D00568AC3 /* parser-source */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = lexer.cpp;
+			buildArgumentsString = parser.cpp;
 			buildConfigurationList = 6ADFF7B61343864E00568AC3 /* Build configuration list for PBXLegacyTarget "parser-source" */;
 			buildPhases = (
 			);
@@ -847,6 +847,7 @@
 				6ADFF7B51343864E00568AC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
