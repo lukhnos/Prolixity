@@ -25,21 +25,16 @@ Note on Building From A Fresh Clone
 Note on Building with Xcode 3.2.5
 ---------------------------------
 
-Prolixity is developed with Xcode 4. The project contains targets of two platforms: iOS and Mac OS X, and Xcode 3.2.5 doesn't handle it well. To build the project with Xcode 3.2.5, please do this:
-
-1.  After opening the project, Opt-click on the Overview dropdown list (the list that shows the available SDKs, Opt-click expands the list)
-
-2.  Choose "Base SDK"
-
-Then the project should build, first the Lemon parser, an OS X command line tool, then the rest of the targets, which are iOS apps.
-
-Cf. http://lists.apple.com/archives/xcode-users/2010/Jun/msg00308.html
+The previous version of Prolixity can be built with Xcode 3.2.5. However,
+since Xcode 4 has become official, Xcode 3.2.5 support is now discontinued.
 
 
 Copyright
 ---------
 
 Copyright (c) 2011 Lukhnos D. Liu (lukhnos at lukhnos dot org)
+
+This project includes the icon work and contributions from Evadne Wu.
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
