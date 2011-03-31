@@ -69,6 +69,7 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self.textView resignFirstResponder];    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [self saveCurrentSnippet];
