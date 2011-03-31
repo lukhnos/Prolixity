@@ -285,6 +285,10 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             NSUInteger arg = [[self pop] integerValue];
             [invocation setArgument:&arg atIndex:argi];
         }
+        else if (!strcmp(argType, @encode(BOOL))) {
+            BOOL arg = [[self pop] boolValue];
+            [invocation setArgument:&arg atIndex:argi];
+        }
         else if (!strcmp(argType, @encode(CGPoint))) {
             NSValue *arg = [self pop];
             CGPoint p = CGPointMake(0.0, 0.0);
@@ -338,6 +342,11 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
         NSUInteger i = 0;
         [invocation getReturnValue:&i];        
         PXRetainAssign(tempValue, [NSNumber numberWithInteger:i]);
+    }
+    else if (!strcmp(returnValueType, @encode(BOOL))) {
+        BOOL i = NO;
+        [invocation getReturnValue:&i];        
+        PXRetainAssign(tempValue, [NSNumber numberWithBool:i]);
     }
     else if (!strcmp(returnValueType, @encode(id)) || !strcmp(returnValueType, @encode(Class))) {
         id returnValue = nil;
