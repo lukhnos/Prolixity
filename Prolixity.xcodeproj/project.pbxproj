@@ -45,8 +45,6 @@
 		6A7CF7F413444C6600BE111B /* PXEvaluationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7CF7E613444C6600BE111B /* PXEvaluationResultViewController.xib */; };
 		6A7CF7F513444C6600BE111B /* PXAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF7E913444C6600BE111B /* PXAppDelegate_iPad.m */; };
 		6A7CF7F613444C6600BE111B /* PXDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF7EB13444C6600BE111B /* PXDetailViewController.m */; };
-		6A7CF7F713444C6600BE111B /* PXEvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF7ED13444C6600BE111B /* PXEvaluationCanvasView.m */; };
-		6A7CF7F813444C6600BE111B /* PXEvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF7EF13444C6600BE111B /* PXEvaluationResultViewController.m */; };
 		6A7CF7F913444C6600BE111B /* PXRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF7F113444C6600BE111B /* PXRootViewController_iPad.m */; };
 		6A7CF7FC13444D7500BE111B /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7CF7FB13444D7500BE111B /* MainWindow_iPhone.xib */; };
 		6A7CF7FF13444DBC00BE111B /* PXAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF7FE13444DBC00BE111B /* PXAppDelegate_iPhone.m */; };
@@ -55,6 +53,8 @@
 		6A7CF83E134455E900BE111B /* PXSnippetEditorViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF83C134455E800BE111B /* PXSnippetEditorViewController_iPhone.m */; };
 		6A7CF83F134455E900BE111B /* PXSnippetEditorViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7CF83D134455E800BE111B /* PXSnippetEditorViewController_iPhone.xib */; };
 		6A7CF8491344602300BE111B /* PXEvaluationResultViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7CF8481344602300BE111B /* PXEvaluationResultViewController_iPhone.xib */; };
+		6A7CF84F1344644A00BE111B /* PXEvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF84C1344644A00BE111B /* PXEvaluationCanvasView.m */; };
+		6A7CF8501344644A00BE111B /* PXEvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF84E1344644A00BE111B /* PXEvaluationResultViewController.m */; };
 		6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD1F1314B0B200FA6E76 /* Prolixity.png */; };
 		6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD201314B0B200FA6E76 /* Prolixity72.png */; };
 		6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */; };
@@ -147,10 +147,6 @@
 		6A7CF7E913444C6600BE111B /* PXAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAppDelegate_iPad.m; sourceTree = "<group>"; };
 		6A7CF7EA13444C6600BE111B /* PXDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDetailViewController.h; sourceTree = "<group>"; };
 		6A7CF7EB13444C6600BE111B /* PXDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXDetailViewController.m; sourceTree = "<group>"; };
-		6A7CF7EC13444C6600BE111B /* PXEvaluationCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEvaluationCanvasView.h; sourceTree = "<group>"; };
-		6A7CF7ED13444C6600BE111B /* PXEvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationCanvasView.m; sourceTree = "<group>"; };
-		6A7CF7EE13444C6600BE111B /* PXEvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEvaluationResultViewController.h; sourceTree = "<group>"; };
-		6A7CF7EF13444C6600BE111B /* PXEvaluationResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationResultViewController.m; sourceTree = "<group>"; };
 		6A7CF7F013444C6600BE111B /* PXRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXRootViewController_iPad.h; sourceTree = "<group>"; };
 		6A7CF7F113444C6600BE111B /* PXRootViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRootViewController_iPad.m; sourceTree = "<group>"; };
 		6A7CF7FB13444D7500BE111B /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
@@ -163,6 +159,10 @@
 		6A7CF83C134455E800BE111B /* PXSnippetEditorViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSnippetEditorViewController_iPhone.m; sourceTree = "<group>"; };
 		6A7CF83D134455E800BE111B /* PXSnippetEditorViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXSnippetEditorViewController_iPhone.xib; sourceTree = "<group>"; };
 		6A7CF8481344602300BE111B /* PXEvaluationResultViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXEvaluationResultViewController_iPhone.xib; sourceTree = "<group>"; };
+		6A7CF84B1344644A00BE111B /* PXEvaluationCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEvaluationCanvasView.h; sourceTree = "<group>"; };
+		6A7CF84C1344644A00BE111B /* PXEvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationCanvasView.m; sourceTree = "<group>"; };
+		6A7CF84D1344644A00BE111B /* PXEvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEvaluationResultViewController.h; sourceTree = "<group>"; };
+		6A7CF84E1344644A00BE111B /* PXEvaluationResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationResultViewController.m; sourceTree = "<group>"; };
 		6A95AD1F1314B0B200FA6E76 /* Prolixity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity.png; sourceTree = "<group>"; };
 		6A95AD201314B0B200FA6E76 /* Prolixity72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity72.png; sourceTree = "<group>"; };
 		6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prolixty@2x.png"; sourceTree = "<group>"; };
@@ -246,6 +246,7 @@
 		6A3A78E812FDE1650016D6AD /* Prolixity */ = {
 			isa = PBXGroup;
 			children = (
+				6A7CF84A1344643D00BE111B /* Shared */,
 				6A7CF7FA13444D5900BE111B /* iPhone */,
 				6A7CF7E113444C6600BE111B /* iPad */,
 				6A3A78F112FDE1650016D6AD /* PXAppDelegate.h */,
@@ -366,10 +367,6 @@
 				6A7CF7E913444C6600BE111B /* PXAppDelegate_iPad.m */,
 				6A7CF7EA13444C6600BE111B /* PXDetailViewController.h */,
 				6A7CF7EB13444C6600BE111B /* PXDetailViewController.m */,
-				6A7CF7EC13444C6600BE111B /* PXEvaluationCanvasView.h */,
-				6A7CF7ED13444C6600BE111B /* PXEvaluationCanvasView.m */,
-				6A7CF7EE13444C6600BE111B /* PXEvaluationResultViewController.h */,
-				6A7CF7EF13444C6600BE111B /* PXEvaluationResultViewController.m */,
 				6A7CF7F013444C6600BE111B /* PXRootViewController_iPad.h */,
 				6A7CF7F113444C6600BE111B /* PXRootViewController_iPad.m */,
 			);
@@ -391,6 +388,17 @@
 				6A7CF8481344602300BE111B /* PXEvaluationResultViewController_iPhone.xib */,
 			);
 			path = iPhone;
+			sourceTree = "<group>";
+		};
+		6A7CF84A1344643D00BE111B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6A7CF84B1344644A00BE111B /* PXEvaluationCanvasView.h */,
+				6A7CF84C1344644A00BE111B /* PXEvaluationCanvasView.m */,
+				6A7CF84D1344644A00BE111B /* PXEvaluationResultViewController.h */,
+				6A7CF84E1344644A00BE111B /* PXEvaluationResultViewController.m */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 		6A95AD1E1314B0B200FA6E76 /* Images */ = {
@@ -589,12 +597,12 @@
 				6A38659513179801008B6B20 /* PXLexer.m in Sources */,
 				6A7CF7F513444C6600BE111B /* PXAppDelegate_iPad.m in Sources */,
 				6A7CF7F613444C6600BE111B /* PXDetailViewController.m in Sources */,
-				6A7CF7F713444C6600BE111B /* PXEvaluationCanvasView.m in Sources */,
-				6A7CF7F813444C6600BE111B /* PXEvaluationResultViewController.m in Sources */,
 				6A7CF7F913444C6600BE111B /* PXRootViewController_iPad.m in Sources */,
 				6A7CF7FF13444DBC00BE111B /* PXAppDelegate_iPhone.m in Sources */,
 				6A7CF8341344502900BE111B /* PXRootViewController_iPhone.m in Sources */,
 				6A7CF83E134455E900BE111B /* PXSnippetEditorViewController_iPhone.m in Sources */,
+				6A7CF84F1344644A00BE111B /* PXEvaluationCanvasView.m in Sources */,
+				6A7CF8501344644A00BE111B /* PXEvaluationResultViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
