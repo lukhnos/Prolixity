@@ -436,7 +436,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = /Users/lukhnos/recherche/Prolixity/parser;
+			buildWorkingDirectory = "$(SRCROOT)/parser";
 			dependencies = (
 			);
 			name = "parser-source";
