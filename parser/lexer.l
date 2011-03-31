@@ -107,6 +107,7 @@ PERIOD          \.
 (?i:to)                 { return TOKEN_TO; }
 (?i:on)                 { BEGIN(IDMODE); return TOKEN_ON; }
 (?i:invoke)             { BEGIN(IDMODE); return TOKEN_INVOKE; }
+(?i:evaluate)           { BEGIN(IDMODE); return TOKEN_EVALUATE; }
 (?i:get)                { BEGIN(IDMODE); return TOKEN_GET; }
 (?i:set)                { BEGIN(IDMODE); return TOKEN_SET; }
 (?i:print)              { BEGIN(IDMODE); return TOKEN_PRINT; }

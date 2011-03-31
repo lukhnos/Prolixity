@@ -64,6 +64,22 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
     [super dealloc];
 }
 
+- (id)copyWithZone:(NSZone *)zone;
+{
+    PXBlock *newBlock = [[PXBlock alloc] init];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [newBlock->formalParams setArray:formalParams];
+    [newBlock->instructions setArray:instructions];
+    
+    for (NSString *key in variables) {
+        id object = [[variables objectForKey:key] copy];
+        [newBlock->variables setObject:object forKey:key];
+        [object release];
+    }
+    return newBlock;
+}
+
 + (PXBlock *)blockWithSource:(NSString *)inSource error:(NSError **)outError
 {
     const char *u8str = [inSource UTF8String];
@@ -117,7 +133,16 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 
 - (id)runWithParent:(PXBlock *)inParent
 {
-    NSAssert(parent == nil, @"Parent must not be set before running.");
+    for (NSString *param in formalParams) {
+        if ([stack count]) {
+            [self exportObject:[self pop] toVariable:param];
+        }
+        else {
+            [self exportObject:[NSNull null] toVariable:param];
+        }
+    }
+    
+    PXBlock *oldParent = parent;
     parent = inParent;
     
     PXBlock *previousCurrentBlock = [[self class] currentBlock];
@@ -154,6 +179,17 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
             else if (instruction == PXInstructionInvoke) {
                 [self invokeMethod:object];
             }
+            else if (instruction == PXInstructionEvaluate) {
+                PXBlock *b = tempValue;
+                NSAssert([b isKindOfClass:[PXBlock class]], @"The evaluate instruction expects a block");
+                
+                b = [b copy];
+                
+                id tmp = tempValue;
+                tempValue = [[b runWithParent:self] retain];
+                [tmp release];
+                [b release];
+            }
         }
     }
     @catch (NSException *exception) {
@@ -161,7 +197,7 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
     }
     @finally {
         [[self class] setCurrentBlock:previousCurrentBlock];    
-        parent = nil;
+        parent = oldParent;
     }
 
     return tempValue;
@@ -245,15 +281,6 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 
 - (void)invokeMethod:(id)methodNameCandidates
 {
-    for (NSString *param in formalParams) {
-        if ([stack count]) {
-            [self storeValue:[self pop] toVariable:param];
-        }
-        else {
-            [self storeValue:[NSNull null] toVariable:param];
-        }
-    }    
-    
     NSObject *object = (tempValue == [NSNull null] ? nil : tempValue);
 
     SEL selector = NULL;

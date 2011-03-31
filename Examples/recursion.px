@@ -1,0 +1,18 @@
+Var fac
+fac = begin...
+  Expect x
+  Var y
+  If x == 1, begin...
+    y = 1
+  ...end, else begin...
+    y = x * (Evaluate fac, x - 1)
+  ...end
+  Y
+...end
+
+var x
+x = 10
+
+Var a
+A = (evaluate fac, x)
+Print "Result for " + x + "! is " + a

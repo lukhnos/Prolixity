@@ -32,5 +32,6 @@ extern NSString *const PXInstructionLoadImmediate;
 extern NSString *const PXInstructionLoad;
 extern NSString *const PXInstructionStore;
 extern NSString *const PXInstructionInvoke;
+extern NSString *const PXInstructionEvaluate;
 extern NSString *const PXInstructionPop;
 extern NSString *const PXInstructionPush;

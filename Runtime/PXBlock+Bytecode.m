@@ -31,5 +31,6 @@ NSString *const PXInstructionLoadImmediate = @"loadi";
 NSString *const PXInstructionLoad = @"load";
 NSString *const PXInstructionStore = @"save";
 NSString *const PXInstructionInvoke = @"invoke";
+NSString *const PXInstructionEvaluate = @"evaluate";
 NSString *const PXInstructionPop = @"pop";
 NSString *const PXInstructionPush = @"push";

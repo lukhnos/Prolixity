@@ -82,6 +82,7 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
         PXLoadExample(@"images", @"Images", @"Draw images with UIImage");
         
         PXLoadExample(@"smalltalkish", @"Smalltalkish", @"Inside Prolixity");
+        PXLoadExample(@"recursion", @"Recursion", @"To iterate is human...");
         PXLoadExample(@"about", @"About Prolixity", @"Copyright, tidbits, etc.");
 
         PXLoadExample(@"yourcode", @"Try It!", nil);

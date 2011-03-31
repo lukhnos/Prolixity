@@ -40,4 +40,5 @@
 - (void)addPush;
 - (void)addPop;
 - (void)addInvoke:(NSString *)methodName;
+- (void)addEvaluate;
 @end

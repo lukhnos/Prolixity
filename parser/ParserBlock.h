@@ -197,6 +197,11 @@ namespace Prolixity {
             instructions.push_back("push");
         }
         
+        void addEvaluate()
+        {
+            instructions.push_back("evaluate");
+        }
+        
         void addInvoke(const std::string& methodName)
         {
             std::string inst;

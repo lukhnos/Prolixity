@@ -95,7 +95,7 @@ NS_INLINE NSString *PXIdentifierFromLexemedIdentifier(NSString *identifier)
             return;
         }
         
-        if ([t isEqualToString:@"expect"]) {
+        if ([t isEqualToString:@"param"]) {
             [self declareFormalParam:[inLexer next]];
         }
         else if ([t isEqualToString:@"var"]) {
@@ -162,12 +162,15 @@ NS_INLINE NSString *PXIdentifierFromLexemedIdentifier(NSString *identifier)
         else if ([t isEqualToString:@"invoke"]) {
             [self addInvoke:[inLexer next]];
         }
+        else if ([t isEqualToString:@"evaluate"]) {
+            [self addEvaluate];
+        }
     }
 }
 
 - (void)declareFormalParam:(NSString *)inName
 {
-    
+    [formalParams addObject:inName];
 }
 
 - (void)declareVariable:(NSString *)inName
@@ -222,5 +225,11 @@ NS_INLINE NSString *PXIdentifierFromLexemedIdentifier(NSString *identifier)
     else {
         [instructions addObject:candidates];
     }
+}
+
+- (void)addEvaluate
+{
+    [instructions addObject:PXInstructionEvaluate];
+    [instructions addObject:[NSNull null]];
 }
 @end

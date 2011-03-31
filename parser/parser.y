@@ -344,6 +344,11 @@ expression(X) ::= invocation(INVOCATION).
     X = INVOCATION;
 }
 
+expression(X) ::= evaluation(EVAL).
+{
+    X = EVAL;
+}
+
 expression(X) ::= get_expression(GETEXP).
 {
     X = GETEXP;
@@ -889,7 +894,6 @@ set_expression(X) ::= optional_on(OBJ) SET STRING(STR) COMMA TO expression(EXP).
 
     X->addInvoke("setValue:forKey:");
 }    
-
     
 %type invocation {ParserBlock*}
 %destructor invocation { delete $$; }
@@ -982,6 +986,39 @@ taking_tail(X) ::= COMMA AND identifier(NAME_PART) invocation_tail(Z).
     delete NAME_PART;
 }
 
+%type evaluation {ParserBlock*}
+%destructor evaluation { delete $$; }
+
+evaluation(X) ::= EVALUATE nonprs_expression(B).
+{
+    X = B;
+    X->addEvaluate();
+}
+
+evaluation(X) ::= EVALUATE nonprs_expression(B) COMMA eval_param_list(P).
+{
+    P->mergeBlock(*B);
+    delete B;    
+    X = P;
+    X->addEvaluate();
+}
+
+%type eval_param_list {ParserBlock*}
+%destructor eval_param_list { delete $$; }
+
+eval_param_list(P) ::= nonprs_expression(E).
+{
+    P = E;
+    P->addPush();
+}
+
+eval_param_list(P) ::= nonprs_expression(E) COMMA eval_param_list(L).
+{
+    E->addPush();
+    L->mergeBlock(*E);    
+    delete E;    
+    P = L;    
+}
 
 %type block {ParserBlock*}
 %destructor block { delete $$; }
