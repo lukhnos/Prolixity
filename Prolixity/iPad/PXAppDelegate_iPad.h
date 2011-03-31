@@ -1,5 +1,5 @@
 //
-// PXAppDelegate.h
+// PXAppDelegate_iPad.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,10 +25,14 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "PXLexicon.h"
-#import "PXRuntime.h"
-#import "PXSnippetManager.h"
+#import "PXAppDelegate.h"
 
-@interface PXAppDelegate : NSObject <UIApplicationDelegate>
+@class PXRootViewController;
+@class PXDetailViewController;
+
+@interface PXAppDelegate_iPad : PXAppDelegate
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
+@property (nonatomic, retain) IBOutlet PXRootViewController *rootViewController;
+@property (nonatomic, retain) IBOutlet PXDetailViewController *detailViewController;
 @end

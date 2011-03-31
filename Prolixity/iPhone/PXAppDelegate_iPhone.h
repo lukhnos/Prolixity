@@ -1,5 +1,5 @@
 //
-// PXAppDelegate.h
+// PXAppDelegate_iPhone.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,10 +25,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "PXLexicon.h"
-#import "PXRuntime.h"
-#import "PXSnippetManager.h"
+#import "PXAppDelegate.h"
 
-@interface PXAppDelegate : NSObject <UIApplicationDelegate>
+@interface PXAppDelegate_iPhone : PXAppDelegate
 @end

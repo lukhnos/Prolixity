@@ -29,7 +29,7 @@
 #import "PXDetailViewController.h"
 #import "PXSnippetManager.h"
 #import "PXRuntime.h"
-#import "PXAppDelegate.h"
+#import "PXAppDelegate_iPad.h"
 
 @interface PXRootViewController ()
 - (IBAction)addSnippetAction;
@@ -157,7 +157,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = [[PXSnippetManager sharedManager] snippetIDAtIndex:indexPath.row];
-    ((PXAppDelegate *)[[UIApplication sharedApplication] delegate]).detailViewController.currentSnippetIdentifier = identifier;
+    ((PXAppDelegate_iPad *)[[UIApplication sharedApplication] delegate]).detailViewController.currentSnippetIdentifier = identifier;
 }
 
 - (void)didReceiveMemoryWarning
@@ -177,7 +177,7 @@
 - (IBAction)addSnippetAction
 {
     NSString *identifier = [[PXSnippetManager sharedManager] createSnippet];
-    ((PXAppDelegate *)[[UIApplication sharedApplication] delegate]).detailViewController.currentSnippetIdentifier = identifier;
+    ((PXAppDelegate_iPad *)[[UIApplication sharedApplication] delegate]).detailViewController.currentSnippetIdentifier = identifier;
     
     NSUInteger index = [[PXSnippetManager sharedManager] indexForSnippetID:identifier];
     [self selectSnippetIndex:index];

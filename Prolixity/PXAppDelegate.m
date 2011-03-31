@@ -26,12 +26,6 @@
 //
 
 #import "PXAppDelegate.h"
-#import "PXRootViewController.h"
-#import "PXLexicon.h"
-#import "PXEvaluationCanvasView.h"
-#import "PXRuntime.h"
-#import "PXSnippetManager.h"
-#import "PXDetailViewController.h"
 
 NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString *description)
 {
@@ -58,26 +52,8 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
 }
 
 @implementation PXAppDelegate
-
-@synthesize window;
-@synthesize splitViewController;
-@synthesize rootViewController;
-@synthesize detailViewController;
-
-- (void)dealloc
-{
-    [window release];
-    [splitViewController release];
-    [rootViewController release];
-    [detailViewController release];
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window.rootViewController = self.splitViewController;
-    [self.window makeKeyAndVisible];
-    
     [PXLexicon addClass:[NSString class]];    
     [PXLexicon addClass:[NSMutableString class]];
     [PXLexicon addClass:[NSNumber class]];    
@@ -92,9 +68,6 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
     [PXLexicon addClass:[UIBezierPath class]];
     [PXLexicon addClass:[UIImage class]];
     
-    [PXLexicon addClass:[PXEvaluationCanvasView class]];
-    
-
     if ([PXSnippetManager sharedManager].firstTimeUser) {
         PXLoadExample(@"hello", @"Hello, world!", @"Explains what Prolixity is");
         PXLoadExample(@"basics", @"Basics", @"Basic syntax");
@@ -116,32 +89,6 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
         PXLoadExample(@"yourcode", @"Try It!", nil);
     }
 
-    self.detailViewController.currentSnippetIdentifier = [[PXSnippetManager sharedManager] snippetIDAtIndex:0];
-    [self.rootViewController selectSnippetIndex:0];
-    
     return YES;
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    [self.detailViewController saveCurrentSnippet];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    [self.detailViewController saveCurrentSnippet];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    [self.detailViewController saveCurrentSnippet];
 }
 @end
