@@ -27,6 +27,7 @@
 
 #import "PXRootViewController_iPhone.h"
 #import "PXAppDelegate_iPhone.h"
+#import "PXSnippetEditorViewController_iPhone.h"
 #import "PXSnippetManager.h"
 #import "PXUtilities.h"
 
@@ -62,7 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = PXLSTR(@"Prolixity Snippets");    
+    self.title = PXLSTR(@"Snippets");    
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addSnippetAction)] autorelease];                                        
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView:) name:PXSnippetManagerDidUpdateNotification object:nil];
@@ -160,7 +161,11 @@
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 
     NSString *identifier = [[PXSnippetManager sharedManager] snippetIDAtIndex:index];
-    (void)identifier;
+    
+    PXSnippetEditorViewController_iPhone *editor = [[PXSnippetEditorViewController_iPhone alloc] initWithNibName:@"PXSnippetEditorViewController_iPhone" bundle:nil];
+    editor.currentSnippetIdentifier = identifier;
+    [self.navigationController pushViewController:editor animated:YES];
+    [editor release];
 }
 
 - (void)reloadTableView:(NSNotification *)notification

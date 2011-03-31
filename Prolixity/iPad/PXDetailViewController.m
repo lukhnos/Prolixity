@@ -26,7 +26,7 @@
 //
 
 #import "PXDetailViewController.h"
-#import "PXRootViewController.h"
+#import "PXRootViewController_iPad.h"
 #import "PXRuntime.h"
 #import "PXSnippetManager.h"
 
@@ -62,7 +62,9 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 }
 
 - (IBAction)runAction
-{    
+{
+    [self saveCurrentSnippet];
+    
     [[PXBlock currentConsoleBuffer] setString:@""];
     
     NSError *error = nil;
