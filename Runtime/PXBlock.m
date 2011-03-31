@@ -67,7 +67,6 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 - (id)copyWithZone:(NSZone *)zone;
 {
     PXBlock *newBlock = [[PXBlock alloc] init];
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [newBlock->formalParams setArray:formalParams];
     [newBlock->instructions setArray:instructions];

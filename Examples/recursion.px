@@ -1,3 +1,8 @@
+--
+-- This snippet demos how to use the "evaluate" keyword to
+-- make blocks act as functions.
+--
+
 Var fac
 fac = begin...
   Expect x
