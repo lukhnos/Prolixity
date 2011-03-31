@@ -27,6 +27,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class PXBlock;
 
 @interface PXEvaluationCanvasView : UIView
 {
@@ -38,6 +39,6 @@
 
 - (void)drawDot:(CGPoint)p;
 
-@property (retain, nonatomic) NSString *source;
+@property (retain, nonatomic) PXBlock *block;
 @property (retain, nonatomic) IBOutlet UITextView *textView;
 @end

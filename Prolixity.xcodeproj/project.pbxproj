@@ -54,6 +54,7 @@
 		6A7CF8351344502900BE111B /* PXRootViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7CF8331344502900BE111B /* PXRootViewController_iPhone.xib */; };
 		6A7CF83E134455E900BE111B /* PXSnippetEditorViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7CF83C134455E800BE111B /* PXSnippetEditorViewController_iPhone.m */; };
 		6A7CF83F134455E900BE111B /* PXSnippetEditorViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7CF83D134455E800BE111B /* PXSnippetEditorViewController_iPhone.xib */; };
+		6A7CF8491344602300BE111B /* PXEvaluationResultViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7CF8481344602300BE111B /* PXEvaluationResultViewController_iPhone.xib */; };
 		6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD1F1314B0B200FA6E76 /* Prolixity.png */; };
 		6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD201314B0B200FA6E76 /* Prolixity72.png */; };
 		6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */; };
@@ -161,6 +162,7 @@
 		6A7CF83B134455E800BE111B /* PXSnippetEditorViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSnippetEditorViewController_iPhone.h; sourceTree = "<group>"; };
 		6A7CF83C134455E800BE111B /* PXSnippetEditorViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXSnippetEditorViewController_iPhone.m; sourceTree = "<group>"; };
 		6A7CF83D134455E800BE111B /* PXSnippetEditorViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXSnippetEditorViewController_iPhone.xib; sourceTree = "<group>"; };
+		6A7CF8481344602300BE111B /* PXEvaluationResultViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXEvaluationResultViewController_iPhone.xib; sourceTree = "<group>"; };
 		6A95AD1F1314B0B200FA6E76 /* Prolixity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity.png; sourceTree = "<group>"; };
 		6A95AD201314B0B200FA6E76 /* Prolixity72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Prolixity72.png; sourceTree = "<group>"; };
 		6A95AD211314B0B200FA6E76 /* Prolixty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prolixty@2x.png"; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				6A7CF83B134455E800BE111B /* PXSnippetEditorViewController_iPhone.h */,
 				6A7CF83C134455E800BE111B /* PXSnippetEditorViewController_iPhone.m */,
 				6A7CF83D134455E800BE111B /* PXSnippetEditorViewController_iPhone.xib */,
+				6A7CF8481344602300BE111B /* PXEvaluationResultViewController_iPhone.xib */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				6A7CF7FC13444D7500BE111B /* MainWindow_iPhone.xib in Resources */,
 				6A7CF8351344502900BE111B /* PXRootViewController_iPhone.xib in Resources */,
 				6A7CF83F134455E900BE111B /* PXSnippetEditorViewController_iPhone.xib in Resources */,
+				6A7CF8491344602300BE111B /* PXEvaluationResultViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

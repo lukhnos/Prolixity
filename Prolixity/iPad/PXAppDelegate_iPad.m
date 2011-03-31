@@ -53,9 +53,6 @@
     
     self.window.rootViewController = self.splitViewController;
     [self.window makeKeyAndVisible];
-    
-    // export iPad version-specific classes
-    [PXLexicon addClass:[PXEvaluationCanvasView class]];
 
     self.detailViewController.currentSnippetIdentifier = [[PXSnippetManager sharedManager] snippetIDAtIndex:0];
     [self.rootViewController selectSnippetIndex:0];

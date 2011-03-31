@@ -19,14 +19,17 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 - (void)killPreviousDeferredSaveInvocation;
 - (void)deferredSaveCurrentSnippet;
 - (void)saveCurrentSnippet;
+- (void)highlightLine:(NSUInteger)lineNumber;
 @end
 
 
 @implementation PXSnippetEditorViewController_iPhone
+@synthesize evaluationResultViewController;
 @synthesize currentSnippetIdentifier;
 
 - (void)dealloc
 {    
+    [evaluationResultViewController release];    
     [currentSnippetIdentifier release];
     [super dealloc];
 }
@@ -72,8 +75,7 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -118,6 +120,16 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
     [UIView commitAnimations];
 }
 
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (lastErrorLineNumber != NSNotFound) {
+        [self highlightLine:lastErrorLineNumber];
+    }
+}
+
+#pragma mark Private methods
+
 - (UITextView *)textView
 {
     return (UITextView *)self.view;
@@ -125,7 +137,40 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
 
 - (IBAction)runAction
 {
+    [self saveCurrentSnippet];
     
+    [[PXBlock currentConsoleBuffer] setString:@""];
+    
+    NSError *error = nil;
+    PXBlock *blk = [PXBlock blockWithSource:self.textView.text error:&error];
+    
+    if (error) {
+        lastErrorLineNumber = NSNotFound;
+        
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^Line (\\d+):" options:0 error:NULL];
+        NSString *errDesc = [error localizedDescription];
+        [regex enumerateMatchesInString:errDesc options:0 range:NSMakeRange(0, [errDesc length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+            if (result.range.location != NSNotFound) {
+                NSRange lineNoRange = [result rangeAtIndex:1];
+                lastErrorLineNumber = [[errDesc substringWithRange:lineNoRange] integerValue];
+            }
+        }];
+        
+        NSString *buttonTitle = (lastErrorLineNumber == NSNotFound) ? PXLSTR(@"Dismiss") : PXLSTR(@"Edit");
+        [[[[UIAlertView alloc] initWithTitle:PXLSTR(@"Error in code") message:errDesc delegate:self cancelButtonTitle:buttonTitle otherButtonTitles:nil] autorelease] show];
+        return;
+    }
+    
+    if (!self.evaluationResultViewController) {
+        self.evaluationResultViewController = [[[PXEvaluationResultViewController alloc] initWithNibName:@"PXEvaluationResultViewController_iPhone" bundle:nil] autorelease];
+        
+        // load the view
+        [self.evaluationResultViewController view];
+    }
+
+    self.evaluationResultViewController.evaluationCanvasView.block = blk;
+    [self.evaluationResultViewController.evaluationCanvasView setNeedsDisplay];
+    [self.navigationController pushViewController:self.evaluationResultViewController animated:YES];
 }
 
 - (void)killPreviousDeferredSaveInvocation
@@ -145,5 +190,36 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
     if ([self.currentSnippetIdentifier length] > 0) {
         [[PXSnippetManager sharedManager] setSnippet:self.textView.text forSnippetID:self.currentSnippetIdentifier];
     }    
+}
+
+// TODO: Share this part wth PXDetailViewController
+- (void)highlightLine:(NSUInteger)lineNumber
+{
+    if (lineNumber == NSUIntegerMax) {
+        return;
+    }
+    
+    NSString *text = self.textView.text;
+    NSUInteger pos = 0;
+    NSUInteger len = [text length];
+    NSUInteger lineIndex = 0;
+    NSUInteger previousLinePos = 0;
+    
+    for (pos = 0 ;  pos < len ; pos++) {
+        UniChar c = [text characterAtIndex:pos];
+        if (c == '\n') {
+            lineIndex++;
+            
+            if (lineIndex == lineNumber) {
+                NSRange errorRange = NSMakeRange(previousLinePos, (pos + 1) - previousLinePos);
+                self.textView.selectedRange = errorRange;
+                [self.textView scrollRangeToVisible:errorRange];
+                return;
+            }
+            else {
+                previousLinePos = pos + 1;
+            }
+        }
+    }
 }
 @end

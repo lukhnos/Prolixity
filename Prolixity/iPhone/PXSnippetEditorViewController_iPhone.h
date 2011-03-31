@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PXEvaluationResultViewController.h"
 
 @interface PXSnippetEditorViewController_iPhone : UIViewController <UITextViewDelegate>
 {    
+    NSUInteger lastErrorLineNumber;    
 }
 @property (retain, nonatomic) NSString *currentSnippetIdentifier;
-@property (readonly, nonatomic) UITextView *textView;    
+@property (readonly, nonatomic) UITextView *textView;
+@property (retain, nonatomic) PXEvaluationResultViewController *evaluationResultViewController;
 @end

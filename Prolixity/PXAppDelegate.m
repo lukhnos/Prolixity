@@ -67,7 +67,9 @@ NS_INLINE void PXLoadExample(NSString *principalName, NSString *title, NSString 
     [PXLexicon addClass:[UIColor class]];
     [PXLexicon addClass:[UIBezierPath class]];
     [PXLexicon addClass:[UIImage class]];
-    
+
+    [PXLexicon addClass:[PXEvaluationCanvasView class]];
+
     if ([PXSnippetManager sharedManager].firstTimeUser) {
         PXLoadExample(@"hello", @"Hello, world!", @"Explains what Prolixity is");
         PXLoadExample(@"basics", @"Basics", @"Basic syntax");

@@ -68,7 +68,7 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
     [[PXBlock currentConsoleBuffer] setString:@""];
     
     NSError *error = nil;
-    PXBlock *__unused blk = [PXBlock blockWithSource:self.textView.text error:&error];
+    PXBlock *blk = [PXBlock blockWithSource:self.textView.text error:&error];
     
     if (error) {
         lastErrorLineNumber = NSNotFound;
@@ -89,11 +89,14 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
     
     if (!self.evaluationResultViewController) {
         self.evaluationResultViewController = [[[PXEvaluationResultViewController alloc] initWithNibName:@"PXEvaluationResultViewController" bundle:nil] autorelease];        
+        
+        // load the view
+        [self.evaluationResultViewController view];        
     }
  
     self.evaluationResultViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentModalViewController:self.evaluationResultViewController animated:YES];
-    self.evaluationResultViewController.evaluationCanvasView.source = self.textView.text;
+    self.evaluationResultViewController.evaluationCanvasView.block = blk;
     [self.evaluationResultViewController.evaluationCanvasView setNeedsDisplay];
 }
 

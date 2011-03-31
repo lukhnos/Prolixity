@@ -26,6 +26,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PXEvaluationCanvasView.h"
 #import "PXLexicon.h"
 #import "PXRuntime.h"
 #import "PXSnippetManager.h"
