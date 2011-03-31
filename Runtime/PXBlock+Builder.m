@@ -95,7 +95,10 @@ NS_INLINE NSString *PXIdentifierFromLexemedIdentifier(NSString *identifier)
             return;
         }
         
-        if ([t isEqualToString:@"var"]) {
+        if ([t isEqualToString:@"expect"]) {
+            [self declareFormalParam:[inLexer next]];
+        }
+        else if ([t isEqualToString:@"var"]) {
             [self declareVariable:[inLexer next]];
         }
         else if ([t isEqualToString:@"load"]) {
@@ -160,6 +163,11 @@ NS_INLINE NSString *PXIdentifierFromLexemedIdentifier(NSString *identifier)
             [self addInvoke:[inLexer next]];
         }
     }
+}
+
+- (void)declareFormalParam:(NSString *)inName
+{
+    
 }
 
 - (void)declareVariable:(NSString *)inName

@@ -163,6 +163,11 @@ statement(X) ::= var_statement(Y).
     X = Y;
 }
 
+statement(X) ::= expect_statement(Y).
+{
+    X = Y;
+}
+
 statement(X) ::= save_statement(Y).
 {
     X = Y;
@@ -217,6 +222,15 @@ var_statement(X) ::= VAR identifier(ID).
     delete ID;
 }
 
+%type expect_statement {ParserBlock*}
+%destructor expect_statement { delete $$; }
+
+expect_statement(X) ::= EXPECT identifier(ID).
+{
+    X = new ParserBlock;
+    X->declareFormalParam(*ID);
+    delete ID;
+}
 
 %type save_statement {ParserBlock*}
 %destructor save_statement { delete $$; }

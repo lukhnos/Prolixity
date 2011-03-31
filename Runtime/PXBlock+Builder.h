@@ -32,6 +32,7 @@
 + (PXBlock *)blockWithBlockAssembly:(NSString *)inAsm;
 - (void)parse:(PXLexer *)inLexer;
 
+- (void)declareFormalParam:(NSString *)inName;
 - (void)declareVariable:(NSString *)inName;
 - (void)addLoadImmeidate:(id)inObject;
 - (void)addLoad:(NSString *)inName;

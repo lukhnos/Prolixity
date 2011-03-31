@@ -40,6 +40,7 @@ namespace Prolixity {
     private:
         std::string name;
         std::vector<std::string> vars;
+        std::vector<std::string> formalParams;
         std::vector<std::string> instructions;
         std::vector<ParserBlock> blocks;
         std::string lastError;
@@ -63,8 +64,7 @@ namespace Prolixity {
         const std::string getSimpleNumber()
 		{
 			return simpleNumber;
-		}
-		
+		}		
 	
         const std::string obtainName()
         {
@@ -75,6 +75,7 @@ namespace Prolixity {
         void mergeBlock(const ParserBlock& anotherBlock)
         {
             vars.insert(vars.end(), anotherBlock.vars.begin(), anotherBlock.vars.end());            
+            formalParams.insert(formalParams.end(), anotherBlock.formalParams.begin(), anotherBlock.formalParams.end());            
             instructions.insert(instructions.end(), anotherBlock.instructions.begin(), anotherBlock.instructions.end());
             blocks.insert(blocks.end(), anotherBlock.blocks.begin(), anotherBlock.blocks.end());
             if (anotherBlock.lastError.length()) {
@@ -94,6 +95,11 @@ namespace Prolixity {
         void declareVariable(const std::string& name)
         {
             vars.push_back(name);
+        }
+        
+        void declareFormalParam(const std::string& name)
+        {
+            formalParams.push_back(name);
         }
         
         void addStore(const std::string& identifier)
@@ -239,7 +245,11 @@ namespace Prolixity {
             for (std::vector<ParserBlock>::const_iterator bi = blocks.begin(), be = blocks.end() ; bi != be ; ++bi) {
                 sst << (*bi).dump(level + 1, tabWidth, tabChar);
             }
-            
+
+            for (std::vector<std::string>::const_iterator fpi = formalParams.begin(), fpe = formalParams.end() ; fpi != fpe ; ++fpi) {
+                sst << tab2 << "param" << " " << *fpi << "\n";
+            }
+
             for (std::vector<std::string>::const_iterator vi = vars.begin(), ve = vars.end() ; vi != ve ; ++vi) {
                 sst << tab2 << "var" << " " << *vi << "\n";
             }

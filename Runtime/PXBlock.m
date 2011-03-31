@@ -37,10 +37,12 @@ NSString *const PXBlockErrorDomain = @"org.lukhnos.Prolixity.PXBlock";
 
 static const size_t kObjCMaXTypeLength = 256;
 
+static NSString *const PXCurrentStackInThreadKey = @"PXCurrentStackInThreadKey";
 static NSString *const PXCurrentBlockInThreadKey = @"PXCurrentBlockInThreadKey";
 static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBufferInThreadKey";
 
 @interface PXBlock (Runtime)
++ (NSMutableArray *)currentStack;
 + (void)setCurrentBlock:(PXBlock *)inBlock;
 - (void)push:(id)inObject;
 - (id)pop;
@@ -55,7 +57,8 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 {
     parent = nil;
     [tempValue release], tempValue = nil;
-    [stack release], stack = nil;
+    [formalParams release], formalParams = nil;
+    stack = nil;
     [variables release], variables = nil;
     [instructions release], instructions = nil;
     [super dealloc];
@@ -104,7 +107,8 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 {
     self = [super init];
     if (self) {
-        stack = [[NSMutableArray alloc] init];
+        formalParams = [[NSMutableArray alloc] init];
+        stack = [PXBlock currentStack];
         variables = [[NSMutableDictionary alloc] init];
         instructions = [[NSMutableArray alloc] init];
     }
@@ -172,6 +176,16 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 
 
 @implementation PXBlock (Runtime)
++ (NSMutableArray *)currentStack
+{
+    NSMutableArray *stack = [[[NSThread currentThread] threadDictionary] objectForKey:PXCurrentStackInThreadKey];
+    if (!stack) {
+        stack = [NSMutableArray array];
+        [[[NSThread currentThread] threadDictionary] setObject:stack forKey:PXCurrentStackInThreadKey];
+    }
+    return stack;
+}
+
 + (void)setCurrentBlock:(PXBlock *)inBlock
 {
     [[[NSThread currentThread] threadDictionary] setValue:inBlock forKey:PXCurrentBlockInThreadKey];
@@ -231,6 +245,15 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
 
 - (void)invokeMethod:(id)methodNameCandidates
 {
+    for (NSString *param in formalParams) {
+        if ([stack count]) {
+            [self storeValue:[self pop] toVariable:param];
+        }
+        else {
+            [self storeValue:[NSNull null] toVariable:param];
+        }
+    }    
+    
     NSObject *object = (tempValue == [NSNull null] ? nil : tempValue);
 
     SEL selector = NULL;

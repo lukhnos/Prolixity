@@ -39,6 +39,7 @@ extern NSString *const PXBlockErrorDomain;
     PXBlock *parent;
     
     id tempValue;
+    NSMutableArray *formalParams;
     NSMutableArray *stack;
     NSMutableDictionary *variables;
     NSMutableArray *instructions;
