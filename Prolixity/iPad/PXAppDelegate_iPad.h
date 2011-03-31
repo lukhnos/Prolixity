@@ -27,12 +27,12 @@
 
 #import "PXAppDelegate.h"
 
-@class PXRootViewController;
+@class PXRootViewController_iPad;
 @class PXDetailViewController;
 
 @interface PXAppDelegate_iPad : PXAppDelegate
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
-@property (nonatomic, retain) IBOutlet PXRootViewController *rootViewController;
+@property (nonatomic, retain) IBOutlet PXRootViewController_iPad *rootViewController;
 @property (nonatomic, retain) IBOutlet PXDetailViewController *detailViewController;
 @end

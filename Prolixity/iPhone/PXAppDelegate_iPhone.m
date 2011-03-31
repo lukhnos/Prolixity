@@ -28,4 +28,24 @@
 #import "PXAppDelegate_iPhone.h"
 
 @implementation PXAppDelegate_iPhone
+@synthesize navigationController;
+@synthesize window;
+
+- (void)dealloc
+{
+    [navigationController release];
+    [window release];
+    [super dealloc];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    if (![super application:application didFinishLaunchingWithOptions:launchOptions]) {
+        return NO;
+    }
+
+    self.window.rootViewController = self.navigationController;
+    [self.window makeKeyAndVisible];
+    return YES;
+}
 @end

@@ -26,7 +26,7 @@
 //
 
 #import "PXAppDelegate_iPad.h"
-#import "PXRootViewController.h"
+#import "PXRootViewController_iPad.h"
 #import "PXEvaluationCanvasView.h"
 #import "PXDetailViewController.h"
 

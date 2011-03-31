@@ -1,5 +1,5 @@
 //
-// PXRootViewController.h
+// PXRootViewController_iPad.h
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -29,7 +29,7 @@
 
 @class PXDetailViewController;
 
-@interface PXRootViewController : UITableViewController
+@interface PXRootViewController_iPad : UITableViewController
 {
 }
 

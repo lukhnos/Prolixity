@@ -1,5 +1,5 @@
 //
-// PXRootViewController.m
+// PXRootViewController_iPad.m
 //
 // Copyright (c) 2011 Lukhnos D. Liu (http://lukhnos.org)
 //
@@ -25,17 +25,17 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "PXRootViewController.h"
+#import "PXRootViewController_iPad.h"
 #import "PXDetailViewController.h"
 #import "PXSnippetManager.h"
 #import "PXRuntime.h"
 #import "PXAppDelegate_iPad.h"
 
-@interface PXRootViewController ()
+@interface PXRootViewController_iPad ()
 - (IBAction)addSnippetAction;
 @end
 
-@implementation PXRootViewController
+@implementation PXRootViewController_iPad
 @synthesize detailViewController;
 
 - (void)viewDidLoad
