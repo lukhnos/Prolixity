@@ -50,10 +50,10 @@
 		6AA3954713174F7F00C034E0 /* PXSnippetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3954613174F7F00C034E0 /* PXSnippetManager.m */; };
 		6ABD1D3B12FE1A240014DF3B /* PXEvaluationCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3A12FE1A240014DF3B /* PXEvaluationCanvasView.m */; };
 		6ABD1D3F12FE1A610014DF3B /* PXEvaluationResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3D12FE1A600014DF3B /* PXEvaluationResultViewController.m */; };
-		6ABD1D4012FE1A610014DF3B /* PXEvaluationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ABD1D3E12FE1A600014DF3B /* PXEvaluationResultViewController.xib */; };
 		6AE091D7131751B90039E5E4 /* NSString+PXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE091D4131751B90039E5E4 /* NSString+PXSupport.m */; };
 		6AE091D8131751B90039E5E4 /* PXUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE091D6131751B90039E5E4 /* PXUtilities.m */; };
 		6AE091DC1317571D0039E5E4 /* PXRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AE091DB1317571D0039E5E4 /* PXRuntime.m */; };
+		6AE1BE861344486600B28327 /* PXEvaluationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AE1BE881344486600B28327 /* PXEvaluationResultViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,13 +147,13 @@
 		6ABD1D3A12FE1A240014DF3B /* PXEvaluationCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationCanvasView.m; sourceTree = "<group>"; };
 		6ABD1D3C12FE1A600014DF3B /* PXEvaluationResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXEvaluationResultViewController.h; sourceTree = "<group>"; };
 		6ABD1D3D12FE1A600014DF3B /* PXEvaluationResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXEvaluationResultViewController.m; sourceTree = "<group>"; };
-		6ABD1D3E12FE1A600014DF3B /* PXEvaluationResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PXEvaluationResultViewController.xib; sourceTree = "<group>"; };
 		6AE091D3131751B90039E5E4 /* NSString+PXSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PXSupport.h"; sourceTree = "<group>"; };
 		6AE091D4131751B90039E5E4 /* NSString+PXSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PXSupport.m"; sourceTree = "<group>"; };
 		6AE091D5131751B90039E5E4 /* PXUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXUtilities.h; sourceTree = "<group>"; };
 		6AE091D6131751B90039E5E4 /* PXUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXUtilities.m; sourceTree = "<group>"; };
 		6AE091D91317525C0039E5E4 /* PXRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXRuntime.h; sourceTree = "<group>"; };
 		6AE091DB1317571D0039E5E4 /* PXRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXRuntime.m; sourceTree = "<group>"; };
+		6AE1BE871344486600B28327 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PXEvaluationResultViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,7 +236,7 @@
 				6ABD1D3A12FE1A240014DF3B /* PXEvaluationCanvasView.m */,
 				6ABD1D3C12FE1A600014DF3B /* PXEvaluationResultViewController.h */,
 				6ABD1D3D12FE1A600014DF3B /* PXEvaluationResultViewController.m */,
-				6ABD1D3E12FE1A600014DF3B /* PXEvaluationResultViewController.xib */,
+				6AE1BE881344486600B28327 /* PXEvaluationResultViewController.xib */,
 				6A3A78FD12FDE1650016D6AD /* PXRootViewController.h */,
 				6A3A78FE12FDE1650016D6AD /* PXRootViewController.m */,
 				6AA3954513174F7E00C034E0 /* PXSnippetManager.h */,
@@ -478,7 +478,7 @@
 				6A3A78ED12FDE1650016D6AD /* InfoPlist.strings in Resources */,
 				6A3A78F612FDE1650016D6AD /* MainWindow.xib in Resources */,
 				6A3A78FC12FDE1650016D6AD /* PXDetailView.xib in Resources */,
-				6ABD1D4012FE1A610014DF3B /* PXEvaluationResultViewController.xib in Resources */,
+				6AE1BE861344486600B28327 /* PXEvaluationResultViewController.xib in Resources */,
 				6A95AD221314B0B200FA6E76 /* Prolixity.png in Resources */,
 				6A95AD231314B0B200FA6E76 /* Prolixity72.png in Resources */,
 				6A95AD241314B0B200FA6E76 /* Prolixty@2x.png in Resources */,
@@ -611,6 +611,14 @@
 				6A3A790F12FDE1650016D6AD /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6AE1BE881344486600B28327 /* PXEvaluationResultViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AE1BE871344486600B28327 /* en */,
+			);
+			name = PXEvaluationResultViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
