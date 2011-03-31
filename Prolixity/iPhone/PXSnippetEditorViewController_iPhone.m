@@ -7,7 +7,8 @@
 //
 
 #import "PXSnippetEditorViewController_iPhone.h"
-#import "PXAppDelegate_iPhone.h"
+#import "PXRuntime.h"
+#import "PXSnippetManager.h"
 #import "PXUtilities.h"
 
 // TODO: Make this a shared constatnt
