@@ -119,40 +119,46 @@ static NSString *const PXCurrentConsoleBufferInThreadKey = @"PXCurrentConsoleBuf
     PXBlock *previousCurrentBlock = [[self class] currentBlock];
     [[self class] setCurrentBlock:self];
     
-    NSEnumerator *ienum = [instructions objectEnumerator];    
-    NSString *instruction = nil;
-    while ((instruction = [ienum nextObject])) {
-        id object = [ienum nextObject];
-        NSAssert(object != nil, @"object cannot be nil");
-        
-        if (instruction == PXInstructionLoadImmediate) {
-            id tmp = tempValue;
-            tempValue = [object retain];
-            [tmp release];
-        }
-        else if (instruction == PXInstructionLoad) {
-            id tmp = tempValue;
-            tempValue = [[self loadFromVariable:object] retain];
-            [tmp release];
-        }
-        else if (instruction == PXInstructionStore) {
-            [self storeValue:tempValue toVariable:object];
-        }
-        else if (instruction == PXInstructionPop) {
-            id tmp = tempValue;
-            tempValue = [[self pop] retain];
-            [tmp release];
-        }
-        else if (instruction == PXInstructionPush) {
-            [self push:tempValue];
-        }
-        else if (instruction == PXInstructionInvoke) {
-            [self invokeMethod:object];
+    @try {
+        NSEnumerator *ienum = [instructions objectEnumerator];    
+        NSString *instruction = nil;
+        while ((instruction = [ienum nextObject])) {
+            id object = [ienum nextObject];
+            NSAssert(object != nil, @"object cannot be nil");
+            
+            if (instruction == PXInstructionLoadImmediate) {
+                id tmp = tempValue;
+                tempValue = [object retain];
+                [tmp release];
+            }
+            else if (instruction == PXInstructionLoad) {
+                id tmp = tempValue;
+                tempValue = [[self loadFromVariable:object] retain];
+                [tmp release];
+            }
+            else if (instruction == PXInstructionStore) {
+                [self storeValue:tempValue toVariable:object];
+            }
+            else if (instruction == PXInstructionPop) {
+                id tmp = tempValue;
+                tempValue = [[self pop] retain];
+                [tmp release];
+            }
+            else if (instruction == PXInstructionPush) {
+                [self push:tempValue];
+            }
+            else if (instruction == PXInstructionInvoke) {
+                [self invokeMethod:object];
+            }
         }
     }
-        
-    [[self class] setCurrentBlock:previousCurrentBlock];    
-    parent = nil;
+    @catch (NSException *exception) {
+        @throw exception;
+    }
+    @finally {
+        [[self class] setCurrentBlock:previousCurrentBlock];    
+        parent = nil;
+    }
 
     return tempValue;
 }
