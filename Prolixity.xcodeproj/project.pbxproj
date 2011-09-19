@@ -506,6 +506,9 @@
 /* Begin PBXProject section */
 		6A3A78D512FDE1650016D6AD /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 6A3A78D812FDE1650016D6AD /* Build configuration list for PBXProject "Prolixity" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;

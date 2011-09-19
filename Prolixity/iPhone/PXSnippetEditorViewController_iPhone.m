@@ -47,6 +47,9 @@ static const NSTimeInterval kAutosaveInterval = 10.0;
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:PXLSTR(@"Run") style:UIBarButtonItemStylePlain target:self action:@selector(runAction)] autorelease];
+    
+    self.textView.textColor = [UIColor blackColor];
+    self.textView.font = [UIFont systemFontOfSize:14.0];
 }
 
 - (void)viewDidUnload
